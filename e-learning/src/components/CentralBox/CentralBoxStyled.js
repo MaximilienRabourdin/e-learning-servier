@@ -1,9 +1,12 @@
 import styled from "styled-components";
 
-const CentralBoxStyled = styled.div `
+
+const CentralBoxStyled = styled.div`
 width: 100vw;
 height: 100vh;
 position:fixed;
+
+
 
 
 .all-box{
@@ -18,9 +21,12 @@ position:fixed;
 
 // Navbar start
 
-.navbar {
+.sidebar {
     width: 6rem;
     height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
     background-color:#0089E3;
     border-radius: 10px 0px 0px 10px;
 };
@@ -29,6 +35,7 @@ position:fixed;
     margin:0;
     padding:0;
     width:100%;
+    height: 100%;
     list-style:none;
     display:flex;
     align-items:center;
@@ -39,35 +46,67 @@ position:fixed;
 .button{
     display:flex;
     align-items:center;
-    flex-direction:center;
-    align-content:center;
+    flex-direction:column;
+    text-align:center;
+    margin: 1rem;
+   align-content:center;
+
+    a{
+        margin-top:0.4rem;
+        color: #FFF;
+        font-family: Abel;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        f
+    }
 }
+
+img{
+    width:80%;
+    cursor:pointer;
+    
+}
+
 
 a {
     width:100%;
     height: 100%;
+    position:center;
 }
 
 .right_section {
-    width: 100%
-    background-color:red;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.title_page{
-    background-image:url("../../../public/background_color_title.svg");
+
+
+.title_section {
+  background-cover: url('../../../public/background_color_title.svg');
+  width: 100%;
+  align-self: flex-start;
+}
+    .title_page{
     color: #005994;
-    padding: 2rem; 
-    margin: 0rem;
-    font-family: 'Abel', sans-serif;
+    font-family: Abel;
+    font-size: 30px;
+    margin-left:1rem;
     font-style: normal;
     font-weight: 400;
-    font-size: 40px;
-    z-index: 9999;
+    line-height: normal;
+    }
+
+    .step_bar {
+    position: fixed;
+    bottom: 1rem;
+    left: 8rem; /* Ajustez la valeur left selon votre mise en page */
 }
 
 
-// Navbar End
 
-`
+`;
 
 export default CentralBoxStyled;
