@@ -1,84 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import CentralBoxStyled from "./CentralBoxStyled";
-import LinearProgress from '@mui/material/LinearProgress';
+import LinearProgress from "@mui/material/LinearProgress";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+
+import slides from "../../data/slides";
 
 function CentralBox() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [quizData, setQuizData] = useState([
-    {
-      question: "Question 1",
-      options: ["Option 1", "Option 2", "Option 3", "Option 4"],
-      correctAnswerIndex: 0,
-      userAnswerIndex: null,
-    },
-    {
-      question: "Question 2",
-      options: ["Option 1", "Option 2", "Option 3", "Option 4"],
-      correctAnswerIndex: 1,
-      userAnswerIndex: null,
-    },
-    {
-      question: "Question 3",
-      options: ["Option 1", "Option 2", "Option 3", "Option 4"],
-      correctAnswerIndex: 2,
-      userAnswerIndex: null,
-    },
-  ]);
-
-  const handleAnswerSelection = (questionIndex, answerIndex) => {
-    const updatedQuizData = [...quizData];
-    updatedQuizData[questionIndex].userAnswerIndex = answerIndex;
-    setQuizData(updatedQuizData);
-  };
 
   const handleNextPage = () => {
-    setCurrentPage(currentPage + 1);
+    if (currentPage < slides.length) {
+      setCurrentPage(currentPage + 1);
+    }
   };
 
   const handlePreviousPage = () => {
-    setCurrentPage(currentPage - 1);
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
   };
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (currentPage < quizData.length) {
-        setCurrentPage(currentPage + 1);
-      }
-    }, 5000);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [currentPage, quizData]);
-
-  const progressBarValue = ((currentPage - 1) / quizData.length) * 100;
-
-  const renderQuiz = (questionIndex) => {
-    const question = quizData[questionIndex];
-    return (
-      <div>
-        <h2>{question.question}</h2>
-        <ul>
-          {question.options.map((option, index) => (
-            <li
-              key={index}
-              onClick={() => handleAnswerSelection(questionIndex, index)}
-              style={{
-                backgroundColor:
-                  question.userAnswerIndex === index
-                    ? index === question.correctAnswerIndex
-                      ? "green"
-                      : "red"
-                    : "",
-              }}
-            >
-              {option}
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  };
+  const progressBarValue = ((currentPage - 1) / slides.length) * 100;
 
   return (
     <CentralBoxStyled>
@@ -90,44 +32,113 @@ function CentralBox() {
               <a className="text-button">Menu</a>
             </li>
             <li className="button">
-              <img alt="icon" src="./menu_icon.svg" />
+              <img alt="icon" src="./abbreviation_icon.png" />
               <a className="text-button">Abbreviations</a>
             </li>
             <li className="button">
-              <img alt="icon" src="./menu_icon.svg" />
+              <img alt="icon" src="./reference_icon.png" />
               <a className="text-button">References</a>
             </li>
             <li className="button">
-              <img alt="icon" src="./menu_icon.svg" />
+              <img alt="icon" src="./help_icon.png" />
               <a className="text-button">Aide</a>
             </li>
           </ul>
         </nav>
+
         <div className="right_section">
-          <div className="title_section">
-            <p className="title_page">
-              Présentation du cas clinique interactif
-            </p>
-          </div>
-          <div className="quiz_section">
-            {currentPage <= quizData.length && renderQuiz(currentPage - 1)}
+          {/* Affichage du contenu de la slide actuelle */}
+          <div className="slide_content">
+            <h1 className="slide_title">{slides[currentPage - 1].title}</h1>
+            {/* Vérification du type de la slide pour afficher le contenu approprié */}
+            {slides[currentPage - 1].type === "presentation" && (
+              <>
+                <h3 className="slide_subtitle">
+                  {slides[currentPage - 1].subtitle}
+                </h3>
+                <p>{slides[currentPage - 1].text}</p>
+              </>
+            )}
+
+            {slides[currentPage - 1].type === "imageWithVoiceOver" && (
+              <div className="image_with_voice_over_section">
+                <audio controls>
+                  <source src={slides[currentPage - 1].voiceOver} />
+                </audio>
+                <img
+                  src={slides[currentPage - 1].imageSrc}
+                  alt={slides[currentPage - 1].imageAlt}
+                />
+              </div>
+            )}
+
+            {slides[currentPage - 1].type === "video" && (
+              <div className="video_section">
+                <video controls>
+                  <source src={slides[currentPage - 1].videoSrc} />
+                </video>
+              </div>
+            )}
+
+            {slides[currentPage - 1].type === "objectives" && (
+              <div className="objectives_section">
+                <ul>
+                  {slides[currentPage - 1].objectivesList.map(
+                    (objective, index) => (
+                      <li key={index}>{objective}</li>
+                    )
+                  )}
+                </ul>
+              </div>
+            )}
+
+            {slides[currentPage - 1].type === "patientPresentation" && (
+              <div className="patient_presentation_section">
+                <img
+                  src={slides[currentPage - 1].imageSrc}
+                  alt={slides[currentPage - 1].imageAlt}
+                />
+                <p>{slides[currentPage - 1].patientInfo.gender}</p>
+                <p>{slides[currentPage - 1].patientInfo.age}</p>
+                <p>
+                  Facteurs de risque cardiovasculaires :{" "}
+                  {slides[currentPage - 1].patientInfo.riskFactors.join(", ")}
+                </p>
+                <p>
+                  Motifs de consultation :{" "}
+                  {slides[currentPage - 1].patientInfo.consultationReasons.join(
+                    ", "
+                  )}
+                </p>
+                <p>{slides[currentPage - 1].patientInfo.additionalInfo}</p>
+              </div>
+            )}
+
+            {/* Ajoutez d'autres conditions pour les autres types de diapositives ici... */}
+
+            {/* Ajoutez ici les autres types de contenu pour les autres types de diapositives */}
           </div>
           <div className="step_bar">
-            <LinearProgress variant="determinate" value={progressBarValue} />
-            <div>
-              <button
-                disabled={currentPage === 1}
-                onClick={handlePreviousPage}
-              >
-                Precedent
-              </button>
-              <button
-                disabled={currentPage === quizData.length}
-                onClick={handleNextPage}
-              >
-                Suivant
-              </button>
-            </div>
+            <button
+              className="previous_button"
+              disabled={currentPage === 1}
+              onClick={handlePreviousPage}
+            >
+              <IoIosArrowBack /> Précédent
+            </button>
+            <LinearProgress
+              className="linear_progress"
+              variant="determinate"
+              value={progressBarValue}
+            />
+            <button
+              className="next_button"
+              disabled={currentPage === slides.length}
+              onClick={handleNextPage}
+            >
+              Suivant <IoIosArrowForward />
+            </button>
+            <div></div>
           </div>
         </div>
       </div>
