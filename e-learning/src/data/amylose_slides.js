@@ -1,4 +1,4 @@
-const slides = [
+const amylose_slide = [
   {
     id: 1,
     type: "instruction",
@@ -12,8 +12,8 @@ const slides = [
     type: "default",
     title: "Introduction",
     subtitle: "Présentation",
-    author: "Pr Abdoul KANE",
-    text: "Chef du Service de Cardiologie, Hôpital Dalal Jamm - Guédiawaye, Sénégal",
+    author: "Pr Nadia Laredj",
+    text: "Cheffe du service de Cardiologie, Centre Hospitalo-Universitaire d’Oran - Université d’Oran 1 - Faculté de Médecine d’Oran - Oran, Algérie",
     subtext: "Pas de conflits d'intérêts pour cette présentation",
   },
   {
@@ -28,60 +28,10 @@ const slides = [
     title: "Objectifs d’apprentissage",
     text: "À la fin de cette présentation de cas interactive, les apprenants seront en mesure de:\n\n",
     objectivesList: [
-      "Identifier les signes échocardiographiques de la cardiopathie carcinoïde",
-      "Décrire les examens indispensables pour le dépistage d’une maladie carcinoïde",
-      "Poser un diagnostic de cardiopathie carcinoïde",
+      "Comprendre l‘intérêt des techniques d'échocardiographie pour le diagnostic et la stratification du pronostic de l‘amylose cardiaque",
+      "Identifier l‘hypertrophie ventriculaire symétrique et reconnaitre l‘aspect granité et brillant du myocarde faisant suspecter une amylose cardiaque",
+      "Comprendre l‘intérêt de l‘étude de la déformation longitudinale",
     ],
-  },
-  {
-    "id": 5,
-    "type": "video",
-    "title": "Mesures d'échocardiographie transthoracique ou ETT",
-    "content": {
-      "Ventricules": {
-        "Mesures": [
-          "Taille",
-          "Masse",
-          "Épaisseur des parois du VG"
-        ],
-        "Fonctions": [
-          "Fonction systolique et diastolique",
-          "Fraction d'éjection",
-          "Fraction de raccourcissement",
-          "Rapport E/A"
-        ],
-        "Autres": [
-          "Flux d'éjection",
-          "Mouvements des parois",
-          "Pressions"
-        ]
-      },
-      "Oreillettes": {
-        "Mesures": [
-          "Taille"
-        ],
-        "Autres": [
-          "Pressions"
-        ]
-      },
-      "Aorte et Veine Cave Inférieure": {
-        "Mesures": [
-          "Diamètre"
-        ]
-      },
-      "Artère Pulmonaire": {
-        "Mesures": [
-          "Pression"
-        ]
-      },
-      "Veines Pulmonaires": {
-        "Mesures": [
-          "Flux"
-        ]
-      },
-      "VG": "Ventricule Gauche"
-    },
-    "reference": "Mitchell C, Rahko PS, Blauwet LA, et al. J Am Soc Echocardiogr. 2019;32(1):1-64. Illustration © smart.servier.com"
   },
   {
     id: 5,
@@ -122,8 +72,7 @@ const slides = [
         <br />
       </>
     ),
-    text2:
-    (
+    text2: (
       <>
         <p> Température = 36,7 °C</p> <br />
         <p>Souffle systolique 4/6 au niveau du foyer tricuspide</p> <br />
@@ -251,9 +200,9 @@ const slides = [
     type: "patientHistory",
     title: "L’histoire de la patiente continue",
     text: `Scanner thoraco-abdomino pelvien : \n
-  Aspect en faveur d’une tumeur grêlique avec localisations secondaires hépatique et pulmonaire \n
-
-  → diagnostic de cardiopathie carcinoïde \n`,
+    Aspect en faveur d’une tumeur grêlique avec localisations secondaires hépatique et pulmonaire \n
+  
+    → diagnostic de cardiopathie carcinoïde \n`,
     images: [
       {
         src: "/public/thoraco-abdomino.png",
@@ -414,18 +363,26 @@ const slides = [
     type: "default",
     text: (
       <>
-        - Le syndrome carcinoïde est une pathologie rare.
+        - L’amylose est la manifestation de plusieurs maladies systémiques ;
+        elle se caractérise par une accumulation extracellulaire de protéines
+        fibrillaires insolubles qui se déposent et envahissent progressivement
+        les tissus.
         <br />
-        - L’atteinte cardiaque est à rechercher systématiquement chez les
-        patients présentant un syndrome carcinoïde.
+        - L'atteinte cardiaque mène typiquement à une insuffisance cardiaque à
+        fraction d’éjection préservée et constitue le principal facteur
+        pronostique avant, pendant et après le traitement.
         <br />
-        - L’échocardiographie transthoracique est l’examen de référence pour
-        diagnostiquer une cardiopathie carcinoïde.
-        <br />- Le pronostic est péjoratif mais peut être amélioré par le
-        remplacement chirurgical valvulaire.
+        - Le diagnostic repose sur un faisceau d’arguments cliniques,
+        échocardiographiques, et d’IRM, associés à une biopsie extracardiaque
+        positive.
+        <br />
+        <b>
+          - L’ETT permet à la fois le diagnostic et la stratification
+          pronostique avec les nouvelles techniques d’imagerie (2D strain)
+        </b>
       </>
     ),
   },
 ];
 
-export default slides;
+export default amylose_slide;

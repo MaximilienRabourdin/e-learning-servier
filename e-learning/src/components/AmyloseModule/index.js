@@ -1,18 +1,17 @@
 import React, { useState } from "react";
-import CentralBoxStyled from "./CentralBoxStyled";
+import AmyloseModuleStyled from "./AmyloseModuleStyled";
 import LinearProgress from "@mui/material/LinearProgress";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import slides from "../../data/slides";
+import amylose_slide from "../../data/amylose_slides";
 import SlidePatientHistory from "./SlidePatientHistory";
 
 import { CSSTransition } from "react-transition-group";
 
-function CentralBox() {
+function AmyloseModule() {
   const [currentPage, setCurrentPage] = useState(1);
   const [showMenuPopup, setShowMenuPopup] = useState(false);
   const [showReferencesPopup, setShowReferencesPopup] = useState(false);
   const [showAidePopup, setShowAidePopup] = useState(false);
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [quizAnswers, setQuizAnswers] = useState({});
   const [showAbbreviationPopup, setShowAbbreviationPopup] = useState(false);
   const [enlargedImage, setEnlargedImage] = useState(null);
@@ -25,7 +24,7 @@ function CentralBox() {
   };
 
   const handleNextPage = () => {
-    if (currentPage < slides.length) {
+    if (currentPage < amylose_slide.length) {
       setCurrentPage(currentPage + 1);
     }
   };
@@ -36,7 +35,7 @@ function CentralBox() {
     }
   };
 
-  const progressBarValue = ((currentPage - 1) / slides.length) * 100;
+  const progressBarValue = ((currentPage - 1) / amylose_slide.length) * 100;
 
   const handleMenuButtonClick = () => {
     setShowMenuPopup(true);
@@ -78,7 +77,7 @@ function CentralBox() {
   };
 
   return (
-    <CentralBoxStyled>
+    <AmyloseModuleStyled>
       <div className="all-box">
         <nav className="sidebar">
           <ul className="all_button">
@@ -135,41 +134,41 @@ function CentralBox() {
         )}
 
         <div className="right_section">
-          {slides.map((slide, index) => (
+          {amylose_slide.map((slide, index) => (
             <CSSTransition key={index} classNames="slide-fade" timeout={500}>
               <div
                 className={`slide_content ${
                   currentPage === index + 1 ? "show" : ""
                 }`}
               >
-                <h1 className="slide_title">{slides[currentPage - 1].title}</h1>
+                <h1 className="slide_title">{amylose_slide[currentPage - 1].title}</h1>
 
-                {slides[currentPage - 1].type === "default" && (
+                {amylose_slide[currentPage - 1].type === "default" && (
                   <>
                     <div className="presentation_slide">
                       <p>
-                        <b> {slides[currentPage - 1].subtitle}</b>
+                        <b> {amylose_slide[currentPage - 1].subtitle}</b>
                       </p>
-                      <p> {slides[currentPage - 1].author} </p>
-                      <p> {slides[currentPage - 1].text} </p>
+                      <p> {amylose_slide[currentPage - 1].author} </p>
+                      <p> {amylose_slide[currentPage - 1].text} </p>
                       <b>
                         {" "}
                         <p className="subtitle2">
                           {" "}
-                          {slides[currentPage - 1].subtitle2}{" "}
+                          {amylose_slide[currentPage - 1].subtitle2}{" "}
                         </p>{" "}
                       </b>
-                      <p className="text2"> {slides[currentPage - 1].text2} </p>
+                      <p className="text2"> {amylose_slide[currentPage - 1].text2} </p>
 
                       <p className="subtext">
                         {" "}
-                        {slides[currentPage - 1].subtext}{" "}
+                        {amylose_slide[currentPage - 1].subtext}{" "}
                       </p>
                     </div>
                   </>
                 )}
 
-                {slides[currentPage - 1].type === "instruction" && (
+                {amylose_slide[currentPage - 1].type === "instruction" && (
                   <>
                     <div className="all_instruction_slide">
                       <div className="instruction_control_buttonside">
@@ -206,7 +205,7 @@ function CentralBox() {
                           <p className="description_button_text">
                             {" "}
                             Cliquez sur ce bouton pour avoir toutes les
-                            abréviations des slides
+                            abréviations des amylose_slide
                           </p>
                         </div>
                       </div>
@@ -224,7 +223,7 @@ function CentralBox() {
                           <p className="description_button_text">
                             {" "}
                             Cliquez sur ce bouton pour avoir toutes les
-                            références des slides
+                            références des amylose_slide
                           </p>
                         </div>
                       </div>
@@ -248,59 +247,59 @@ function CentralBox() {
                       </div>
 
                       <div className="instruction_navigation">
-                        <p> Utilisez les flèches pour changer de slides </p>
+                        <p> Utilisez les flèches pour changer de amylose_slide </p>
                       </div>
                     </div>
                   </>
                 )}
 
-                {slides[currentPage - 1].type === "presentation" && (
+                {amylose_slide[currentPage - 1].type === "presentation" && (
                   <>
                     <div className="presentation_slide">
-                      <p>{slides[currentPage - 1].subtitle}</p>
-                      <p> {slides[currentPage - 1].author} </p>
-                      <p> {slides[currentPage - 1].text} </p>
-                      <p> {slides[currentPage - 1].subtext} </p>
+                      <p>{amylose_slide[currentPage - 1].subtitle}</p>
+                      <p> {amylose_slide[currentPage - 1].author} </p>
+                      <p> {amylose_slide[currentPage - 1].text} </p>
+                      <p> {amylose_slide[currentPage - 1].subtext} </p>
                     </div>
                   </>
                 )}
 
-                {slides[currentPage - 1].type === "presentation" && (
+                {amylose_slide[currentPage - 1].type === "presentation" && (
                   <>
                     <h3 className="slide_subtitle">
-                      {slides[currentPage - 1].subtitle}
+                      {amylose_slide[currentPage - 1].subtitle}
                     </h3>
-                    <p>{slides[currentPage - 1].text}</p>
+                    <p>{amylose_slide[currentPage - 1].text}</p>
                   </>
                 )}
-                {slides[currentPage - 1].type === "imageWithVoiceOver" && (
+                {amylose_slide[currentPage - 1].type === "imageWithVoiceOver" && (
                   <div className="image_with_voice_over_section">
                     <img
                       className="enlargedImage"
-                      src={slides[currentPage - 1].imageSrc}
-                      alt={slides[currentPage - 1].imageAlt}
+                      src={amylose_slide[currentPage - 1].imageSrc}
+                      alt={amylose_slide[currentPage - 1].imageAlt}
                       onClick={() =>
-                        handleImageClick(slides[currentPage - 1].imageSrc)
+                        handleImageClick(amylose_slide[currentPage - 1].imageSrc)
                       }
                     />
                   </div>
                 )}
 
-                {slides[currentPage - 1].type === "video" && (
+                {amylose_slide[currentPage - 1].type === "video" && (
                   <section className="video_section">
                     <video controls>
-                      <source src={slides[currentPage - 1].videoSrc} />
+                      <source src={amylose_slide[currentPage - 1].videoSrc} />
                     </video>
                   </section>
                 )}
 
-                {slides[currentPage - 1].type === "objectives" && (
+                {amylose_slide[currentPage - 1].type === "objectives" && (
                   <div className="objectives_section">
                     <p className="objectives_section_title">
-                      {slides[currentPage - 1].text}
+                      {amylose_slide[currentPage - 1].text}
                     </p>
                     <ul>
-                      {slides[currentPage - 1].objectivesList.map(
+                      {amylose_slide[currentPage - 1].objectivesList.map(
                         (objective, index) => (
                           <li key={index}>{objective}</li>
                         )
@@ -309,32 +308,32 @@ function CentralBox() {
                   </div>
                 )}
 
-                {slides[currentPage - 1].type === "quizz" && (
+                {amylose_slide[currentPage - 1].type === "quizz" && (
                   <div className="quizz_slide">
                     <p className="quizz_title">
-                      {slides[currentPage - 1].text}
+                      {amylose_slide[currentPage - 1].text}
                     </p>
                     <ul id="quizz">
-                      {slides[currentPage - 1].answers.map((answer, index) => (
+                      {amylose_slide[currentPage - 1].answers.map((answer, index) => (
                         <li key={index}>
                           <button
                             className={`answer_button ${
-                              quizAnswers[slides[currentPage - 1].id] !==
+                              quizAnswers[amylose_slide[currentPage - 1].id] !==
                                 undefined &&
-                              (quizAnswers[slides[currentPage - 1].id] ===
+                              (quizAnswers[amylose_slide[currentPage - 1].id] ===
                               answer.correct
                                 ? "correct"
                                 : "incorrect")
                             }`}
                             onClick={() =>
                               handleAnswerClick(
-                                slides[currentPage - 1].id,
+                                amylose_slide[currentPage - 1].id,
                                 index,
                                 answer.correct
                               )
                             }
                             disabled={
-                              quizAnswers[slides[currentPage - 1].id] !==
+                              quizAnswers[amylose_slide[currentPage - 1].id] !==
                               undefined
                             }
                           >
@@ -343,120 +342,120 @@ function CentralBox() {
                         </li>
                       ))}
                     </ul>
-                    <p className="subtext">{slides[currentPage - 1].subtext}</p>
+                    <p className="subtext">{amylose_slide[currentPage - 1].subtext}</p>
                   </div>
                 )}
-                {slides[currentPage - 1].type === "imageWithText" && (
+                {amylose_slide[currentPage - 1].type === "imageWithText" && (
                   <>
-                    <p>{slides[currentPage - 1].text}</p>
+                    <p>{amylose_slide[currentPage - 1].text}</p>
                     <img
                       className="enlargedImage"
                       className="image_echocardiographie"
-                      src={slides[currentPage - 1].images[0].src}
-                      alt={slides[currentPage - 1].images[0].alt}
+                      src={amylose_slide[currentPage - 1].images[0].src}
+                      alt={amylose_slide[currentPage - 1].images[0].alt}
                     />
                     <div className="additional_info">
-                      <p>{slides[currentPage - 1].subtext}</p>
+                      <p>{amylose_slide[currentPage - 1].subtext}</p>
                     </div>
                   </>
                 )}
 
-                {slides[currentPage - 1].type === "text_cardiopathie" && (
+                {amylose_slide[currentPage - 1].type === "text_cardiopathie" && (
                   <>
                     <div className="cardiopathie_section">
-                      <p>{slides[currentPage - 1].text}</p>
+                      <p>{amylose_slide[currentPage - 1].text}</p>
                       <div className="additional_info">
                         <p className="subtext">
-                          {slides[currentPage - 1].subtext}
+                          {amylose_slide[currentPage - 1].subtext}
                         </p>
                       </div>
                     </div>
                   </>
                 )}
 
-                {slides[currentPage - 1].type === "patientPresentation" && (
+                {amylose_slide[currentPage - 1].type === "patientPresentation" && (
                   <div className="patient_presentation_section">
                     <img
                       className="image_patienteZ"
-                      src={slides[currentPage - 1].imageSrc}
-                      alt={slides[currentPage - 1].imageAlt}
+                      src={amylose_slide[currentPage - 1].imageSrc}
+                      alt={amylose_slide[currentPage - 1].imageAlt}
                     />
                     <div className="text_patienteZ">
                       <p>
-                        {slides[currentPage - 1].patientInfo.gender},{" "}
-                        {slides[currentPage - 1].patientInfo.age}
+                        {amylose_slide[currentPage - 1].patientInfo.gender},{" "}
+                        {amylose_slide[currentPage - 1].patientInfo.age}
                       </p>{" "}
                       <p>
                         <b> Facteurs de risque cardiovasculaires : </b> <br />
-                        {slides[currentPage - 1].patientInfo.riskFactors.join(
+                        {amylose_slide[currentPage - 1].patientInfo.riskFactors.join(
                           ", "
                         )}
                       </p>
                       <p>
                         <b> Motifs de consultation : </b> <br />
-                        {slides[
+                        {amylose_slide[
                           currentPage - 1
                         ].patientInfo.consultationReasons.join(", ")}
                       </p>
                       <p className="additional_info">
                         {" "}
                         {
-                          slides[currentPage - 1].patientInfo.additionalInfo
+                          amylose_slide[currentPage - 1].patientInfo.additionalInfo
                         }{" "}
                       </p>
                     </div>
                   </div>
                 )}
 
-                {slides[currentPage - 1].type === "examen_medical" && (
+                {amylose_slide[currentPage - 1].type === "examen_medical" && (
                   <>
-                    <h3>{slides[currentPage - 1].subtitle}</h3>
+                    <h3>{amylose_slide[currentPage - 1].subtitle}</h3>
 
                     <div className="examenmedical_section">
                       <div className="examenmedical_section_left">
-                        <p> {slides[currentPage - 1].text} </p>
+                        <p> {amylose_slide[currentPage - 1].text} </p>
                       </div>
                       <div className="divider"> </div>
                       <div className="examenmedical_section_right">
-                        <p> {slides[currentPage - 1].text2} </p>
+                        <p> {amylose_slide[currentPage - 1].text2} </p>
                       </div>
                     </div>
                     <p className="subtext">
                       {" "}
-                      {slides[currentPage - 1].subtext}{" "}
+                      {amylose_slide[currentPage - 1].subtext}{" "}
                     </p>
                   </>
                 )}
 
-                {slides[currentPage - 1].type === "patientHistory" && (
-                  <SlidePatientHistory slideData={slides[currentPage - 1]} />
+                {amylose_slide[currentPage - 1].type === "patientHistory" && (
+                  <SlidePatientHistory slideData={amylose_slide[currentPage - 1]} />
                 )}
 
-                {slides[currentPage - 1].type === "bilan" && (
+                {amylose_slide[currentPage - 1].type === "bilan" && (
                   <>
                     <div className="presentation_slide">
                       <p>
                         {" "}
-                        <b> {slides[currentPage - 1].text} </b>{" "}
+                        <b> {amylose_slide[currentPage - 1].text} </b>{" "}
                       </p>
 
                       <p className="additional_info">
                         {" "}
-                        {slides[currentPage - 1].subtext}{" "}
+                        {amylose_slide[currentPage - 1].subtext}{" "}
                       </p>
                     </div>
                   </>
                 )}
 
-                {slides[currentPage - 1].type === "cardiopathie carcinoïde" && (
+                {amylose_slide[currentPage - 1].type === "cardiopathie carcinoïde" && (
                   <>
                     <div className="cardiopathie_section">
-                      <h3>.{slides[currentPage - 1].subtitle}</h3>
-                      <p>{slides[currentPage - 1].text}</p>
-                      <h3>.{slides[currentPage - 1].subtitle2}</h3>
-                      <p>{slides[currentPage - 1].text2}</p>
-                      <h3>.{slides[currentPage - 1].subtitle3}</h3>
-                      <p>{slides[currentPage - 1].text3}</p>
+                      <h3>.{amylose_slide[currentPage - 1].subtitle}</h3>
+                      <p>{amylose_slide[currentPage - 1].text}</p>
+                      <h3>.{amylose_slide[currentPage - 1].subtitle2}</h3>
+                      <p>{amylose_slide[currentPage - 1].text2}</p>
+                      <h3>.{amylose_slide[currentPage - 1].subtitle3}</h3>
+                      <p>{amylose_slide[currentPage - 1].text3}</p>
                     </div>
                   </>
                 )}
@@ -478,7 +477,7 @@ function CentralBox() {
             />
             <button
               className="next_button"
-              disabled={currentPage === slides.length}
+              disabled={currentPage === amylose_slide.length}
               onClick={handleNextPage}
             >
               <IoIosArrowForward />
@@ -664,7 +663,7 @@ function CentralBox() {
                   <p className="description_button_text">
                     {" "}
                     Cliquez sur ce bouton pour avoir toutes les abréviations des
-                    slides
+                    amylose_slide
                   </p>
                 </div>
               </div>
@@ -682,7 +681,7 @@ function CentralBox() {
                   <p className="description_button_text">
                     {" "}
                     Cliquez sur ce bouton pour avoir toutes les références des
-                    slides
+                    amylose_slide
                   </p>
                 </div>
               </div>
@@ -706,7 +705,7 @@ function CentralBox() {
               </div>
 
               <div className="instruction_navigation">
-                <p> Utilisez les flèches pour changer de slides </p>
+                <p> Utilisez les flèches pour changer de amylose_slide </p>
               </div>
             </div>
 
@@ -716,8 +715,8 @@ function CentralBox() {
           </div>
         </div>
       )}
-    </CentralBoxStyled>
+    </AmyloseModuleStyled>
   );
 }
 
-export default CentralBox;
+export default AmyloseModule;
