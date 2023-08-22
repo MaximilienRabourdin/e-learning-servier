@@ -1,4 +1,14 @@
 [[redirects]]
+  from = "/"
+  to = "/accueil_cas_clinique_cardiopathie_carcinoïde"
+  status = 200
+
+[[redirects]]
+  from = "/"
+  to = "/accueil_cas_clinique_cardiopathie_carcinoïde"
+  status = 200
+
+[[redirects]]
   from = "/accueil_cas_clinique_cardiopathie_carcinoïde"
   to = "/cas_clinique_cardiopathie_carcinoïde"
   status = 200
@@ -6,9 +16,4 @@
 [[redirects]]
   from = "/accueil_cas_clinique_interactive_amylose_cardiaque"
   to = "/cas_clinique_interactive_amylose_cardiaque"
-  status = 200
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
   status = 200

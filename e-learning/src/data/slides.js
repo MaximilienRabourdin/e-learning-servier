@@ -33,56 +33,56 @@ const slides = [
       "Poser un diagnostic de cardiopathie carcinoïde",
     ],
   },
-  {
-    "id": 5,
-    "type": "video",
-    "title": "Mesures d'échocardiographie transthoracique ou ETT",
-    "content": {
-      "Ventricules": {
-        "Mesures": [
-          "Taille",
-          "Masse",
-          "Épaisseur des parois du VG"
-        ],
-        "Fonctions": [
-          "Fonction systolique et diastolique",
-          "Fraction d'éjection",
-          "Fraction de raccourcissement",
-          "Rapport E/A"
-        ],
-        "Autres": [
-          "Flux d'éjection",
-          "Mouvements des parois",
-          "Pressions"
-        ]
-      },
-      "Oreillettes": {
-        "Mesures": [
-          "Taille"
-        ],
-        "Autres": [
-          "Pressions"
-        ]
-      },
-      "Aorte et Veine Cave Inférieure": {
-        "Mesures": [
-          "Diamètre"
-        ]
-      },
-      "Artère Pulmonaire": {
-        "Mesures": [
-          "Pression"
-        ]
-      },
-      "Veines Pulmonaires": {
-        "Mesures": [
-          "Flux"
-        ]
-      },
-      "VG": "Ventricule Gauche"
-    },
-    "reference": "Mitchell C, Rahko PS, Blauwet LA, et al. J Am Soc Echocardiogr. 2019;32(1):1-64. Illustration © smart.servier.com"
-  },
+  // {
+  //   "id": 5,
+  //   "type": "video",
+  //   "title": "Mesures d'échocardiographie transthoracique ou ETT",
+  //   "content": {
+  //     "Ventricules": {
+  //       "Mesures": [
+  //         "Taille",
+  //         "Masse",
+  //         "Épaisseur des parois du VG"
+  //       ],
+  //       "Fonctions": [
+  //         "Fonction systolique et diastolique",
+  //         "Fraction d'éjection",
+  //         "Fraction de raccourcissement",
+  //         "Rapport E/A"
+  //       ],
+  //       "Autres": [
+  //         "Flux d'éjection",
+  //         "Mouvements des parois",
+  //         "Pressions"
+  //       ]
+  //     },
+  //     "Oreillettes": {
+  //       "Mesures": [
+  //         "Taille"
+  //       ],
+  //       "Autres": [
+  //         "Pressions"
+  //       ]
+  //     },
+  //     "Aorte et Veine Cave Inférieure": {
+  //       "Mesures": [
+  //         "Diamètre"
+  //       ]
+  //     },
+  //     "Artère Pulmonaire": {
+  //       "Mesures": [
+  //         "Pression"
+  //       ]
+  //     },
+  //     "Veines Pulmonaires": {
+  //       "Mesures": [
+  //         "Flux"
+  //       ]
+  //     },
+  //     "VG": "Ventricule Gauche"
+  //   },
+  //   "reference": "Mitchell C, Rahko PS, Blauwet LA, et al. J Am Soc Echocardiogr. 2019;32(1):1-64. Illustration © smart.servier.com"
+  // },
   {
     id: 5,
     type: "patientPresentation",
@@ -122,8 +122,7 @@ const slides = [
         <br />
       </>
     ),
-    text2:
-    (
+    text2: (
       <>
         <p> Température = 36,7 °C</p> <br />
         <p>Souffle systolique 4/6 au niveau du foyer tricuspide</p> <br />
@@ -281,26 +280,30 @@ const slides = [
         cardiaque droite.
         <br />- L’atteinte gauche est rare car les poumons font office de filtre
         physiologique.
-        <br />- En cas d’atteinte du cœur gauche, un foramen ovale perméable
-        (FOP) doit être recherché.
+        <br />-{" "}
+        <b>
+          En cas d’atteinte du cœur gauche, un foramen ovale perméable (FOP)
+          doit être recherché.
+        </b>
       </>
     ),
     subtext: (
       <>
         Pellikka PA, et al. Carcinoid heart disease. Clinical and
-        echocardiographic spectrum in 74 patients. Circulation.
+        echocardiographic spectrum in 74 patients. <i> Circulation</i>.
         1993;87(4):1188-1196
         <br />
-        Kulke MH, Mayer RJ. Carcinoid tumors. N Engl J Med. 1999;340(11):858-868
+        Kulke MH, Mayer RJ. Carcinoid tumors. <i>N Engl J Med.</i>{" "}
+        1999;340(11):858-868
         <br />
         Roberts WC. A unique heart disease associated with a unique cancer:
-        carcinoid heart disease. Am J Cardiol. 1997;80(2):251-256
+        carcinoid heart disease. <i>Am J Cardiol</i> 1997;80(2):251-256
         <br />
         Mansencal N, et al. Assessment of patent foramen ovale in carcinoid
-        heart disease. Am Heart J. 2006;151(5):1129.e1-6
+        heart disease. <i>Am Heart J</i> 2006;151(5):1129.e1-6
         <br />
         Ram P, et al. Carcinoid Heart Disease: Review of Current Knowledge.
-        Texas Heart Institute Journal. 2019;46(1):21‑27
+        <i>Texas Heart Institute Journal</i>. 2019;46(1):21‑27
       </>
     ),
   },
@@ -328,8 +331,16 @@ const slides = [
         tumeur neuroendocrine.
       </>
     ),
-    subtext:
-      "Références bibliographiques :\n- Roberts WC. A unique heart disease associated with a unique cancer: carcinoid heart disease. Am J Cardiol. 1997;80(2):251-256.\n- Bhattacharyya S, et al. Features of carcinoid heart disease identified by 2- and 3-dimensional echocardiography and cardiac MRI. Circ Cardiovasc Imaging. 2010;3(1):103-111.",
+    subtext: (
+      <>
+        Roberts WC. A unique heart disease associated with a unique cancer:
+        carcinoid heart disease. <i>Am J Cardiol</i>. 1997;80(2):251-256.
+        <br />
+        Bhattacharyya S, et al. Features of carcinoid heart disease identified
+        by 2- and 3-dimensional echocardiography and cardiac MRI.{" "}
+        <i>Circ Cardiovasc Imaging</i>. 2010;3(1):103-111.",
+      </>
+    ),
     images: [
       {
         src: "/chemin/vers/les/images/carcinoid_heart_disease.jpg",
@@ -360,8 +371,12 @@ const slides = [
         correct: true,
       },
     ],
-    subtext:
-      "5-HIAA : acide 5-hydroxy-indol-acétique ; NT-proBNP : N-terminal pro Brain Natriuretic Peptide",
+    subtext: (
+      <>
+        5-HIAA : acide 5-hydroxy-indol-acétique ; NT-proBNP :{" "}
+        <i>N-terminal pro Brain Natriuretic Peptide</i>
+      </>
+    ),
   },
   {
     id: 17,
@@ -405,8 +420,26 @@ const slides = [
         l’atteinte cardiaque
       </>
     ),
-    subtext:
-      "5-HIAA : acide 5-hydroxy-indol-acétique ; NT-proBNP : N-terminal pro Brain Natriuretic Peptide",
+    subtext: (
+      <>
+        5-HIAA : acide 5-hydroxy-indol-acétique ; NT-proBNP :{" "}
+        <i>N-terminal pro Brain Natriuretic Peptide</i>,
+      </>
+    ),
+    subtext2: (
+      <>
+        <br/>Møller JE, et al. Factors associated with progression of carcinoid heart
+        disease. <i>N Engl J Med.</i> 2003;348(11):1005‑1015. 
+        <br/> Møller JE, et al.Prognosis of carcinoid heart disease: analysis of 200 cases over two
+        decades. <i>Circulation</i>2005;112(21):3320-3327.
+        <br/> Mansencal N, et al.Comparison of prognostic value of tissue Doppler imaging in carcinoid
+        heart disease versus the value in patients with the carcinoid syndrome
+        but without carcinoid heart disease. <i>Am J Cardiol</i>. 2010;105(4):527-531.
+        <br/>Davar J, et al. Diagnosing and Managing Carcinoid Heart Disease in Patients With Neuroendocrine Tumors. <i>Journal of the American College of
+        Cardiology</i>. 2017;69(10):1288‑1304 
+        <br/>Lyon AR, et al. 2022 ESC Guidelines on cardio-oncology. <i>European Heart Journal</i>. 2022;0:1-133
+      </>
+    ),
   },
   {
     id: 19,

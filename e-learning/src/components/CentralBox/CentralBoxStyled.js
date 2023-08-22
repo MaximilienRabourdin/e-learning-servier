@@ -196,7 +196,18 @@ const CentralBoxStyled = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    margin:0;
   }
+
+
+  .additional_references{
+    width: 100%;
+    font-size: 12px;
+    color: #7f7f7f;
+    margin:0;
+  }
+  
+
 
   .subtext {
     width: 100%;
@@ -245,11 +256,7 @@ const CentralBoxStyled = styled.div`
     align-content: center;
   }
 
-  .cardiopathie_section {
-    background_color: red;
-    width: 80%;
-    height: 50%;
-  }
+ 
 
   /* quizz section */
   .quizz_slide {
@@ -492,6 +499,11 @@ const CentralBoxStyled = styled.div`
     color: blue;
     -webkit-transform: rotate(180deg);
   }
+
+  .cardiopathie_section{
+    overflow: auto;
+  max-height: 400px;
+}
 
   /* instruction slide end */
 `;

@@ -11,7 +11,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<ChoiceModule />} />
+        <Route path="/choix_du_module" element={<ChoiceModule />} />
 
         {/* Route pour la page d'accueil */}
         <Route

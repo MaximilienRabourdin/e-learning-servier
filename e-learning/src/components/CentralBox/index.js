@@ -457,6 +457,12 @@ function CentralBox() {
                       <p>{slides[currentPage - 1].text2}</p>
                       <h3>.{slides[currentPage - 1].subtitle3}</h3>
                       <p>{slides[currentPage - 1].text3}</p>
+                      <p className="additional_info">
+                        {" "}
+                        {slides[currentPage - 1].subtext}{" "}
+                      </p>
+                      <p className="additional_references"> {slides[currentPage - 1].subtext2}{" "}</p>
+
                     </div>
                   </>
                 )}
@@ -540,8 +546,8 @@ function CentralBox() {
             <p>
               Bhattacharyya S, Toumpanakis C, Burke M, Taylor AM, Caplin ME,
               Davar J. Features of carcinoid heart disease identified by 2- and
-              3-dimensional echocardiography and cardiac MRI. Circulation.
-              Cardiovascular Imaging. 2010;3(1):103-111. doi:
+              3-dimensional echocardiography and cardiac MRI. <i>Circulation.
+              Cardiovascular Imaging</i>. 2010;3(1):103-111. doi:
               <a href="https://doi.org/10.1161/CIRCIMAGING.109.886846">
                 10.1161/CIRCIMAGING.109.886846
               </a>
@@ -549,15 +555,15 @@ function CentralBox() {
               <br />
               Davar J, Connolly HM, Caplin ME, et al. Diagnosing and Managing
               Carcinoid Heart Disease in Patients With Neuroendocrine Tumors.
-              Journal of the American College of Cardiology.
+              <i>Journal of the American College of Cardiology</i>.
               2017;69(10):1288‑1304. doi:
               <a href="https://doi.org/10.1016/j.jacc.2016.12.030">
                 10.1016/j.jacc.2016.12.030
               </a>
               <br />
               <br />
-              Kulke MH, Mayer RJ. Carcinoid tumors. The New England Journal of
-              Medicine. 1999;340(11):858-868. doi:
+              Kulke MH, Mayer RJ. Carcinoid tumors. <i>The New England Journal of
+              Medicine</i>. 1999;340(11):858-868. doi:
               <a href="https://doi.org/10.1056/NEJM199903183401107">
                 10.1056/NEJM199903183401107
               </a>
@@ -568,7 +574,7 @@ function CentralBox() {
               Hematology Association (EHA), the European Society for Therapeutic
               Radiology and Oncology (ESTRO) and the International
               Cardio-Oncology Society (IC-OS): Developed by the task force on
-              cardio-oncology of the European Society of Cardiology (ESC).
+              cardio-oncology of the <i>European Society of Cardiology (ESC) </i>.
               European Heart Journal. 2022;0:1-133. doi:
               <a href="https://doi.org/10.1093/eurheartj/ehac244">
                 10.1093/eurheartj/ehac244
@@ -576,8 +582,8 @@ function CentralBox() {
               <br />
               <br />
               Mansencal N, Mitry E, Forissier JF, et al. Assessment of patent
-              foramen ovale in carcinoid heart disease. The American Heart
-              Journal. 2006;151(5):1129.e1-6. doi:
+              foramen ovale in carcinoid heart disease. <i>The American Heart
+              Journal</i>. 2006;151(5):1129.e1-6. doi:
               <a href="https://doi.org/10.1016/j.ahj.2006.02.019">
                 10.1016/j.ahj.2006.02.019
               </a>
@@ -585,7 +591,7 @@ function CentralBox() {
               <br />
               Møller JE, Connolly HM, Rubin J, Seward JB, Modesto K, Pellikka
               PA. Factors associated with progression of carcinoid heart
-              disease. The New England Journal of Medicine.
+              disease. <i>The New England Journal of Medicine</i>.
               2003;348(11):1005‑1015. doi:
               <a href="https://doi.org/10.1056/NEJMoa021451">
                 10.1056/NEJMoa021451
@@ -594,7 +600,7 @@ function CentralBox() {
               <br />
               Møller JE, Pellikka PA, Bernheim AM, Schaff HV, Rubin J, Connolly
               HM. Prognosis of carcinoid heart disease: analysis of 200 cases
-              over two decades. Circulation. 2005;112(21):3320-3327. doi:
+              over two decades. <i>Circulation</i>. 2005;112(21):3320-3327. doi:
               <a href="https://doi.org/10.1161/CIRCULATIONAHA.105.553750">
                 10.1161/CIRCULATIONAHA.105.553750
               </a>
@@ -608,16 +614,16 @@ function CentralBox() {
               <br />
               <br />
               Ram P, Penalver JL, Lo KBU, Rangaswami J, Pressman GS. Carcinoid
-              Heart Disease: Review of Current Knowledge. Texas Heart Institute
-              Journal. 2019;46(1):21‑27. doi:
+              Heart Disease: Review of Current Knowledge. <i>Texas Heart Institute
+              Journal.</i> 2019;46(1):21‑27. doi:
               <a href="https://doi.org/10.14503/THIJ-17-6562">
                 10.14503/THIJ-17-6562
               </a>
               <br />
               <br />
               Roberts WC. A unique heart disease associated with a unique
-              cancer: carcinoid heart disease. The American Journal of
-              Cardiology. 1997;80(2):251-256. doi:
+              cancer: carcinoid heart disease. <i>The American Journal of
+              Cardiology</i>. 1997;80(2):251-256. doi:
               <a href="https://doi.org/10.1016/s0002-9149(97)00340-8">
                 10.1016/s0002-9149(97)00340-8
               </a>
