@@ -11,7 +11,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/git" element={<ChoiceModule />} />
+        <Route path="/" element={<ChoiceModule />} />
 
         {/* Route pour la page d'accueil */}
         <Route
