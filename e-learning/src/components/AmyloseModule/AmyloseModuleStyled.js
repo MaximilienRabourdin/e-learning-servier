@@ -12,6 +12,10 @@ const AmyloseModuleStyled = styled.div`
 
   .all-box {
     background: white;
+    background-image: url("/background_band.svg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-color: white;
     margin: 4rem 8rem 6rem 8rem;
     height: 84vh;
     width: 80vw;
@@ -68,8 +72,22 @@ const AmyloseModuleStyled = styled.div`
     cursor: pointer;
   }
 
-  .image_echocardiographie {
-    width: 90%;
+  .image_ett {
+    width: 50%;
+  }
+
+  .image_ett_section {
+    display:flex;
+  }
+
+  .ett_text_section {
+    display:flex;
+    justify-content:space-between;
+    width: 100%:
+  }
+
+  .text_ett {
+    margin:0  1rem;
   }
 
   p {
@@ -77,7 +95,7 @@ const AmyloseModuleStyled = styled.div`
   }
 
   li {
-    font-size: 22px;
+    font-size: 18px;
   }
 
   .objectives_section_title {
@@ -122,7 +140,7 @@ const AmyloseModuleStyled = styled.div`
   }
 
   .divider {
-    border:2px solid #e0ebf4;
+    border: 2px solid #e0ebf4;
     margin: 0 4rem;
   }
 
@@ -133,7 +151,6 @@ const AmyloseModuleStyled = styled.div`
     align-items: flex-start;
     align-content: center;
     flex-direction: column;
-  
   }
 
   .slide-fade-enter {
@@ -218,21 +235,25 @@ const AmyloseModuleStyled = styled.div`
 
   .patient_presentation_section {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    align-content:center;
+    align-items:center;
   }
 
-  .image_patienteZ {
-    width: 20%;
+  .image_patienteX {
+    width: 10%;
+    background-repeat: no-repeat;
+
   }
 
-  .text_patienteZ {
+  .text_patienteX {
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin: 4rem 0rem 0rem 4rem;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
+    margin-left:2rem;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
   }
 
   .patientHistory {
@@ -389,7 +410,7 @@ const AmyloseModuleStyled = styled.div`
   .popup-content {
     background-color: white;
     display: flex;
-    font-size: 14px;
+    font-size: 18px;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -421,36 +442,24 @@ const AmyloseModuleStyled = styled.div`
     font-size: 20px;
   }
 
-  /* instruction slide start */
-  .all_instruction_slide {
-    width: 70%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    flex-direction: column;
-    margin: 1rem 0rem;
-  }
-
   .instruction_control_buttonside {
     width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     align-content: center;
-
-    .button_instruction {
-      height: 70px;
-      width: 70px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      align-content: center;
-      margin: 0.5rem 1rem;
-    }
   }
 
+  .button_instruction {
+    height: 70px;
+    width: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    margin: 0.5rem 1rem;
+  }
   .button_instruction_navigation {
     height: 70px;
     width: 70px;
@@ -492,8 +501,91 @@ const AmyloseModuleStyled = styled.div`
     color: blue;
     -webkit-transform: rotate(180deg);
   }
+  .mesuredechocardiographie_section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 100vh;
+    overflow-y: auto;
+  }
 
-  /* instruction slide end */
+  .mesuredechocardiographie_content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-height: 60vh;
+  }
+
+  .mesuredechocardiographie_text {
+    flex: 1;
+    margin-right: 20px;
+    background-color: #f1f8fe;
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+
+  .text_blue {
+    color: ;
+  }
+  .imagerie_section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+
+  .imagerie_content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .echocardiographie_image_container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    transition: background-color 0.3s ease-in-out;
+  }
+  .echocardiographie_image {
+    max-width: 70%; /* Réduisez la largeur maximale */
+    max-height: 250px; /* Réduisez la hauteur maximale */
+  }
+
+  .mesuredechocardiographie_title {
+    font-weight: bold;
+  }
+
+  .mesuredechocardiographie_text p {
+    margin: 0;
+  }
+
+  .mesuredechocardiographie_text ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .mesuredechocardiographie_text li {
+    font-size: 18px;
+    transition: 0.3s ease-in-out;
+    background-color: #f1f8fe;
+    margin: 0.2rem 0rem;
+    border-radius: 10px;
+  }
+
+  .subtext_echocardiographie {
+    width: 100%;
+    font-size: 14px;
+    color: #7f7f7f;
+    text-align: left;
+  }
 `;
 
 export default AmyloseModuleStyled;

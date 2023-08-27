@@ -35,26 +35,140 @@ const amylose_slide = [
   },
   {
     id: 5,
-    type: "patientPresentation",
-    title: "Patiente Z : Présentation",
-    imageSrc: "/patiente_z.png",
-    imageAlt: "Image de la patiente Z",
-    patientInfo: {
-      age: "52 ans",
-      gender: "Femme",
-      riskFactors: [
-        "Sédentarité",
-        "HTA découverte récemment (Hypertension artérielle)",
+    type: "mesuredechocardiographie",
+    title: "Mesures d’échocardiographie transthoracique ou ETT",
+    imageSrc: "/ett.png",
+    imageAlt: "Image d'échocardiographie",
+    categorie: {
+      title: "Ventricules",
+      mesures: [
+        {
+          titre: "Ventricules",
+          parametres: [
+            "- Taille",
+            "- Masse",
+            "- Epaisseur des parois du VG",
+            "- Fonction systolique et diastolique (fraction d’éjection, fraction de raccourcissement, rapport E/A…)",
+            "- Flux d’éjection",
+            "- Mouvements des parois",
+            "- Pressions",
+          ],
+        },
+        {
+          titre: "Oreillettes",
+          parametres: ["- Taille", "- Pressions"],
+        },
+        {
+          titre: "Aorte et veine cave inférieure",
+          parametres: ["- Diamètre"],
+        },
+        {
+          titre: "Artère pulmonaire",
+          parametres: ["- Pression"],
+        },
+        {
+          titre: "Veines pulmonaires",
+          parametres: ["- Flux"],
+        },
       ],
-      consultationReasons: [
-        "Depuis 3 mois : Dyspnée d’effort",
-        "Amaigrissement non chiffré",
-      ],
-      additionalInfo: "HTA : hypertension artérielle",
+      subtext:
+        "Mitchell C, Rahko PS, Blauwet LA, et al J Am Soc Echocardiogr. 2019;32(1):1-64. Illustration ® smart.servier.com",
     },
   },
+
   {
     id: 6,
+    type: "et_imagerie_deformation",
+    title: "ETT et imagerie de déformation",
+    imageSrc: "/imagerie.png",
+    imageAlt: "Image d'échocardiographie",
+    text: (
+      <>
+        <p>
+          Suivi de structure ou speckle tracking (analyse de la déformation du
+          myocarde)
+        </p>
+        <p>
+          Le strain est le degré de déformation du myocarde durant le cycle
+          cardiaque
+        </p>
+        <p>Contraction (strain positif) et relaxation (strain négatif)</p>
+        <p>
+          3 types de strains en fonction de l’orientation des fibres musculaires
+          : longitudinal, radial et circonférentiel
+        </p>
+        <p>Strain global = moyenne des strain des segments individuels</p>
+        <p>Différences régionales dans la fonction contractile</p>
+        <p>Strain longitudinal = marqueur robuste de la fonction cardiaque</p>
+      </>
+    ),
+    subtext:
+      "Nouvelles techniques échocardiographiques. Cardiologie Pratique. Published May 19, 2011. Accessed February 17, 2023. Illustration ® smart.servier.com",
+  },
+
+  {
+    id: 7,
+    type: "patientPresentation",
+    title: "Patiente X : Présentation",
+    imageSrc: "/patiente_z.png",
+    imageAlt: "Image de la patiente X",
+    patientInfo: {
+      age: "41 ans",
+      gender: "Femme",
+      medicalHistory: "Sans antécédents particuliers",
+      consultationReasons: [
+        "Douleurs abdominales",
+        "Consultation en hépato-gastrologie pour investigation",
+      ],
+      clinicalExamination: [
+        "Etat général moyen",
+        "Asthénie",
+        "Douleurs abdominales",
+        "Distension abdominale avec hépatosplénomégalie",
+        "Macroglossie",
+      ],
+      ecgFindings: [
+        "Rythme régulier sinusal à 90 bpm",
+        "Intervalle P-R : 0,18 s",
+        "HVG électrique",
+      ],
+      additionalInfo:
+        "ECG : électrocardiogramme ; HVG : hypertrophie ventriculaire gauche",
+    },
+  },
+
+  {
+    id: 7,
+    type: "imageWithText",
+    title: "Patiente X : ETT",
+    text1: (
+      <>
+        - FEVG préservée (FEVG = 53 % en Simpson Biplan) <br/>
+        - Cinétique segmentaire homogène <br/>
+      </>
+    ),
+    text2: (
+      <>
+        - Pressions de remplissage normales <br/>
+        - Épaississement des valves mitrale et tricuspide <br/>
+        - Pas d’HTAP
+      </>
+    ),
+    images: [
+      {
+        src: "/ett1.png",
+        alt: "Photo",
+      },
+      {
+        src: "/ett2.png",
+        alt: "Photo",
+      },
+    ],
+    subtext:"FEVG : fraction d’éjection du ventricule gauche ; HTAP : hypertension artérielle pulmonaire"
+  },
+
+  {
+    id: 7,
     type: "examen_medical",
     title: "Patiente Z : Examen Médical",
     subtitle: "Examen physique",
@@ -90,51 +204,39 @@ const amylose_slide = [
       "FC : fréquence cardiaque ; FR : fréquence respiratoire ; RHJ : reflux hépato jugulaire ; SaO2 : saturation artérielle en oxygène ; TA : tension artérielle ; TSVJ : turgescence spontanée des veines jugulaires",
   },
   {
-    id: 7,
+    id: 8,
     type: "video",
     title: "Patiente Z : Echocardiographie Transthoracique",
     videoSrc1: "./path/to/video.mp4",
     videoSrc2: "./path/to/video.mp4",
   },
   {
-    id: 8,
+    id: 11,
     type: "quizz",
     title: "Question 1",
-    text: "Quelles sont vos hypothèses diagnostiques ?",
+    text: "Quel diagnostic évoquez-vous ?",
     answers: [
       {
-        text: "Cœur pulmonaire chronique",
+        text: "Insuffisance cardiaque à FEVG préservée",
         correct: false,
       },
       {
-        text: "Cardiopathie carcinoïde",
+        text: "Cardiomyopathie hypertrophique",
+        correct: false,
+      },
+      {
+        text: "Rétrécissement aortique calcifié",
+        correct: false,
+      },
+      {
+        text: "Amylose à chaînes légères (AL)",
         correct: true,
-      },
-      {
-        text: "Cardiopathie rhumatismale",
-        correct: false,
-      },
-      {
-        text: "Valvulopathie médicamenteuse",
-        correct: false,
-      },
-    ],
-  },
-  {
-    id: 9,
-    type: "imageWithText",
-    title: "Patiente Z : Echocardiographie Transthoracique",
-    text: "Un texte explicatif sera rajouté ici",
-    images: [
-      {
-        src: "/echocardiographie transthoracique.png",
-        alt: "Photo",
       },
     ],
   },
 
   {
-    id: 10,
+    id: 11,
     type: "imageWithText",
     title: "Patiente Z : Echocardiographie Transthoracique",
     text: "Un texte explicatif sera rajouté ici",

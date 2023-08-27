@@ -10,8 +10,16 @@ const CentralBoxStyled = styled.div`
   position: fixed;
   font-family: Abel;
 
+  h1 {
+    font-weight: 800;
+  }
+  
   .all-box {
     background: white;
+    background-image: url("/background_band.svg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-color: white;
     margin: 4rem 8rem 6rem 8rem;
     height: 84vh;
     width: 80vw;
@@ -66,6 +74,7 @@ const CentralBoxStyled = styled.div`
   img {
     width: 80%;
     cursor: pointer;
+    border-radius:30px;
   }
 
   .image_echocardiographie {
@@ -122,7 +131,7 @@ const CentralBoxStyled = styled.div`
   }
 
   .divider {
-    border:2px solid #e0ebf4;
+    border: 2px solid #e0ebf4;
     margin: 0 4rem;
   }
 
@@ -133,7 +142,6 @@ const CentralBoxStyled = styled.div`
     align-items: flex-start;
     align-content: center;
     flex-direction: column;
-  
   }
 
   .slide-fade-enter {
@@ -196,18 +204,15 @@ const CentralBoxStyled = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    margin:0;
+    margin: 0;
   }
 
-
-  .additional_references{
+  .additional_references {
     width: 100%;
     font-size: 12px;
     color: #7f7f7f;
-    margin:0;
+    margin: 0;
   }
-  
-
 
   .subtext {
     width: 100%;
@@ -255,8 +260,6 @@ const CentralBoxStyled = styled.div`
     align-items: center;
     align-content: center;
   }
-
- 
 
   /* quizz section */
   .quizz_slide {
@@ -324,9 +327,7 @@ const CentralBoxStyled = styled.div`
     justify-content: center;
     padding: 0.5rem;
     background: #f1f8ff;
-    width: calc(
-      100% - 7rem
-    ); /* Utilisation de calc() pour ajuster la largeur */
+    width: calc(100% - 7rem);
     bottom: 0rem;
     z-index: 1; /* Ajout de la propriété z-index */
   }
@@ -500,10 +501,10 @@ const CentralBoxStyled = styled.div`
     -webkit-transform: rotate(180deg);
   }
 
-  .cardiopathie_section{
+  .cardiopathie_section {
     overflow: auto;
-  max-height: 400px;
-}
+    max-height: 400px;
+  }
 
   /* instruction slide end */
 `;

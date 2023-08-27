@@ -394,7 +394,7 @@ const slides = [
     title: "La cardiopathie carcinoïde",
     type: "cardiopathie carcinoïde",
     subtitle: "Dosage plasmatique ou urinaire du 5-HIAA",
-    text: "Taux significativement élevé en cas d’atteinte cardiaque",
+    text: "-Taux significativement élevé en cas d’atteinte cardiaque",
     subtitle2: "Pronostic\n",
     text2: (
       <>

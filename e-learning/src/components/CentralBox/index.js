@@ -9,10 +9,12 @@ import { CSSTransition } from "react-transition-group";
 
 function CentralBox() {
   const [currentPage, setCurrentPage] = useState(1);
+  const totalSlides = 20;
+  const stepBarWidth = (currentPage / totalSlides) * 100;
+
   const [showMenuPopup, setShowMenuPopup] = useState(false);
   const [showReferencesPopup, setShowReferencesPopup] = useState(false);
   const [showAidePopup, setShowAidePopup] = useState(false);
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [quizAnswers, setQuizAnswers] = useState({});
   const [showAbbreviationPopup, setShowAbbreviationPopup] = useState(false);
   const [enlargedImage, setEnlargedImage] = useState(null);
@@ -38,10 +40,7 @@ function CentralBox() {
 
   const progressBarValue = ((currentPage - 1) / slides.length) * 100;
 
-  const handleMenuButtonClick = () => {
-    setShowMenuPopup(true);
-  };
-
+ 
   const handleReferencesButtonClick = () => {
     setShowReferencesPopup(true);
   };
@@ -78,7 +77,7 @@ function CentralBox() {
   };
 
   return (
-    <CentralBoxStyled>
+    <CentralBoxStyled stepBarWidth={stepBarWidth}>
       <div className="all-box">
         <nav className="sidebar">
           <ul className="all_button">
@@ -109,6 +108,13 @@ function CentralBox() {
             >
               <img alt="icon" src="./aide_icon.svg" />
               <a className="text-button">Aide</a>
+            </li>
+            <li
+              onClick={handleAideButtonClick}
+              className={`button ${currentPage === 4 ? "active" : ""}`}
+            >
+              <img alt="icon" src="./aide_icon.svg" />
+              <a className="text-button">Quitter</a>
             </li>
           </ul>
         </nav>
