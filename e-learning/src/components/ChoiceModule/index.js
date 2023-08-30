@@ -17,8 +17,20 @@ function ChoiceModule() {
           Une étude de cas clinique interactive sur une amylose cardiaque
         </a>
         <a className="thirdModule">?</a>
-        <img className="servier_logo" src="/servier_logo.png" />
-      </div>
+        <div className="logo_section">
+        <img
+          className="servier_logo"
+          src="/servier_logo.png"
+          alt="Servier Logo"
+        />
+  
+
+        <img
+          className="springerhealthcare_logo"
+          src="/springer.svg"
+          alt="Springer logo"
+        />{" "}
+      </div>      </div>
     </ChoiceModuleStyled>
   );
 }

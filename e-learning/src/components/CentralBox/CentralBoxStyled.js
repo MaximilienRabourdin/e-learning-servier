@@ -362,14 +362,30 @@ const CentralBoxStyled = styled.div`
   }
 
   .logo_section {
-    position: fixed;
+    display:flex;
+    position:fixed;
     left: 1rem;
     bottom: 1rem;
+  }
+
+  .logo_section_springerhealthcare_logo {
+    position: fixed;
+    left: 12rem;
+    bottom: 1.4rem;
   }
 
   .servier_logo {
     width: 10%;
     border-radius: 16px;
+    background: #f6fcff;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.06) inset,
+      4px 0px 4px 0px rgba(0, 0, 0, 0.06) inset;
+  }
+
+  .springerhealthcare_logo {
+    width:20%;
+    border-radius: 16px;
+    margin-left:2rem;
     background: #f6fcff;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.06) inset,
       4px 0px 4px 0px rgba(0, 0, 0, 0.06) inset;

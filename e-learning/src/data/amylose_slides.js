@@ -117,7 +117,7 @@ const amylose_slide = [
       gender: "Femme",
       medicalHistory: "Sans antécédents particuliers",
       consultationReasons: [
-        "Douleurs abdominales",
+        "- Douleurs abdominales",
         "Consultation en hépato-gastrologie pour investigation",
       ],
       clinicalExamination: [
@@ -143,15 +143,14 @@ const amylose_slide = [
     title: "Patiente X : ETT",
     text1: (
       <>
-        - FEVG préservée (FEVG = 53 % en Simpson Biplan) <br/>
-        - Cinétique segmentaire homogène <br/>
+        - FEVG préservée (FEVG = 53 % en Simpson Biplan) <br />
+        - Cinétique segmentaire homogène <br />
       </>
     ),
     text2: (
       <>
-        - Pressions de remplissage normales <br/>
-        - Épaississement des valves mitrale et tricuspide <br/>
-        - Pas d’HTAP
+        - Pressions de remplissage normales <br />
+        - Épaississement des valves mitrale et tricuspide <br />- Pas d’HTAP
       </>
     ),
     images: [
@@ -164,54 +163,49 @@ const amylose_slide = [
         alt: "Photo",
       },
     ],
-    subtext:"FEVG : fraction d’éjection du ventricule gauche ; HTAP : hypertension artérielle pulmonaire"
+    subtext:
+      "FEVG : fraction d’éjection du ventricule gauche ; HTAP : hypertension artérielle pulmonaire",
   },
 
   {
-    id: 7,
+    id: 8,
     type: "examen_medical",
-    title: "Patiente Z : Examen Médical",
+    title: "Patiente X : ETT",
     subtitle: "Examen physique",
     text: (
       <>
-        <p> FC = 92 bpm</p> <br />
-        <p>TA bras gauche = 142/87 mmHg</p> <br />
-        <p>TA bras gauche = 142/87 mmHg</p>
+        <p>
+          <b className="blue_text"> Etude de la déformation longitudinale :</b>
+        </p>
         <br />
-        <p>TA bras droit = 145/82 mmHg </p>
+        <p>- 2D-SLG du VG diminué (&lt;- 10,4 %) </p>
         <br />
-        <p>FR = 22 cpm </p>
-        <br />
-        <p>SaO2 = 96 % (air ambiant)</p>
-        <br />
-      </>
-    ),
-    text2: (
-      <>
-        <p> Température = 36,7 °C</p> <br />
-        <p>Souffle systolique 4/6 au niveau du foyer tricuspide</p> <br />
-        <p>Éclat B2 pulmonaire</p>
-        <br />
-        <p>Champs pulmonaires libres </p>
-        <br />
-        <p>Hépatomégalie</p>
-        <br />
-        <p>Œdèmes des membres inférieurs bilatéraux en chaussette</p>
+        <p>
+          {" "}
+          - Prédominance de l‘infiltration sur les segments basaux avec
+          préservation des segments apicaux
+          <br />→ gradient base-apex
+        </p>
         <br />
       </>
     ),
-    subtext:
-      "FC : fréquence cardiaque ; FR : fréquence respiratoire ; RHJ : reflux hépato jugulaire ; SaO2 : saturation artérielle en oxygène ; TA : tension artérielle ; TSVJ : turgescence spontanée des veines jugulaires",
+    images: [
+      {
+        src: "/longitudinale.png",
+        alt: "Photo",
+      },
+    ],
+    subtext: "SLG : strain longitudinal global ; VG : ventricule gauche",
   },
+  // {
+  //   id: 8,
+  //   type: "video",
+  //   title: "Patiente Z : Echocardiographie Transthoracique",
+  //   videoSrc1: "./path/to/video.mp4",
+  //   videoSrc2: "./path/to/video.mp4",
+  // },
   {
-    id: 8,
-    type: "video",
-    title: "Patiente Z : Echocardiographie Transthoracique",
-    videoSrc1: "./path/to/video.mp4",
-    videoSrc2: "./path/to/video.mp4",
-  },
-  {
-    id: 11,
+    id: 9,
     type: "quizz",
     title: "Question 1",
     text: "Quel diagnostic évoquez-vous ?",
@@ -236,233 +230,295 @@ const amylose_slide = [
   },
 
   {
-    id: 11,
-    type: "imageWithText",
-    title: "Patiente Z : Echocardiographie Transthoracique",
-    text: "Un texte explicatif sera rajouté ici",
-    images: [
-      {
-        src: "/echocardiographie transthoracique 2.png",
-        alt: "Photo",
-      },
-    ],
+    id: 10,
+    type: "information",
+    title: "Amylose à chaînes légères (AL)",
+    text: (
+      <>
+        <p> - Maladie rare</p>
+        <p> - Trouble clonal des cellules B</p>
+        <p>- Manifestation de plusieurs maladies systémiques</p>
+        <p>
+          - Accumulation extracellulaire de protéines fibrillaires insolubles
+          qui se déposent et envahissent progressivement les tissus
+        </p>
+      </>
+    ),
+    subtext:
+      "Desport E, Bridoux F, Sirac C, et al. Orphanet Journal of Rare Diseases. 2012;7(1):54.",
   },
 
   {
     id: 11,
-    type: "bilan",
-    title: "Patiente Z : Bilan de l‘Echocardiographie Transthoracique",
-    text: (
-      <>
-        - VG de taille normale avec conservation de la fonction systolique
-        <br />
-        - Valves mitrale et aortique normales
-        <br />
-        - VD dilaté avec conservation de la fonction systolique longitudinale
-        <br />
-        - Valve tricuspide épaissie, figée en bâton de tambour où siège une
-        fuite ; sténose importante
-        <br />
-        - Péricarde normal
-        <br />
-      </>
-    ),
-    subtext: "VD : ventricule droit ; VG : ventricule gauche",
-  },
-  {
-    id: 12,
-    type: "quizz",
+    type: "quizzmultiple",
     title: "Question 2",
-    text: "Au vu de ce bilan, quel(s) autres examens préconiseriez-vous ?",
+    text: "Quels examens demanderiez-vous pour confirmer ce diagnostic ? Trois réponses possibles",
     answers: [
       {
-        text: "IRM cardiaque",
-        correct: false,
-      },
-      {
-        text: "Électrocardiogramme",
-        correct: false,
-      },
-      {
-        text: "Dosage de la chromogranine A",
-        correct: false,
-      },
-      {
-        text: "Dosage du BNP",
-        correct: false,
-      },
-      {
-        text: "Scanner thoraco-abdomino pelvien",
+        text: "Examens biologique",
         correct: true,
       },
-    ],
-  },
-  {
-    id: 13,
-    type: "patientHistory",
-    title: "L’histoire de la patiente continue",
-    text: `Scanner thoraco-abdomino pelvien : \n
-    Aspect en faveur d’une tumeur grêlique avec localisations secondaires hépatique et pulmonaire \n
-  
-    → diagnostic de cardiopathie carcinoïde \n`,
-    images: [
       {
-        src: "/public/thoraco-abdomino.png",
-        alt: "Photo",
+        text: "Biopsies et analyses histologiques (infiltration amyloïde)",
+        correct: true,
+      },
+      {
+        text: "Scanner abdominal",
+        correct: false,
+      },
+      {
+        text: "IRM cardiaque",
+        correct: true,
+      },
+      {
+        text: "Coronarographie",
+        correct: false,
+      },
+      {
+        text: "Holter ECG",
+        correct: false,
       },
     ],
+    subtext:
+      "ECG : électrocardiogramme ; IRM : imagerie par résonance magnétique",
   },
+
+  {
+    id: 12,
+    type: "informationX",
+    title: "Patiente X : Biologie",
+    text: [
+      {
+        title: "Electrophorèse des protéines sériques",
+        content: (
+          <>
+            <p>Réaction inflammatoire aigue et hypogammaglobulinémie</p>
+            <p> Dosage pondéral: </p>
+            <p>IgG = 4,52 g (7 - 16)</p>
+            <p>IgM = 1,36 g (0,31 - 0,77)</p>
+          </>
+        ),
+      },
+      {
+        title: "Dosage des chaines légères libres sériques",
+        content: (
+          <>
+            <p>Chaines kappa : 198,25 mg/L (3,3 - 19,4)</p>
+            <p>Chaines lambda : 18,67 mg/L (5,71 - 26,30)</p>
+            <p>Rapport kappa/lambda : 10,62</p>
+          </>
+        ),
+      },
+      {
+        title: "Electrophorèse des protéines urinaires",
+        content: (
+          <>
+            <p>
+              {" "}
+              <b> Atteinte urinaire avec fuite protéique importante </b>
+            </p>
+            <p>Immunofixation : absence de protéinurie de Bence Jones</p>
+          </>
+        ),
+      },
+      {
+        title: "Dosage des biomarqueurs cardiaques",
+        content: (
+          <>
+            <p>
+              {" "}
+              <b> Dosage du NT-proBNP = 3177 pg/mL </b>{" "}
+            </p>
+            <p>
+              {" "}
+              <b>
+                {" "}
+                Dosage de la troponine = 0,06 µg/L soit 14 fois la normale{" "}
+              </b>{" "}
+            </p>
+          </>
+        ),
+      },
+    ],
+    subtext: "NT-proBNP : N-terminal pro Brain Natriuretic Peptide",
+    image: "photo_attente.png",
+  },
+
+  {
+    id: 13,
+    type: "text_cardiopathie",
+    title: "Patiente X : Analyses histologiques",
+    text: (
+      <>
+        <b>Ponction-biopsie hépatique </b>
+        Présence de dépôts extracellulaires positifs à la coloration au rouge
+        Congo composés d’une substance anhiste éosinophile
+        <br />
+        <br />
+        <b style={{ color: "#0089e3" }}> → amylose hépatique </b> sans
+        prolifération tumorale
+        <br />
+        <br />
+        <b>Ponction-biopsie ostéo-médullaire</b>- Moelle de richesse cellulaire
+        III avec dépôts interstitiels d’une substance éosinophile homogène
+        pouvant rappeler l’<b> amylose </b>
+        - Absence d’infiltration tumorale
+        <br />
+        <br />
+        <b>Ponction-biopsie des glandes salivaires :</b>
+        <br />- Aspect d’une sialadénite chronique sans signe de malignité
+      </>
+    ),
+  },
+
   {
     id: 14,
     type: "text_cardiopathie",
-    title: "La cardiopathie carcinoïde",
+    title: "Diagnostic de l’amylose cardiaque",
     text: (
       <>
-        - Atteinte valvulaire droite organique secondaire à la libération
-        excessive de sérotonine sécrétée par une tumeur endocrine maligne à
-        prédominance digestive.
-        <br />- Son incidence est de l'ordre de 1 à 2/100 000 dans la population
-        générale.
+        <b> Le diagnostic de certitude reste la biopsie endomyocardique </b>
+        <br />- Identification des dépôts amyloïdes intracardiaques
+        <br />- Caractère invasif et peu accessible.
+        <br /> <b> Le diagnostic peut aussi être confirmé si : </b>
+        <br />- Des dépôts amyloïdes sont identifiés dans une biopsie
+        extracardiaque.
+        <br />- <b>Et </b>des éléments caractéristiques sont retrouvés à
+        l’échocardiographie ou à l’IRM cardiaque Des métastases intracardiaques
+        (rare).
         <br />
-        <br />
-        <b>Physiopathologie :</b>
-        <br />- Un dépôt fibreux se forme sur les valves, secondaire à des
-        flushs de sérotonine, entraînant une rétraction valvulaire.
-        <br />- Les valves se figent et entraînent à la longue une insuffisance
-        cardiaque droite.
-        <br />- L’atteinte gauche est rare car les poumons font office de filtre
-        physiologique.
-        <br />- En cas d’atteinte du cœur gauche, un foramen ovale perméable
-        (FOP) doit être recherché.
+        <br /> <b> Les signes cliniques de l’amylose AL </b>
+        <br />- Extracardiaques : macroglossie, hématomes cutanés, protéinurie,
+        insuffisance rénale
+        <br />- Cardiaques : hypotension, élévation du NT-proBNP, élévation
+        persistante de la troponine
       </>
     ),
-    subtext: (
-      <>
-        Pellikka PA, et al. Carcinoid heart disease. Clinical and
-        echocardiographic spectrum in 74 patients. Circulation.
-        1993;87(4):1188-1196
-        <br />
-        Kulke MH, Mayer RJ. Carcinoid tumors. N Engl J Med. 1999;340(11):858-868
-        <br />
-        Roberts WC. A unique heart disease associated with a unique cancer:
-        carcinoid heart disease. Am J Cardiol. 1997;80(2):251-256
-        <br />
-        Mansencal N, et al. Assessment of patent foramen ovale in carcinoid
-        heart disease. Am Heart J. 2006;151(5):1129.e1-6
-        <br />
-        Ram P, et al. Carcinoid Heart Disease: Review of Current Knowledge.
-        Texas Heart Institute Journal. 2019;46(1):21‑27
-      </>
-    ),
+    subtext:
+      "Garcia-Pavia P, et al. Diagnosis and treatment of cardiac amyloidosis: a position statement of the ESC Working Group on Myocardial and Pericardial Diseases. Eur Heart J. 2021;42(16):1554‑1568. McDonagh TA, et al. 2021 ESC Guidelines for the diagnosis and treatment of acute and chronic heart failure. Eur Heart J. 2021;42(36):3599‑3726.",
   },
+
   {
     id: 15,
-    type: "text_cardiopathie",
-    title: "La cardiopathie carcinoïde",
+    type: "interet_imagerie",
+    title: "Intérêt de l’imagerie cardiaque dans le diagnostic",
+    subtitle:
+      "L’échocardiographie et l’IRM cardiaque sont complémentaires. Les éléments caractéristiques retrouvés à :",
     text: (
       <>
-        <b> Deux formes : </b>
-        <br />- Une valvulopathie droite isolée ou associée à une valvulopathie
-        gauche.
-        <br />- La principale valve touchée est la valve tricuspide.
-        <br />- Les lésions valvulaires fuyantes sont plus fréquentes que les
-        sténoses, mais elles sont, en pratique, souvent combinées.
-        <br />- La sténose valvulaire apparaît lorsque la valve devient
-        complètement immobile.
-        <br />
-        Des métastases intracardiaques (rare).
-        <br />
-        <br /> <b> Signes cliniques frustes : </b>
-        <br />- Signes cliniques de l’insuffisance cardiaque droite.
-        <br />- Patients paucisymptomatiques : découverte fortuite lors d’une
-        échocardiographie ou lors d’un bilan chez un patient présentant une
-        tumeur neuroendocrine.
+        <h3>
+          <b>L’échocardiographie</b>
+        </h3>
+        <ul>
+          <li>un aspect granuleux et brillant du myocarde,</li>
+          <li>
+            une augmentation de l’épaisseur de la paroi ventriculaire droite,
+          </li>
+          <li>
+            une augmentation de l’épaisseur des valves mitrale ou tricuspide,
+          </li>
+          <li>un épanchement péricardique,</li>
+          <li>un strain longitudinal diminué avec une préservation apicale.</li>
+        </ul>
       </>
     ),
-    subtext:
-      "Références bibliographiques :\n- Roberts WC. A unique heart disease associated with a unique cancer: carcinoid heart disease. Am J Cardiol. 1997;80(2):251-256.\n- Bhattacharyya S, et al. Features of carcinoid heart disease identified by 2- and 3-dimensional echocardiography and cardiac MRI. Circ Cardiovasc Imaging. 2010;3(1):103-111.",
-    images: [
-      {
-        src: "/chemin/vers/les/images/carcinoid_heart_disease.jpg",
-        alt: "Image de la cardiopathie carcinoïde",
-      },
-    ],
+    text2: (
+      <>
+        <h3>
+          <b>L’IRM cardiaque</b>
+        </h3>
+        <ul>
+          <li>un rehaussement tardif sous-endocardique après gadolinium,</li>
+          <li>une augmentation des valeurs du T1 natif,</li>
+          <li>une augmentation du volume extracellulaire,</li>
+          <li>une cinétique anormale du gadolinium.</li>
+        </ul>
+      </>
+    ),
+    reference:
+      "Garcia-Pavia P, et al. Diagnosis and treatment of cardiac amyloidosis: a position statement of the ESC Working Group on Myocardial and Pericardial Diseases. Eur Heart J. 2021;42(16):1554‑1568. McDonagh TA, et al. 2021 ESC Guidelines for the diagnosis and treatment of acute and chronic heart failure. Eur Heart J. 2021;42(36):3599‑3726.",
   },
+
   {
     id: 16,
-    type: "quizz",
+    type: "quizzmultiple",
     title: "Question 3",
-    text: "Quels sont les marqueurs biologiques à doser pour le diagnostic et le suivi d’une cardiopathie carcinoïde ?",
+    text: "Quels sont les marqueurs pronostiques de l’amylose AL ? Trois réponses possibles",
     answers: [
       {
-        text: "NT-proBNP",
+        text: "Elévation de la troponine T et du NT-proBNP",
         correct: true,
       },
       {
-        text: "Troponine T",
+        text: "Diminution du débit de filtration glomérulaire",
         correct: false,
       },
       {
-        text: "Chromogranine A",
-        correct: false,
-      },
-      {
-        text: "Métabolite de la sérotonine (5-HIAA)",
+        text: "Altération du strain longitudinal",
         correct: true,
+      },
+      {
+        text: "Altération de la FEVG",
+        correct: false,
+      },
+      {
+        text: "Réhaussement tardif à l’IRM",
+        correct: true,
+      },
+      {
+        text: "Elargissement des complexes QRS",
+        correct: false,
       },
     ],
     subtext:
-      "5-HIAA : acide 5-hydroxy-indol-acétique ; NT-proBNP : N-terminal pro Brain Natriuretic Peptide",
+      "FEVG : fraction d’éjection du ventricule gauche; IRM : imagerie par résonance magnétique ; NT-proBNP : N-terminal pro Brain Natriuretic Peptide",
   },
+
   {
-    id: 17,
-    title: "L’histoire de la patiente continue",
+    id: 19,
+    title: "Marqueurs pronostiques et stratification",
     type: "default",
-    subtitle: "- Biologie",
-    text: "Dosage urinaire du métabolite de la sérotonine (5-HIAA) en cours",
-    subtitle2: "- Evolution",
+    subtitle: "- A l’ETT, altération du strain longitudinal",
+    text: "Normale : -18 % Forme sévère : < -15 % Forme très sévère : < -10 %",
+    subtitle2:
+      "- A l’IRM, rehaussement tardif après injection de gadolinium et T1 mapping > normale",
     text2:
       "Transfert au service de cancérologie (Hôpital Cheikhoul Khadim) pour une prise en charge oncologique",
     subtext: "5-HIAA : acide 5-hydroxy-indol-acétique",
   },
   {
-    id: 18,
-    title: "La cardiopathie carcinoïde",
+    id: 20,
+    title: "Patiente X : Traitement",
     type: "cardiopathie carcinoïde",
-    subtitle: "Dosage plasmatique ou urinaire du 5-HIAA",
-    text: "Taux significativement élevé en cas d’atteinte cardiaque",
-    subtitle2: "Pronostic\n",
+    subtitle:
+      "La patiente reçoit depuis plus de 6 mois une chimiothérapie associant 3 classes thérapeutiques (VCD) : ",
     text2: (
       <>
-        - Le pronostic des tumeurs endocrines digestives est meilleur que celui
-        de nombreuses tumeurs.
         <br />
-        - La présence d’une cardiopathie carcinoïde est un facteur pronostique
-        péjoratif de la maladie carcinoïde.
+        - Un inhibiteur du protéasome (bortezomib = V)
         <br />
-        - Le 5-HIAA et le NT-proBNP sont des facteurs prédictifs de la
-        progression de la cardiopathie.
-        <br />- La principale cause de décès est l’insuffisance cardiaque.
+        - Un agent alkylant (cyclophosphamide = C)
+        <br />
+        - Des corticoïdes (déxaméthasone = D)
+        <br />
+        - Des anticorps anti-CD38 (daratumumab)
       </>
     ),
-    subtitle3: "Traitement\n",
+
     text3: (
       <>
-        - Analogues de la somatostatine et chimiothérapie.
+        - La pierre angulaire du traitement des amyloses AL repose sur la
+        neutralisation du précurseur protéique qu’est la chaine légère
+        d’immunoglobuline, sécrétée en excès par un clone plasmocytaire dans le
+        cadre d’une gammapathie.
         <br />
-        - Résection chirurgicale de la tumeur endocrine digestive et des
-        métastases hépatiques.
-        <br />- Remplacement valvulaire = seul traitement curatif efficace de
-        l’atteinte cardiaque
       </>
     ),
-    subtext:
-      "5-HIAA : acide 5-hydroxy-indol-acétique ; NT-proBNP : N-terminal pro Brain Natriuretic Peptide",
   },
   {
-    id: 19,
+    id: 21,
     title: "Conclusions",
-    type: "default",
+    type: "conclusion",
     text: (
       <>
         - L’amylose est la manifestation de plusieurs maladies systémiques ;

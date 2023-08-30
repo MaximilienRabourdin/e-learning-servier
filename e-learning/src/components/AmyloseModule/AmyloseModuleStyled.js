@@ -54,6 +54,7 @@ const AmyloseModuleStyled = styled.div`
     height: 80px;
     width: 80px;
     color: #0071bb;
+    border-radius: 10px;
 
     a {
       margin-top: 0.4rem;
@@ -70,6 +71,19 @@ const AmyloseModuleStyled = styled.div`
   img {
     width: 80%;
     cursor: pointer;
+  }
+
+  .ett {
+    display: flex;
+  }
+
+  .text_ett {
+    margin-bottom:1rem;
+    background-color:#1875d1;
+    padding:1rem;
+    border-radius: 10px;
+    color:white;
+
   }
 
   .image_ett {
@@ -102,6 +116,13 @@ const AmyloseModuleStyled = styled.div`
     font-size: 24px;
   }
 
+  .list_objectives {
+    background-color : #1976d2;
+    color:white;
+    padding:1rem 2rem;
+    border-radius:20px;
+  }
+
   .right_section {
     width: 100%;
     height: 100%;
@@ -120,9 +141,9 @@ const AmyloseModuleStyled = styled.div`
 
   .examenmedical_section {
     width: 100%;
-    padding: 0 2rem;
+    padding: 0 1rem;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-content: flex-start;
 
     p {
@@ -134,9 +155,15 @@ const AmyloseModuleStyled = styled.div`
     width: 50%;
     max-height: 100%;
     display: flex;
-    align-items: flex-end;
-    align-content: center;
+    align-items: flex-start;
+    align-content: flex-start;
+    justify-content:center;
     flex-direction: column;
+    background-color: #f1f8fe;
+    border-radius: 1rem;
+    padding: 1rem;
+
+
   }
 
   .divider {
@@ -213,6 +240,7 @@ const AmyloseModuleStyled = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    color:white;
   }
 
   .subtext {
@@ -267,58 +295,193 @@ const AmyloseModuleStyled = styled.div`
   }
 
   .cardiopathie_section {
-    background_color: red;
     width: 80%;
     height: 50%;
   }
 
-  /* quizz section */
-  .quizz_slide {
-    text-align: left;
-    height: 40%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
+  .traitement_subtitle {
+    color: #1976d2;
   }
 
-  .quizz_title {
-    font-size: 22px;
-    margin-top: 4rem;
-  }
-
-  #quizz {
-    list-style-type: none;
-    padding-left: 0;
-  }
-
-  .answer_button {
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    font-size: 16px;
-    color: inherit;
+  .pierre_angulaire {
+    background-color: #1789E3;
     padding: 1rem;
+    border:3px solid #1976d2;
+    border-radius: 20px;
+    color:white;
   }
 
-  .answer_button:hover {
-    border: 1px solid #f1f8fe;
-    color: #005a94;
-    background-color: #f1f8fe;
-    cursor: pointer;
-    padding: 1.2rem;
-    border-radius: 50px;
-  }
+/* quizzmultiple section */
+.quizz_slide {
+  text-align: center;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1f8fe;
+  border-radius: 1rem;
+}
 
-  .answer_button.correct {
-    color: green;
-  }
+.quizz_title {
+  font-size: 28px;
+  margin-bottom: 2rem;
+  color: #24226A;
+  font-weight: 700;
+}
 
-  .answer_button.incorrect {
-    color: red;
-  }
+#quizz {
+  list-style-type: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  /* quizz section end  */
+.choice_answer {
+  display: flex;
+  justify-content: flex-start;
+  background-color: #A7CAED;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.choice_answer:hover {
+  background-color: #005a94;
+}
+
+.choice_answer.correct {
+  background-color: green; /* Couleur verte pour les réponses correctes */
+}
+
+.answer_button, .choice_answer, .correct {
+  border: none;
+  color: white;
+  font-size: 18px;
+  padding: 0.4rem 2rem;
+  margin: 0.5rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.answer_button {
+  padding: 1rem 2rem;
+  background-color: #A7CAED;
+}
+
+.answer_button:hover, .choice_answer:hover {
+  background-color: #005a94;
+}
+
+/* checkbox */
+/* Styles pour les cases à cocher */
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #1875D1;
+  border-radius: 3px;
+  outline: none;
+  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #1875D1; /* Couleur verte pour les cases cochées */
+  border-color: #1875D1;
+}
+
+input[type="checkbox"]:disabled {
+  background-color: #D8D8D8; /* Couleur pour les cases désactivées */
+  border-color: #D8D8D8;
+  cursor: not-allowed;
+}
+
+/* Styles pour les labels des cases à cocher */
+label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+label span {
+  margin-left: 5px;
+}
+
+.information_slide{
+  display:flex;
+  flex-direction:column;
+  background-color:#1875d1;
+  color:white;
+  border-radius:10px;
+  padding:1rem;
+}
+
+#add_info{
+  color:white;
+}
+
+.information_slideX {
+  display:flex;
+  align-content:center;
+  align-items:center;
+  width: 100%;
+  height: 80%;
+}
+
+.information_textX {
+  display:flex;
+  margin-left:4rem;
+  flex-direction:column;
+  width: 100%;
+}
+
+.information_section {
+  width: 100%;
+  margin:0.4rem
+  background-color: #D8D8D8; 
+  padding: 0.4rem;
+  border-radius: 10px;
+  
+}
+
+
+.information_section p {
+  margin: 0;
+  font-size:14px;
+}
+
+.information_section h3 {
+  margin: 0;
+  font-size:16px;
+  color:#1875d1;
+}
+
+.information_slide_patienteX {
+  display:flex;
+}
+
+
+.information_reference_patienteX {
+  font-size: 18px;
+  margin:0;
+  padding: 0;
+}
+
+.imageX_section {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  align-content:center;
+}
+
+.informationX_image {
+  width:100%;
+}
 
   .echocardiographie_image {
     width: 100%;
@@ -328,7 +491,43 @@ const AmyloseModuleStyled = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
+  
   }
+
+
+/* interet imagerie  */
+
+.title_interet_imagerie {
+  font-size:20px;
+}
+.interet_imagerie_slide {
+  width: 100%;
+  display:flex;
+  justify-content:center;
+}
+
+.interet_imagerie_left_side {
+  width: 40%;
+  margin-right:2rem;
+  background-color:#1875d1;
+  padding:1rem;
+  border-radius:20px;
+  color:white;
+}
+
+.interet_imagerie_right_side {
+  width: 40%;
+  background-color:#0089E3;
+  padding:1rem;
+  border-radius:20px;
+  color:white;
+}
+
+#add_info{
+  display:flex;
+  text-align:center;
+  color:grey;
+}
 
   .step_bar {
     position: fixed;
@@ -481,6 +680,12 @@ const AmyloseModuleStyled = styled.div`
     align-content: center;
   }
 
+  .enlargedImage {
+    border-radius: 50px;
+    background-color: #0190EF;
+  
+  }
+
   h5 {
     margin: 0;
   }
@@ -585,6 +790,13 @@ const AmyloseModuleStyled = styled.div`
     font-size: 14px;
     color: #7f7f7f;
     text-align: left;
+  }
+
+  .conclusion_slide {
+    background-color:#1976d2;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    color: white;
   }
 `;
 

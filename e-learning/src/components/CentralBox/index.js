@@ -40,7 +40,6 @@ function CentralBox() {
 
   const progressBarValue = ((currentPage - 1) / slides.length) * 100;
 
- 
   const handleReferencesButtonClick = () => {
     setShowReferencesPopup(true);
   };
@@ -252,6 +251,26 @@ function CentralBox() {
                           </p>
                         </div>
                       </div>
+
+                      <div className="instruction_control_buttonside">
+                        <div className="button_instruction">
+                          <img
+                            className="enlargedImage"
+                            alt="icon"
+                            src="./exit.svg"
+                          
+                          />
+                          <a className="text_button_instruction">Quitter</a>
+                        </div>
+                        <div className="description_button">
+                          <h5> Quitter </h5>
+                          <p className="description_button_text">
+                            {" "}
+                            Cliquez sur ce bouton revenir au choix des modules
+                          </p>
+                        </div>
+                      </div>
+
 
                       <div className="instruction_navigation">
                         <p> Utilisez les flèches pour changer de slides </p>
@@ -467,8 +486,10 @@ function CentralBox() {
                         {" "}
                         {slides[currentPage - 1].subtext}{" "}
                       </p>
-                      <p className="additional_references"> {slides[currentPage - 1].subtext2}{" "}</p>
-
+                      <p className="additional_references">
+                        {" "}
+                        {slides[currentPage - 1].subtext2}{" "}
+                      </p>
                     </div>
                   </>
                 )}
@@ -505,6 +526,13 @@ function CentralBox() {
           src="/servier_logo.png"
           alt="Servier Logo"
         />
+  
+
+        <img
+          className="springerhealthcare_logo"
+          src="/springer.svg"
+          alt="Springer logo"
+        />{" "}
       </div>
       {showMenuPopup && (
         <div className="popup-overlay" onClick={handleClosePopup}>
@@ -552,8 +580,9 @@ function CentralBox() {
             <p>
               Bhattacharyya S, Toumpanakis C, Burke M, Taylor AM, Caplin ME,
               Davar J. Features of carcinoid heart disease identified by 2- and
-              3-dimensional echocardiography and cardiac MRI. <i>Circulation.
-              Cardiovascular Imaging</i>. 2010;3(1):103-111. doi:
+              3-dimensional echocardiography and cardiac MRI.{" "}
+              <i>Circulation. Cardiovascular Imaging</i>. 2010;3(1):103-111.
+              doi:
               <a href="https://doi.org/10.1161/CIRCIMAGING.109.886846">
                 10.1161/CIRCIMAGING.109.886846
               </a>
@@ -568,8 +597,9 @@ function CentralBox() {
               </a>
               <br />
               <br />
-              Kulke MH, Mayer RJ. Carcinoid tumors. <i>The New England Journal of
-              Medicine</i>. 1999;340(11):858-868. doi:
+              Kulke MH, Mayer RJ. Carcinoid tumors.{" "}
+              <i>The New England Journal of Medicine</i>. 1999;340(11):858-868.
+              doi:
               <a href="https://doi.org/10.1056/NEJM199903183401107">
                 10.1056/NEJM199903183401107
               </a>
@@ -580,16 +610,17 @@ function CentralBox() {
               Hematology Association (EHA), the European Society for Therapeutic
               Radiology and Oncology (ESTRO) and the International
               Cardio-Oncology Society (IC-OS): Developed by the task force on
-              cardio-oncology of the <i>European Society of Cardiology (ESC) </i>.
-              European Heart Journal. 2022;0:1-133. doi:
+              cardio-oncology of the{" "}
+              <i>European Society of Cardiology (ESC) </i>. European Heart
+              Journal. 2022;0:1-133. doi:
               <a href="https://doi.org/10.1093/eurheartj/ehac244">
                 10.1093/eurheartj/ehac244
               </a>
               <br />
               <br />
               Mansencal N, Mitry E, Forissier JF, et al. Assessment of patent
-              foramen ovale in carcinoid heart disease. <i>The American Heart
-              Journal</i>. 2006;151(5):1129.e1-6. doi:
+              foramen ovale in carcinoid heart disease.{" "}
+              <i>The American Heart Journal</i>. 2006;151(5):1129.e1-6. doi:
               <a href="https://doi.org/10.1016/j.ahj.2006.02.019">
                 10.1016/j.ahj.2006.02.019
               </a>
@@ -620,16 +651,17 @@ function CentralBox() {
               <br />
               <br />
               Ram P, Penalver JL, Lo KBU, Rangaswami J, Pressman GS. Carcinoid
-              Heart Disease: Review of Current Knowledge. <i>Texas Heart Institute
-              Journal.</i> 2019;46(1):21‑27. doi:
+              Heart Disease: Review of Current Knowledge.{" "}
+              <i>Texas Heart Institute Journal.</i> 2019;46(1):21‑27. doi:
               <a href="https://doi.org/10.14503/THIJ-17-6562">
                 10.14503/THIJ-17-6562
               </a>
               <br />
               <br />
               Roberts WC. A unique heart disease associated with a unique
-              cancer: carcinoid heart disease. <i>The American Journal of
-              Cardiology</i>. 1997;80(2):251-256. doi:
+              cancer: carcinoid heart disease.{" "}
+              <i>The American Journal of Cardiology</i>. 1997;80(2):251-256.
+              doi:
               <a href="https://doi.org/10.1016/s0002-9149(97)00340-8">
                 10.1016/s0002-9149(97)00340-8
               </a>

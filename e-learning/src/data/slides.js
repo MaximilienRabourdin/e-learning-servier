@@ -170,6 +170,7 @@ const slides = [
       },
     ],
   },
+  
   {
     id: 9,
     type: "imageWithText",

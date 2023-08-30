@@ -12,7 +12,6 @@ function AmyloseModule() {
   const [showMenuPopup, setShowMenuPopup] = useState(false);
   const [showReferencesPopup, setShowReferencesPopup] = useState(false);
   const [showAidePopup, setShowAidePopup] = useState(false);
-  const [quizAnswers, setQuizAnswers] = useState({});
   const [showAbbreviationPopup, setShowAbbreviationPopup] = useState(false);
   const [enlargedImage, setEnlargedImage] = useState(null);
 
@@ -76,17 +75,43 @@ function AmyloseModule() {
     setShowMenuPopup(false);
   };
 
-  const [modalOpen, setModalOpen] = useState(false);
-  const [largeImageSrc, setLargeImageSrc] = useState("");
+  // choix multiple pour le quizz
 
-  const openModal = (imageSrc) => {
-    setModalOpen(true);
-    setLargeImageSrc(imageSrc);
+  const [selectedAnswers, setSelectedAnswers] = useState([]);
+  const [showAnswer, setShowAnswer] = useState(false);
+
+  const handleQuizzAnswer = (answerText) => {
+    if (selectedAnswers.includes(answerText)) {
+      setSelectedAnswers(selectedAnswers.filter((text) => text !== answerText));
+    } else if (selectedAnswers.length < 3) {
+      setSelectedAnswers([...selectedAnswers, answerText]);
+    }
+
+    if (selectedAnswers.length === 2) {
+      setShowAnswer(true);
+    }
   };
 
-  const closeModal = () => {
-    setModalOpen(false);
-    setLargeImageSrc("");
+  const [quizAnswers, setQuizAnswers] = useState({});
+
+  const handleQuizzMultipleAnswer = (slideId, index, correct) => {
+    if (!quizAnswers[slideId]) {
+      setQuizAnswers({ ...quizAnswers, [slideId]: [] });
+    }
+
+    if (quizAnswers[slideId].includes(index)) {
+      setQuizAnswers({
+        ...quizAnswers,
+        [slideId]: quizAnswers[slideId].filter((item) => item !== index),
+      });
+    } else {
+      if (quizAnswers[slideId].length < 3) {
+        setQuizAnswers({
+          ...quizAnswers,
+          [slideId]: [...quizAnswers[slideId], index],
+        });
+      }
+    }
   };
 
   return (
@@ -121,6 +146,12 @@ function AmyloseModule() {
             >
               <img alt="icon" src="./aide_icon.svg" />
               <a className="text-button">Aide</a>
+            </li>
+            <li className="button" href='/'>
+              <img alt="icon" src="./exit.svg" />
+              <a className="text-button" href="/">
+                Quitter
+              </a>
             </li>
           </ul>
         </nav>
@@ -186,6 +217,34 @@ function AmyloseModule() {
                   </>
                 )}
 
+{amylose_slide[currentPage - 1].type === "conclusion" && (
+                  <>
+                    <div className="conclusion_slide">
+                      <p>
+                        <b> {amylose_slide[currentPage - 1].subtitle}</b>
+                      </p>
+                      <p> {amylose_slide[currentPage - 1].author} </p>
+                      <p> {amylose_slide[currentPage - 1].text} </p>
+                      <b>
+                        {" "}
+                        <p className="subtitle2">
+                          {" "}
+                          {amylose_slide[currentPage - 1].subtitle2}{" "}
+                        </p>{" "}
+                      </b>
+                      <p className="text2">
+                        {" "}
+                        {amylose_slide[currentPage - 1].text2}{" "}
+                      </p>
+
+                      <p className="subtext">
+                        {" "}
+                        {amylose_slide[currentPage - 1].subtext}{" "}
+                      </p>
+                    </div>
+                  </>
+                )}
+
                 {amylose_slide[currentPage - 1].type === "instruction" && (
                   <>
                     <div className="all_instruction_slide">
@@ -223,7 +282,7 @@ function AmyloseModule() {
                           <p className="description_button_text">
                             {" "}
                             Cliquez sur ce bouton pour avoir toutes les
-                            abréviations des amylose_slide
+                            descriptions
                           </p>
                         </div>
                       </div>
@@ -241,7 +300,7 @@ function AmyloseModule() {
                           <p className="description_button_text">
                             {" "}
                             Cliquez sur ce bouton pour avoir toutes les
-                            références des amylose_slide
+                            références
                           </p>
                         </div>
                       </div>
@@ -264,11 +323,22 @@ function AmyloseModule() {
                         </div>
                       </div>
 
-                      <div className="instruction_navigation">
-                        <p>
-                          {" "}
-                          Utilisez les flèches pour changer de amylose_slide{" "}
-                        </p>
+                      <div className="instruction_control_buttonside">
+                        <div className="button_instruction">
+                          <img
+                            className="enlargedImage"
+                            alt="icon"
+                            src="./exit.svg"
+                          />
+                          <a className="text_button_instruction">Quitter</a>
+                        </div>
+                        <div className="description_button">
+                          <h5> Quitter</h5>
+                          <p className="description_button_text">
+                            {" "}
+                            Cliquez sur ce bouton revenir au choix des modules
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </>
@@ -322,7 +392,7 @@ function AmyloseModule() {
                     <p className="objectives_section_title">
                       {amylose_slide[currentPage - 1].text}
                     </p>
-                    <ul>
+                    <ul className="list_objectives">
                       {amylose_slide[currentPage - 1].objectivesList.map(
                         (objective, index) => (
                           <li key={index}>{objective}</li>
@@ -434,7 +504,7 @@ function AmyloseModule() {
 
                 {amylose_slide[currentPage - 1].type === "quizz" && (
                   <div className="quizz_slide">
-                    <p className="quizz_title">
+                      <p className="quizz_title">
                       {amylose_slide[currentPage - 1].text}
                     </p>
                     <ul id="quizz">
@@ -476,40 +546,92 @@ function AmyloseModule() {
                     </p>
                   </div>
                 )}
+
+                {amylose_slide[currentPage - 1].type === "quizzmultiple" && (
+                  <div className="quizz_slide">
+                    <p className="quizz_title">
+                      {amylose_slide[currentPage - 1].text}
+                    </p>
+                    <ul id="quizz">
+                      {amylose_slide[currentPage - 1].answers.map(
+                        (answer, index) => (
+                          <li
+                            className={`choice_answer ${
+                              answer.correct &&
+                              quizAnswers[amylose_slide[currentPage - 1].id]
+                                ?.length >= 3
+                                ? "correct"
+                                : ""
+                            }`}
+                            key={index}
+                          >
+                            <label>
+                              <input
+                                type="checkbox"
+                                value={answer.text}
+                                onChange={() =>
+                                  handleQuizzMultipleAnswer(
+                                    amylose_slide[currentPage - 1].id,
+                                    index,
+                                    answer.correct
+                                  )
+                                }
+                                checked={
+                                  quizAnswers[
+                                    amylose_slide[currentPage - 1].id
+                                  ]?.includes(index) || false
+                                }
+                                disabled={
+                                  quizAnswers[amylose_slide[currentPage - 1].id]
+                                    ?.length >= 3 &&
+                                  !quizAnswers[
+                                    amylose_slide[currentPage - 1].id
+                                  ]?.includes(index)
+                                }
+                              />
+                              <span>{answer.text}</span>
+                            </label>
+                          </li>
+                        )
+                      )}
+                    </ul>
+                    <p className="subtext">
+                      {amylose_slide[currentPage - 1].subtext}
+                    </p>
+                  </div>
+                )}
+
                 {amylose_slide[currentPage - 1].type === "imageWithText" && (
                   <>
-                  <div className="ett">
-                  <p className="text_ett">  {amylose_slide[currentPage - 1].text1} </p>
-                  <p className="text_ett">  {amylose_slide[currentPage - 1].text2} </p>
-
- </div>
-                  <div className="image_ett_section">
-                    <img
-                      className="enlargedImage"
-                      className="image_ett"
-                      src={amylose_slide[currentPage - 1].images[0].src}
-                      alt={amylose_slide[currentPage - 1].images[0].alt}
-                    />
-                     <img
-                      className="enlargedImage"
-                      className="image_ett"
-                      src={amylose_slide[currentPage - 1].images[1].src}
-                      alt={amylose_slide[currentPage - 1].images[1].alt}
-                    />
+                    <div className="ett">
+                      <p className="text_ett">
+                        {" "}
+                        {amylose_slide[currentPage - 1].text1}{" "}
+                      </p>
+                      <p className="text_ett">
+                        {" "}
+                        {amylose_slide[currentPage - 1].text2}{" "}
+                      </p>
+                    </div>
+                    <div className="image_ett_section">
+                      <img
+                        className="enlargedImage"
+                        className="image_ett"
+                        src={amylose_slide[currentPage - 1].images[0].src}
+                        alt={amylose_slide[currentPage - 1].images[0].alt}
+                      />
+                      <img
+                        className="enlargedImage"
+                        className="image_ett"
+                        src={amylose_slide[currentPage - 1].images[1].src}
+                        alt={amylose_slide[currentPage - 1].images[1].alt}
+                      />
                     </div>
                     <div className="additional_info">
                       <p>{amylose_slide[currentPage - 1].subtext}</p>
                     </div>
                   </>
                 )}
-                 {modalOpen && (
-        <div className="modal_overlay">
-          <div className="modal_content">
-            <img src={largeImageSrc} alt="Large Image" />
-            <button onClick={closeModal}>Close</button>
-          </div>
-        </div>
-      )}
 
                 {amylose_slide[currentPage - 1].type ===
                   "text_cardiopathie" && (
@@ -532,65 +654,41 @@ function AmyloseModule() {
                       src={amylose_slide[currentPage - 1].imageSrc}
                       alt={amylose_slide[currentPage - 1].imageAlt}
                     />
-                    <div className="text_patienteX">
-                      {" "}
-                      {/* Ajustez la classe CSS si nécessaire */}
-                      <p>
-                        {amylose_slide[currentPage - 1].patientInfo.gender},{" "}
-                        {amylose_slide[currentPage - 1].patientInfo.age}
-                      </p>{" "}
-                      <p>
-                        <b className="text_blue"> Antécédents médicaux : </b> <br />
+                    <ul>
+                      <li>{amylose_slide[currentPage - 1].patientInfo.age}</li>
+                      <li>
+                        {amylose_slide[currentPage - 1].patientInfo.gender}
+                      </li>
+
+                      <li>
                         {
                           amylose_slide[currentPage - 1].patientInfo
                             .medicalHistory
                         }
-                      </p>
-                      <p>
-                        <b className="blue_text"> Motif de consultation : </b> <br />
-                        {amylose_slide[
-                          currentPage - 1
-                        ].patientInfo.consultationReasons.join(", ")}
-                      </p>
-                      <p>
-                        <b> Examen clinique : </b> <br />
-                        {amylose_slide[
-                          currentPage - 1
-                        ].patientInfo.clinicalExamination.join(", ")}
-                      </p>
-                      <p>
-                        <b> ECG : </b> <br />
-                        {amylose_slide[
-                          currentPage - 1
-                        ].patientInfo.ecgFindings.join(", ")}
-                      </p>
-                      <p className="additional_info">
-                        {" "}
-                        {
-                          amylose_slide[currentPage - 1].patientInfo
-                            .additionalInfo
-                        }{" "}
-                      </p>
-                    </div>
+                      </li>
+                      <li> 
+                      {amylose_slide[currentPage - 1].patientInfo.consultationReasons
+                        }
+                      </li>
+                    </ul>
                   </div>
                 )}
 
                 {amylose_slide[currentPage - 1].type === "examen_medical" && (
                   <>
-                    <h3>{amylose_slide[currentPage - 1].subtitle}</h3>
-
                     <div className="examenmedical_section">
                       <div className="examenmedical_section_left">
-                        <p> {amylose_slide[currentPage - 1].text} </p>
+                        {amylose_slide[currentPage - 1].text}
                       </div>
-                      <div className="divider"> </div>
                       <div className="examenmedical_section_right">
-                        <p> {amylose_slide[currentPage - 1].text2} </p>
+                        <img
+                          src={amylose_slide[currentPage - 1].images[0].src}
+                          alt={amylose_slide[currentPage - 1].images[0].alt}
+                        />
                       </div>
                     </div>
                     <p className="subtext">
-                      {" "}
-                      {amylose_slide[currentPage - 1].subtext}{" "}
+                      {amylose_slide[currentPage - 1].subtext}
                     </p>
                   </>
                 )}
@@ -617,16 +715,73 @@ function AmyloseModule() {
                   </>
                 )}
 
+                {amylose_slide[currentPage - 1].type === "information" && (
+                  <>
+                    <div className="information_slide">
+                      {amylose_slide[currentPage - 1].text}
+
+                      <p className="additional_info" id="add_info">
+                        {amylose_slide[currentPage - 1].subtext}
+                      </p>
+                    </div>
+                  </>
+                )}
+
+                {amylose_slide[currentPage - 1].type === "informationX" && (
+                  <div className="information_slideX">
+                    <div className="information_textX">
+                      {amylose_slide[currentPage - 1].text.map(
+                        (block, index) => (
+                          <div className="information_section" key={index}>
+                            <h3>
+                              {" "}
+                              <b> {block.title} </b>{" "}
+                            </h3>
+                            {block.content}
+                          </div>
+                        )
+                      )}
+                    </div>
+                    <div className="imageX_section">
+                      <img
+                        className="informationX_image"
+                        src={amylose_slide[currentPage - 1].image}
+                        alt="image en attente"
+                      />
+                      <p>Electrophorèse des protéines sériques </p>
+                    </div>
+                  </div>
+                )}
+
+                {amylose_slide[currentPage - 1].type === "interet_imagerie" && (
+                  <>
+                    <h4 className="title_interet_imagerie">
+                      {" "}
+                      {amylose_slide[currentPage - 1].subtitle}
+                    </h4>
+                    <div className="interet_imagerie_slide">
+                      <div className="interet_imagerie_left_side">
+                        <p>{amylose_slide[currentPage - 1].text}</p>
+                      </div>
+                      <div className="interet_imagerie_right_side">
+                        {amylose_slide[currentPage - 1].text2}
+                      </div>
+                    </div>
+                    <p className="additional_info" id="add_info">
+                      {amylose_slide[currentPage - 1].reference}
+                    </p>
+                  </>
+                )}
+
                 {amylose_slide[currentPage - 1].type ===
                   "cardiopathie carcinoïde" && (
                   <>
                     <div className="cardiopathie_section">
-                      <h3>.{amylose_slide[currentPage - 1].subtitle}</h3>
+                      <h3 className="traitement_subtitle">{amylose_slide[currentPage - 1].subtitle}</h3>
                       <p>{amylose_slide[currentPage - 1].text}</p>
-                      <h3>.{amylose_slide[currentPage - 1].subtitle2}</h3>
+                      <h3>{amylose_slide[currentPage - 1].subtitle2}</h3>
                       <p>{amylose_slide[currentPage - 1].text2}</p>
-                      <h3>.{amylose_slide[currentPage - 1].subtitle3}</h3>
-                      <p>{amylose_slide[currentPage - 1].text3}</p>
+                      <p className="pierre_angulaire">{amylose_slide[currentPage - 1].text3}</p>
                     </div>
                   </>
                 )}
@@ -678,23 +833,16 @@ function AmyloseModule() {
       {showAbbreviationPopup && (
         <div className="popup-overlay" onClick={handleClosePopup}>
           <div className="popup-content">
-            <h4>Abréviations</h4>
+            <h4 style={{ color: "#0089e3" }}>Abréviations</h4>
             <p>
-              BNP : peptide 5-HIAA : acide 5-hydroxy-indol-acétique
-              natriurétique de type B <br />
-              FC : fréquence cardiaque <br />
-              FR : fréquence respiratoire <br /> FOP : foramen ovale perméable{" "}
-              <br />
-              HTA : hypertension artérielle <br />
+              ECG : électrocardiogramme FEVG : fraction d’éjection du ventricule
+              gauche <br />
+              HTAP : hypertension artérielle pulmonaire <br />
+              HVG :hypertrophie ventriculaire gauche <br />
               IRM : imagerie par résonance magnétique <br />
               NT-proBNP : N-terminal pro Brain Natriuretic Peptide <br />
-              RHJ : reflux hépatojugulaire <br />
-              SaO2 : saturation artérielle en oxygène <br />
-              TA : tension artérielle <br />
-              TDM : tomodensitométrie <br />
-              TSVJ : turgescence spontanée des veines jugulaires <br />
-              VD : ventricule droit <br />
-              VG : ventricule gauche
+              VD: ventricule droit <br />
+              VG : ventricule gauche <br />
             </p>
             {/* <button className="close-button" onClick={handleClosePopup}>
               Ok
@@ -708,93 +856,55 @@ function AmyloseModule() {
             <h4>Références</h4>
 
             <p>
-              Bhattacharyya S, Toumpanakis C, Burke M, Taylor AM, Caplin ME,
-              Davar J. Features of carcinoid heart disease identified by 2- and
-              3-dimensional echocardiography and cardiac MRI. Circulation.
-              Cardiovascular Imaging. 2010;3(1):103-111. doi:
-              <a href="https://doi.org/10.1161/CIRCIMAGING.109.886846">
-                10.1161/CIRCIMAGING.109.886846
+              Cohen OC, Ismael A, Pawarova B, et al. Longitudinal strain is an
+              independent predictor of survival and response to therapy in
+              patients with systemic AL amyloidosis. Eur Heart J.
+              2022;43(4):333‑341. doi:
+              <a href="https://doi.org/10.1093/eurheartj/ehab507">
+                10.1093/eurheartj/ehab507
               </a>
               <br />
               <br />
-              Davar J, Connolly HM, Caplin ME, et al. Diagnosing and Managing
-              Carcinoid Heart Disease in Patients With Neuroendocrine Tumors.
-              Journal of the American College of Cardiology.
-              2017;69(10):1288‑1304. doi:
-              <a href="https://doi.org/10.1016/j.jacc.2016.12.030">
-                10.1016/j.jacc.2016.12.030
+              Desport E, Bridoux F, Sirac C, et al. AL Amyloidosis. Orphanet
+              Journal of Rare Diseases. 2012;7(1):54. doi:
+              <a href="https://doi.org/10.1186/1750-1172-7-54">
+                10.1186/1750-1172-7-54
               </a>
               <br />
               <br />
-              Kulke MH, Mayer RJ. Carcinoid tumors. The New England Journal of
-              Medicine. 1999;340(11):858-868. doi:
-              <a href="https://doi.org/10.1056/NEJM199903183401107">
-                10.1056/NEJM199903183401107
+              Dispenzieri A, Gertz MA, Kyle RA, et al. Serum cardiac troponins
+              and N-terminal pro-brain natriuretic peptide: a staging system for
+              primary systemic amyloidosis. J Clin Oncol. 2004;22(18):3751‑3757.
+              doi:
+              <a href="https://doi.org/10.1200/JCO.2004.03.029">
+                10.1200/JCO.2004.03.029
               </a>
               <br />
               <br />
-              Lyon AR, López-Fernández T, Couch LS, et al. 2022 ESC Guidelines
-              on cardio-oncology developed in collaboration with the European
-              Hematology Association (EHA), the European Society for Therapeutic
-              Radiology and Oncology (ESTRO) and the International
-              Cardio-Oncology Society (IC-OS): Developed by the task force on
-              cardio-oncology of the European Society of Cardiology (ESC).
-              European Heart Journal. 2022;0:1-133. doi:
-              <a href="https://doi.org/10.1093/eurheartj/ehac244">
-                10.1093/eurheartj/ehac244
+              Elouardighi Kaoutar. Place de l’IRM dans le diagnostic de
+              l’amylose cardiaque: Expérience CHU RABAT - Université Mohammed V
+              RABAT 2020
+              <br />
+              <br />
+              Garcia-Pavia P, Rapezzi C, Adler Y, et al. Diagnosis and treatment
+              of cardiac amyloidosis: a position statement of the ESC Working
+              Group on Myocardial and Pericardial Diseases. Eur Heart J.
+              2021;42(16):1554‑1568. doi:
+              <a href="https://doi.org/10.1093/eurheartj/ehab072">
+                10.1093/eurheartj/ehab072
               </a>
               <br />
               <br />
-              Mansencal N, Mitry E, Forissier JF, et al. Assessment of patent
-              foramen ovale in carcinoid heart disease. The American Heart
-              Journal. 2006;151(5):1129.e1-6. doi:
-              <a href="https://doi.org/10.1016/j.ahj.2006.02.019">
-                10.1016/j.ahj.2006.02.019
-              </a>
-              <br />
-              <br />
-              Møller JE, Connolly HM, Rubin J, Seward JB, Modesto K, Pellikka
-              PA. Factors associated with progression of carcinoid heart
-              disease. The New England Journal of Medicine.
-              2003;348(11):1005‑1015. doi:
-              <a href="https://doi.org/10.1056/NEJMoa021451">
-                10.1056/NEJMoa021451
-              </a>
-              <br />
-              <br />
-              Møller JE, Pellikka PA, Bernheim AM, Schaff HV, Rubin J, Connolly
-              HM. Prognosis of carcinoid heart disease: analysis of 200 cases
-              over two decades. Circulation. 2005;112(21):3320-3327. doi:
-              <a href="https://doi.org/10.1161/CIRCULATIONAHA.105.553750">
-                10.1161/CIRCULATIONAHA.105.553750
-              </a>
-              <br />
-              Pellikka PA, Tajik AJ, Khandheria BK, et al. Carcinoid heart
-              disease. Clinical and echocardiographic spectrum in 74 patients.
-              Circulation. 1993;87(4):1188-1196. doi:
-              <a href="https://doi.org/10.1161/01.CIR.87.4.1188">
-                10.1161/01.CIR.87.4.1188
-              </a>
-              <br />
-              <br />
-              Ram P, Penalver JL, Lo KBU, Rangaswami J, Pressman GS. Carcinoid
-              Heart Disease: Review of Current Knowledge. Texas Heart Institute
-              Journal. 2019;46(1):21‑27. doi:
-              <a href="https://doi.org/10.14503/THIJ-17-6562">
-                10.14503/THIJ-17-6562
-              </a>
-              <br />
-              <br />
-              Roberts WC. A unique heart disease associated with a unique
-              cancer: carcinoid heart disease. The American Journal of
-              Cardiology. 1997;80(2):251-256. doi:
-              <a href="https://doi.org/10.1016/s0002-9149(97)00340-8">
-                10.1016/s0002-9149(97)00340-8
+              McDonagh TA, Metra M, Adamo M, et al. 2021 ESC Guidelines for the
+              diagnosis and treatment of acute and chronic heart failure. Eur
+              Heart J. 2021;42(36):3599‑3726. doi:
+              <a href="https://doi.org/10.1093/eurheartj/ehab368">
+                10.1093/eurheartj/ehab368
               </a>
             </p>
             {/* <button className="close-button" onClick={handleClosePopup}>
-              Ok
-            </button> */}
+        Ok
+      </button> */}
           </div>
         </div>
       )}
