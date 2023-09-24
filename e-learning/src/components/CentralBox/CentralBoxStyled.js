@@ -43,6 +43,7 @@ const CentralBoxStyled = styled.div`
     margin: 0;
     padding: 0;
     list-style: none;
+    text-decoration:none;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -59,6 +60,9 @@ const CentralBoxStyled = styled.div`
     width: 80px;
     color: #0071bb;
 
+    .button a {
+      text-decoration:none;
+    }
     a {
       margin-top: 0.4rem;
       color: #fff;
