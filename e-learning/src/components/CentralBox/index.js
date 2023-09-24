@@ -225,7 +225,7 @@ function CentralBox() {
               className={`button ${currentPage === 4 ? "active" : ""}`}
             >
               <img alt="icon" src="./aide_icon.svg" />
-              <a className="text-button">Quitter</a>
+              <a className="text-button" href='/accueil_cas_clinique_cardiopathie_carcinoïde'>Quitter</a>
             </li>
           </ul>
         </nav>
