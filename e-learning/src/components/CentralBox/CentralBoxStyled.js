@@ -24,6 +24,7 @@ const CentralBoxStyled = styled.div`
     height: 84vh;
     width: 80vw;
     display: flex;
+
     filter: drop-shadow(0px 7px 36px rgba(0, 89, 148, 0.24));
     border-radius: 10px;
     position: relative; /* Ajout de la propriété position relative */
@@ -50,6 +51,8 @@ const CentralBoxStyled = styled.div`
     align-content: center;
   }
 
+  .text-button_exit { text-decoration:none;}
+
   .button {
     display: flex;
     align-items: center;
@@ -63,6 +66,8 @@ const CentralBoxStyled = styled.div`
     .button a {
       text-decoration:none;
     }
+
+    
     a {
       margin-top: 0.4rem;
       color: #fff;
@@ -286,6 +291,7 @@ const CentralBoxStyled = styled.div`
     color: #7f7f7f;
     text-align: left;
   }
+
 
   .video_section {
     position: relative;
@@ -568,7 +574,7 @@ const CentralBoxStyled = styled.div`
       justify-content: space-between;
       align-items: center;
       align-content: center;
-      margin: 0.5rem 1rem;
+      margin: 0.4rem 1rem;
     }
   }
 
@@ -580,7 +586,7 @@ const CentralBoxStyled = styled.div`
     justify-content: space-between;
     align-items: center;
     align-content: center;
-    margin: 0.5rem 0rem;
+   
   }
 
   .instruction_navigation {
@@ -599,6 +605,7 @@ const CentralBoxStyled = styled.div`
 
   .description_button_text {
     margin: 0;
+    text-decoration:none;
   }
 
   .arrow_direction_instruction_left {
@@ -618,13 +625,13 @@ const CentralBoxStyled = styled.div`
     display:flex;
     align-items:flex-start;
     justify-content:space-between;
-    margin-top:1rem;
+    
   }
 
   .cardiopathie_section_text1 {
     background-color: #37AEFF;
     color:white;
-    padding:2rem;
+    padding:1rem;
     margin-right:1rem;
     border-radius:10px;
   }
@@ -633,7 +640,7 @@ const CentralBoxStyled = styled.div`
   .cardiopathie_section_text2 {
     background-color: #1789E3;
     color:white;
-    padding:2rem;
+    padding:1rem;
     margin-right:1rem;
     border-radius:10px;
   }
@@ -642,7 +649,7 @@ const CentralBoxStyled = styled.div`
   .cardiopathie_section_text3 {
     background-color: #1172C0;
     color:white;
-    padding:2rem;
+    padding:1rem;
     margin-right:1rem;
     border-radius:10px;
   }
@@ -675,7 +682,7 @@ const CentralBoxStyled = styled.div`
   }
 
   .additional_info_text_cardiopathie {
-    margin-top:4rem;
+    margin-top:2rem;
     display: flex;
     justify-content:flex-start;
     align-items:flex-start;

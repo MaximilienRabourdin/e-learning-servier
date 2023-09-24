@@ -221,11 +221,10 @@ function CentralBox() {
               <a className="text-button">Aide</a>
             </li>
             <li
-              onClick={handleAideButtonClick}
               className={`button ${currentPage === 4 ? "active" : ""}`}
             >
-              <img alt="icon" src="./aide_icon.svg" />
-              <a className="text-button" href='/accueil_cas_clinique_cardiopathie_carcinoïde'>Quitter</a>
+              <img alt="icon" src="./exit_button.svg" />
+              <a className="text-button_exit" href='/accueil_cas_clinique_cardiopathie_carcinoïde'>Quitter</a>
             </li>
           </ul>
         </nav>
@@ -372,7 +371,7 @@ function CentralBox() {
                           <img
                             className="enlargedImage"
                             alt="icon"
-                            src="./exit.svg"
+                            src="./exit_button.svg"
                           />
                           <a className="text_button_instruction">Quitter</a>
                         </div>
