@@ -13,7 +13,7 @@ const CentralBoxStyled = styled.div`
   h1 {
     font-weight: 800;
   }
-  
+
   .all-box {
     background: white;
     background-image: url("/background_band.svg");
@@ -74,12 +74,30 @@ const CentralBoxStyled = styled.div`
   img {
     width: 80%;
     cursor: pointer;
-    border-radius:30px;
+    border-radius: 30px;
   }
 
   .image_echocardiographie {
     width: 90%;
+    cursor: zoom-in; /* Curseur indiquant que l'image est cliquable pour le zoom */
+
   }
+
+  .enlargedImage {
+  height: auto; /* Ajustez la hauteur en conséquence pour préserver les proportions */
+  cursor: zoom-in; /* Curseur indiquant que l'image est cliquable pour le zoom */
+}
+
+  .enlargedImage.zoomed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Ajustez la taille tout en préservant les proportions */
+  z-index: 9999; /* Pour que l'image agrandie apparaisse au-dessus de tout le reste */
+  cursor: zoom-out; /* Curseur indiquant que l'image est cliquable pour réduire le zoom */
+}
 
   p {
     font-size: 18px;
@@ -91,12 +109,45 @@ const CentralBoxStyled = styled.div`
 
   .objectives_section_title {
     font-size: 24px;
+    text-align: center;
   }
 
-  .right_section {
+  .objective_group {
+    display: flex;
+    justify-content: center;
     width: 100%;
-    height: 100%;
+    padding: 0;
+    margin-top: 3rem;
   }
+
+  .objective {
+    width: 30%;
+    list-style: none;
+    margin: 1rem;
+    padding: 2rem;
+    background-color: #21b0f0;
+    color: white;
+    border-radius: 20px;
+    position: relative; /* Positionnement relatif pour les nombres */
+  }
+
+  .objective_number {
+    background-color: #1172c0;
+    font-weigth: bold;
+    margin: 0; /* Supprimer la marge autour du nombre */
+    padding: 1rem;
+    border-radius: 50%; /* Utiliser 50% pour obtenir un border-radius rond */
+    position: absolute; /* Positionnement absolu pour les nombres */
+    top: 0; /* Aligner le nombre en haut */
+    left: 0; /* Aligner le nombre à gauche */
+    transform: translate(-50%, -50%); /* Centrer le nombre */
+  }
+
+    /* Styles pour la section de droite (texte) */
+    .right_section {
+    flex: 1; /* Prenez autant d'espace que possible */
+  }
+
 
   .slide_content {
     padding: 0 2rem;
@@ -109,39 +160,52 @@ const CentralBoxStyled = styled.div`
     max-width: 100%;
   }
 
-  .examenmedical_section {
-    width: 100%;
-    padding: 0 2rem;
-    display: flex;
-    justify-content: center;
-    align-content: flex-start;
+  
 
-    p {
-      margin: 0rem;
-    }
+  .examenmedical_section {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2rem;
+    align-content: center;
+    align-items:center;
+
+    
+  }
+
+  .examenmedical_section .subtext{
+  margin-top:4rem;  
   }
 
   .examenmedical_section_left {
-    width: 50%;
-    max-height: 100%;
-    display: flex;
-    align-items: flex-end;
-    align-content: center;
-    flex-direction: column;
+    width: 30%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+  .examenmedical_section img {
+    max-width: 80%;
   }
 
-  .divider {
-    border: 2px solid #e0ebf4;
-    margin: 0 4rem;
+  .examenmedical_section_center {
+    width: 33%;
+    display:flex;
+    justify-content:center;
+    border-right: 3px solid #E0EBF4
+  }
+
+  .examenmedical_section_center p {
+    margin: 0.2rem;
   }
 
   .examenmedical_section_right {
-    width: 50%;
-    max-height: 100%;
-    display: flex;
-    align-items: flex-start;
-    align-content: center;
-    flex-direction: column;
+    width: 33%;
+    display:flex;
+    justify-content:center;
+    padding-left:4rem;
+  }
+
+  .examenmedical_section_right p {
+    margin: 0.2rem;
   }
 
   .slide-fade-enter {
@@ -167,18 +231,16 @@ const CentralBoxStyled = styled.div`
   }
 
   .slide_title {
-    color: #005994;
+    color: #21B0F0;
     font-family: Abel;
     font-size: 30px;
     margin-left: 1rem;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 800;
     line-height: normal;
   }
 
-  .slide_subtitle {
-    /* Ajoutez les styles que vous souhaitez pour le sous-titre des diapositives */
-  }
+ 
 
   .default_slide_content {
     display: flex;
@@ -238,17 +300,33 @@ const CentralBoxStyled = styled.div`
   }
 
   .image_patienteZ {
-    width: 20%;
+    border-radius: 10px;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    transition: transform 0.3s; /* Animation de transition pour un effet de zoom fluide */
+    align-content: center;
+    padding-right: 2rem;
+  }
+
+  .image_patienteZ:hover {
+    transform: scale(1.2); /* Zoom sur l'image lors du survol de la souris */
+    cursor: zoom-in; /* Curseur indiquant que l'image est cliquable pour le zoom */
   }
 
   .text_patienteZ {
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    margin: 4rem 0rem 0rem 4rem;
+    margin: 0rem 4rem;
+    padding-left: 4rem;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     align-content: center;
+    border-left: 2px solid #1172c0;
   }
 
   .patientHistory {
@@ -262,6 +340,10 @@ const CentralBoxStyled = styled.div`
   }
 
   /* quizz section */
+
+  .quizz-container { 
+    background-color:#1172C0;
+  }
   .quizz_slide {
     text-align: left;
     height: 40%;
@@ -269,6 +351,7 @@ const CentralBoxStyled = styled.div`
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    color:white;
   }
 
   .quizz_title {
@@ -295,22 +378,33 @@ const CentralBoxStyled = styled.div`
     color: #005a94;
     background-color: #f1f8fe;
     cursor: pointer;
-    padding: 1.2rem;
+    padding: 1rem;
     border-radius: 50px;
   }
 
   .answer_button.correct {
     color: green;
+    border: 1px solid #C4E0B2;
+    border-radius: 50px;
+    background-color: #C4E0B2;
+    margin:0.4rem;
   }
 
   .answer_button.incorrect {
-    color: red;
   }
 
   /* quizz section end  */
 
   .echocardiographie_image {
     width: 100%;
+  }
+
+  .all_presentation_slide {
+     display:flex;
+     align-items:center;
+     align-content:center;
+     justify-content:center;
+     width:100%;
   }
 
   .presentation_slide_text {
@@ -362,8 +456,8 @@ const CentralBoxStyled = styled.div`
   }
 
   .logo_section {
-    display:flex;
-    position:fixed;
+    display: flex;
+    position: fixed;
     left: 1rem;
     bottom: 1rem;
   }
@@ -383,9 +477,9 @@ const CentralBoxStyled = styled.div`
   }
 
   .springerhealthcare_logo {
-    width:20%;
+    width: 20%;
     border-radius: 16px;
-    margin-left:2rem;
+    margin-left: 2rem;
     background: #f6fcff;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.06) inset,
       4px 0px 4px 0px rgba(0, 0, 0, 0.06) inset;
@@ -447,7 +541,6 @@ const CentralBoxStyled = styled.div`
 
   /* instruction slide start */
   .all_instruction_slide {
-    width: 70%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -518,9 +611,128 @@ const CentralBoxStyled = styled.div`
   }
 
   .cardiopathie_section {
-    overflow: auto;
-    max-height: 400px;
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    margin-top:1rem;
   }
+
+  .cardiopathie_section_text1 {
+    background-color: #37AEFF;
+    color:white;
+    padding:2rem;
+    margin-right:1rem;
+    border-radius:10px;
+  }
+
+
+  .cardiopathie_section_text2 {
+    background-color: #1789E3;
+    color:white;
+    padding:2rem;
+    margin-right:1rem;
+    border-radius:10px;
+  }
+
+
+  .cardiopathie_section_text3 {
+    background-color: #1172C0;
+    color:white;
+    padding:2rem;
+    margin-right:1rem;
+    border-radius:10px;
+  }
+
+  .info_additional {
+    margin-top:2rem;
+  }
+
+
+
+  .cardiopathie_section_left {
+    width: 80%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    align-content:flex-start;;
+    justify-content:flex-start;
+    background-color:#1172C0;
+    color:white;
+    padding:2rem;
+    margin-right:2rem;
+    border-radius:10px;
+  }
+
+  .cardiopathie_section_right {
+    background-color:#1172C0;
+    color:white;
+    padding:0 2rem 2rem 2rem;
+    border-radius:10px;
+  }
+
+  .additional_info_text_cardiopathie {
+    margin-top:4rem;
+    display: flex;
+    justify-content:flex-start;
+    align-items:flex-start;
+  }
+
+  .image_with_text_slide {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.image_section {
+  flex: 1;
+  margin-right: 1rem;
+  text-align: center;
+}
+
+.image_section img {
+  max-width: 100%;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.image_credit {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.text_section {
+  width:50%;
+  display:flex;
+justify-content:center;
+  flex-direction:column;
+  align-items:flex-start;
+  align-content:center;
+}
+
+.text_section h2 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.text_section p {
+  margin: 0;
+}
+
+.conclusions-container {
+ background-color:#FDC002;
+ color:white;
+h1 {
+  color:white;
+}
+.conclusion_text {
+  font-size:24px;
+  color:black;
+}
+}
+}
+
+
+
 
   /* instruction slide end */
 `;

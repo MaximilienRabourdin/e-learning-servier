@@ -27,6 +27,7 @@ const slides = [
     type: "objectives",
     title: "Objectifs d’apprentissage",
     text: "À la fin de cette présentation de cas interactive, les apprenants seront en mesure de:\n\n",
+    objectivesNumber: ["1", "2", "3"],
     objectivesList: [
       "Identifier les signes échocardiographiques de la cardiopathie carcinoïde",
       "Décrire les examens indispensables pour le dépistage d’une maladie carcinoïde",
@@ -87,8 +88,8 @@ const slides = [
     id: 5,
     type: "patientPresentation",
     title: "Patiente Z : Présentation",
-    imageSrc: "/patiente_z.png",
-    imageAlt: "Image de la patiente Z",
+    imageSrc: "/patiente.jpeg",
+    imageAlt: "photo by Alex Green",
     patientInfo: {
       age: "52 ans",
       gender: "Femme",
@@ -107,9 +108,11 @@ const slides = [
     id: 6,
     type: "examen_medical",
     title: "Patiente Z : Examen Médical",
+    imageSrc: "./examens.jpeg",
     subtitle: "Examen physique",
     text: (
       <>
+        <p> TSVJ (+) RHJ (+)</p> <br />
         <p> FC = 92 bpm</p> <br />
         <p>TA bras gauche = 142/87 mmHg</p> <br />
         <p>TA bras gauche = 142/87 mmHg</p>
@@ -150,7 +153,7 @@ const slides = [
     id: 8,
     type: "quizz",
     title: "Question 1",
-    text: "Quelles sont vos hypothèses diagnostiques ?",
+    text: "Quel est votre hypothèse diagnostique ?",
     answers: [
       {
         text: "Cœur pulmonaire chronique",
@@ -170,7 +173,7 @@ const slides = [
       },
     ],
   },
-  
+
   {
     id: 9,
     type: "imageWithText",
@@ -200,6 +203,7 @@ const slides = [
   {
     id: 11,
     type: "bilan",
+    imageSrc: "./coeur.png",
     title: "Patiente Z : Bilan de l‘Echocardiographie Transthoracique",
     text: (
       <>
@@ -222,7 +226,7 @@ const slides = [
     id: 12,
     type: "quizz",
     title: "Question 2",
-    text: "Au vu de ce bilan, quel(s) autres examens préconiseriez-vous ?",
+    text: "Au vu de ce bilan, quel autre examen préconiseriez-vous ?",
     answers: [
       {
         text: "IRM cardiaque",
@@ -272,7 +276,10 @@ const slides = [
         prédominance digestive.
         <br />- Son incidence est de l'ordre de 1 à 2/100 000 dans la population
         générale.
-        <br />
+      </>
+    ),
+    text2: (
+      <>
         <br />
         <b>Physiopathologie :</b>
         <br />- Un dépôt fibreux se forme sur les valves, secondaire à des
@@ -325,7 +332,12 @@ const slides = [
         <br />
         Des métastases intracardiaques (rare).
         <br />
+      </>
+    ),
+    text2: (
+      <>
         <br /> <b> Signes cliniques frustes : </b>
+        <br />
         <br />- Signes cliniques de l’insuffisance cardiaque droite.
         <br />- Patients paucisymptomatiques : découverte fortuite lors d’une
         échocardiographie ou lors d’un bilan chez un patient présentant une
@@ -353,7 +365,7 @@ const slides = [
     id: 16,
     type: "quizz",
     title: "Question 3",
-    text: "Quels sont les marqueurs biologiques à doser pour le diagnostic et le suivi d’une cardiopathie carcinoïde ?",
+    text: "Quels sont les marqueurs biologiques à doser pour le diagnostic et le suivi d’une cardiopathie carcinoïde ? 2 réponses possibles",
     answers: [
       {
         text: "NT-proBNP",
@@ -382,8 +394,10 @@ const slides = [
   {
     id: 17,
     title: "L’histoire de la patiente continue",
-    type: "default",
+    type: "storycontinu",
     subtitle: "- Biologie",
+    imageSrc: "./patiente.jpeg",
+    creditPicture: "Photo by Alex Green",
     text: "Dosage urinaire du métabolite de la sérotonine (5-HIAA) en cours",
     subtitle2: "- Evolution",
     text2:
@@ -429,23 +443,30 @@ const slides = [
     ),
     subtext2: (
       <>
-        <br/>Møller JE, et al. Factors associated with progression of carcinoid heart
-        disease. <i>N Engl J Med.</i> 2003;348(11):1005‑1015. 
-        <br/> Møller JE, et al.Prognosis of carcinoid heart disease: analysis of 200 cases over two
-        decades. <i>Circulation</i>2005;112(21):3320-3327.
-        <br/> Mansencal N, et al.Comparison of prognostic value of tissue Doppler imaging in carcinoid
-        heart disease versus the value in patients with the carcinoid syndrome
-        but without carcinoid heart disease. <i>Am J Cardiol</i>. 2010;105(4):527-531.
-        <br/>Davar J, et al. Diagnosing and Managing Carcinoid Heart Disease in Patients With Neuroendocrine Tumors. <i>Journal of the American College of
-        Cardiology</i>. 2017;69(10):1288‑1304 
-        <br/>Lyon AR, et al. 2022 ESC Guidelines on cardio-oncology. <i>European Heart Journal</i>. 2022;0:1-133
+        <br />
+        Møller JE, et al. Factors associated with progression of carcinoid heart
+        disease. <i>N Engl J Med.</i> 2003;348(11):1005‑1015.
+        <br /> Møller JE, et al.Prognosis of carcinoid heart disease: analysis
+        of 200 cases over two decades. <i>Circulation</i>2005;112(21):3320-3327.
+        <br /> Mansencal N, et al.Comparison of prognostic value of tissue
+        Doppler imaging in carcinoid heart disease versus the value in patients
+        with the carcinoid syndrome but without carcinoid heart disease.{" "}
+        <i>Am J Cardiol</i>. 2010;105(4):527-531.
+        <br />
+        Davar J, et al. Diagnosing and Managing Carcinoid Heart Disease in
+        Patients With Neuroendocrine Tumors.{" "}
+        <i>Journal of the American College of Cardiology</i>.
+        2017;69(10):1288‑1304
+        <br />
+        Lyon AR, et al. 2022 ESC Guidelines on cardio-oncology.{" "}
+        <i>European Heart Journal</i>. 2022;0:1-133
       </>
     ),
   },
   {
     id: 19,
     title: "Conclusions",
-    type: "default",
+    type: "conclusions",
     text: (
       <>
         - Le syndrome carcinoïde est une pathologie rare.

@@ -9,6 +9,103 @@ import { CSSTransition } from "react-transition-group";
 
 function CentralBox() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [clickCounts, setClickCounts] = useState(Array(slides.length).fill(0));
+  const [selectedAnswerCount, setSelectedAnswerCount] = useState(0);
+  const [userAnswers, setUserAnswers] = useState(Array(slides.length).fill([]));
+  const [userHasAnswered, setUserHasAnswered] = useState(false);
+  const [showAnswers, setShowAnswers] = useState(false);
+  const [quizQuestions, setQuizQuestions] = useState([
+    {
+      id: 8,
+      type: "quizz",
+      title: "Question 1",
+      text: "Quel est votre hypothèse diagnostique ?",
+      answers: [
+        {
+          text: "Cœur pulmonaire chronique",
+          correct: false,
+          selected: false,
+        },
+        {
+          text: "Cardiopathie carcinoïde",
+          correct: true,
+          selected: false,
+        },
+        {
+          text: "Cardiopathie rhumatismale",
+          correct: false,
+          selected: false,
+        },
+        {
+          text: "Valvulopathie médicamenteuse",
+          correct: false,
+          selected: false,
+        },
+      ],
+    },
+    {
+      id: 12,
+      type: "quizz",
+      title: "Question 2",
+      text: "Au vu de ce bilan, quel autre examen préconiseriez-vous ?",
+      answers: [
+        {
+          text: "IRM cardiaque",
+          correct: false,
+          selected: false,
+        },
+        {
+          text: "Électrocardiogramme",
+          correct: false,
+          selected: false,
+        },
+        {
+          text: "Dosage de la chromogranine A",
+          correct: false,
+          selected: false,
+        },
+        {
+          text: "Dosage du BNP",
+          correct: false,
+          selected: false,
+        },
+        {
+          text: "Scanner thoraco-abdomino pelvien",
+          correct: true,
+          selected: false,
+        },
+      ],
+    },
+    {
+      id: 16,
+      type: "quizz",
+      title: "Question 3",
+      text: "Quels sont les marqueurs biologiques à doser pour le diagnostic et le suivi d’une cardiopathie carcinoïde ? 2 réponses possibles",
+      answers: [
+        {
+          text: "NT-proBNP",
+          correct: true,
+          selected: false,
+        },
+        {
+          text: "Troponine T",
+          correct: false,
+          selected: false,
+        },
+        {
+          text: "Chromogranine A",
+          correct: false,
+          selected: false,
+        },
+        {
+          text: "Métabolite de la sérotonine (5-HIAA)",
+          correct: true,
+          selected: false,
+        },
+      ],
+    },
+  ]);
+
   const totalSlides = 20;
   const stepBarWidth = (currentPage / totalSlides) * 100;
 
@@ -19,11 +116,11 @@ function CentralBox() {
   const [showAbbreviationPopup, setShowAbbreviationPopup] = useState(false);
   const [enlargedImage, setEnlargedImage] = useState(null);
 
-  const handleAnswerClick = (quizId, answerIndex, correct) => {
-    setQuizAnswers((prevAnswers) => ({
-      ...prevAnswers,
-      [quizId]: correct,
-    }));
+  const handleAnswerClick = (quizId, answerIndex, isCorrect) => {
+    const newUserAnswers = [...userAnswers];
+    newUserAnswers[currentPage - 1] = [answerIndex];
+    setUserAnswers(newUserAnswers);
+    setUserHasAnswered(true);
   };
 
   const handleNextPage = () => {
@@ -62,10 +159,6 @@ function CentralBox() {
     setShowAbbreviationPopup(true);
   };
 
-  const handleImageClick = (imageSrc) => {
-    setEnlargedImage(imageSrc);
-  };
-
   const handleCloseEnlargedImage = () => {
     setEnlargedImage(null);
   };
@@ -75,9 +168,28 @@ function CentralBox() {
     setShowMenuPopup(false);
   };
 
+  // Mettre en place le zoom
+  const [isZoomed, setIsZoomed] = useState(false);
+
+  const handleImageClickZoom = () => {
+    // Inversez l'état du zoom lorsque l'utilisateur clique sur l'image
+    setIsZoomed(!isZoomed);
+  };
+
+  // Supposons que "isQuizzSlide" soit un booléen indiquant si la diapositive est de type "quizz".
+  const isQuizzSlide = slides[currentPage - 1].type === "quizz";
+
   return (
     <CentralBoxStyled stepBarWidth={stepBarWidth}>
-      <div className="all-box">
+      <div
+        className={`all-box ${
+          slides[currentPage - 1].type === "quizz"
+            ? "quizz-container"
+            : slides[currentPage - 1].type === "conclusions"
+            ? "conclusions-container"
+            : ""
+        }`}
+      >
         <nav className="sidebar">
           <ul className="all_button">
             <li
@@ -147,7 +259,11 @@ function CentralBox() {
                   currentPage === index + 1 ? "show" : ""
                 }`}
               >
-                <h1 className="slide_title">{slides[currentPage - 1].title}</h1>
+                <h1
+                  className={`slide_title ${isQuizzSlide ? "quizz-title" : ""}`}
+                >
+                  {slides[currentPage - 1].title}
+                </h1>
 
                 {slides[currentPage - 1].type === "default" && (
                   <>
@@ -173,7 +289,6 @@ function CentralBox() {
                     </div>
                   </>
                 )}
-
                 {slides[currentPage - 1].type === "instruction" && (
                   <>
                     <div className="all_instruction_slide">
@@ -258,7 +373,6 @@ function CentralBox() {
                             className="enlargedImage"
                             alt="icon"
                             src="./exit.svg"
-                          
                           />
                           <a className="text_button_instruction">Quitter</a>
                         </div>
@@ -271,14 +385,12 @@ function CentralBox() {
                         </div>
                       </div>
 
-
                       <div className="instruction_navigation">
                         <p> Utilisez les flèches pour changer de slides </p>
                       </div>
                     </div>
                   </>
                 )}
-
                 {slides[currentPage - 1].type === "presentation" && (
                   <>
                     <div className="presentation_slide">
@@ -289,7 +401,6 @@ function CentralBox() {
                     </div>
                   </>
                 )}
-
                 {slides[currentPage - 1].type === "presentation" && (
                   <>
                     <h3 className="slide_subtitle">
@@ -304,13 +415,12 @@ function CentralBox() {
                       className="enlargedImage"
                       src={slides[currentPage - 1].imageSrc}
                       alt={slides[currentPage - 1].imageAlt}
-                      onClick={() =>
-                        handleImageClick(slides[currentPage - 1].imageSrc)
-                      }
+                      // onClick={() =>
+                      //   handleImageClick(slides[currentPage - 1].imageSrc)
+                      // }
                     />
                   </div>
                 )}
-
                 {slides[currentPage - 1].type === "video" && (
                   <section className="video_section">
                     <video controls>
@@ -318,87 +428,109 @@ function CentralBox() {
                     </video>
                   </section>
                 )}
-
                 {slides[currentPage - 1].type === "objectives" && (
                   <div className="objectives_section">
                     <p className="objectives_section_title">
                       {slides[currentPage - 1].text}
                     </p>
-                    <ul>
+                    <ul className="objective_group">
                       {slides[currentPage - 1].objectivesList.map(
                         (objective, index) => (
-                          <li key={index}>{objective}</li>
+                          <li className="objective" key={index}>
+                            <span className="objective_number">
+                              {slides[currentPage - 1].objectivesNumber[index]}.
+                            </span>{" "}
+                            {objective}
+                          </li>
                         )
                       )}
                     </ul>
                   </div>
                 )}
+           {slides[currentPage - 1].type === "quizz" && (
+  <div className="quizz_slide">
+    <p className="quizz_title">
+      {slides[currentPage - 1].text}
+    </p>
+    <ul id="quizz">
+      {slides[currentPage - 1].answers.map((answer, index) => (
+        <li key={index}>
+          <button
+            className={`answer_button ${
+              userAnswers[currentPage - 1]?.includes(index)
+                ? answer.correct
+                  ? "correct"
+                  : "incorrect"
+                : ""
+            } ${
+              clickCounts[currentPage - 1] >= (slides[currentPage - 1].id === 16 ? 2 : 1) && answer.correct
+                ? "correct"
+                : ""
+            }`}
+            onClick={() => {
+              handleAnswerClick(
+                slides[currentPage - 1].id,
+                index,
+                answer.correct
+              );
+              if (clickCounts[currentPage - 1] < (slides[currentPage - 1].id === 16 ? 2 : 1)) {
+                const updatedClickCounts = [...clickCounts];
+                updatedClickCounts[currentPage - 1]++;
+                setClickCounts(updatedClickCounts);
+              }
+            }}
+            disabled={
+              userAnswers[currentPage - 1] !== undefined &&
+              (userAnswers[currentPage - 1].length >= 2 ||
+                (selectedAnswerCount >= 2 && !answer.correct))
+            }
+          >
+            {answer.text}
+          </button>
+        </li>
+      ))}
+    </ul>
+    <p className="subtext">{slides[currentPage - 1].subtext}</p>
+  </div>
+)}
 
-                {slides[currentPage - 1].type === "quizz" && (
-                  <div className="quizz_slide">
-                    <p className="quizz_title">
-                      {slides[currentPage - 1].text}
-                    </p>
-                    <ul id="quizz">
-                      {slides[currentPage - 1].answers.map((answer, index) => (
-                        <li key={index}>
-                          <button
-                            className={`answer_button ${
-                              quizAnswers[slides[currentPage - 1].id] !==
-                                undefined &&
-                              (quizAnswers[slides[currentPage - 1].id] ===
-                              answer.correct
-                                ? "correct"
-                                : "incorrect")
-                            }`}
-                            onClick={() =>
-                              handleAnswerClick(
-                                slides[currentPage - 1].id,
-                                index,
-                                answer.correct
-                              )
-                            }
-                            disabled={
-                              quizAnswers[slides[currentPage - 1].id] !==
-                              undefined
-                            }
-                          >
-                            {answer.text}
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                    <p className="subtext">{slides[currentPage - 1].subtext}</p>
-                  </div>
-                )}
+
+
+                {/* Afficher les bonnes réponses lorsque l'utilisateur clique sur le bouton */}
+                
+
                 {slides[currentPage - 1].type === "imageWithText" && (
                   <>
                     <p>{slides[currentPage - 1].text}</p>
                     <img
-                      className="enlargedImage"
-                      className="image_echocardiographie"
+                      className={`enlargedImage ${isZoomed ? "zoomed" : ""}`}
                       src={slides[currentPage - 1].images[0].src}
                       alt={slides[currentPage - 1].images[0].alt}
+                      onClick={handleImageClickZoom}
                     />
                     <div className="additional_info">
                       <p>{slides[currentPage - 1].subtext}</p>
                     </div>
                   </>
                 )}
-
                 {slides[currentPage - 1].type === "text_cardiopathie" && (
                   <>
                     <div className="cardiopathie_section">
-                      <p>{slides[currentPage - 1].text}</p>
-                      <div className="additional_info">
-                        <p className="subtext">
-                          {slides[currentPage - 1].subtext}
-                        </p>
-                      </div>
+                      <p className="cardiopathie_section_left">
+                        {slides[currentPage - 1].text}
+                      </p>
+                      <p className="cardiopathie_section_right">
+                        {slides[currentPage - 1].text2}
+                      </p>
+                    </div>
+
+                    <div className="additional_info_text_cardiopathie">
+                      <p className="subtext">
+                        {slides[currentPage - 1].subtext}
+                      </p>
                     </div>
                   </>
                 )}
-
                 {slides[currentPage - 1].type === "patientPresentation" && (
                   <div className="patient_presentation_section">
                     <img
@@ -432,16 +564,19 @@ function CentralBox() {
                     </div>
                   </div>
                 )}
-
                 {slides[currentPage - 1].type === "examen_medical" && (
                   <>
-                    <h3>{slides[currentPage - 1].subtitle}</h3>
-
                     <div className="examenmedical_section">
                       <div className="examenmedical_section_left">
+                        <img
+                          className="examenmedical_img"
+                          src={slides[currentPage - 1].imageSrc}
+                          alt="image d'examens"
+                        />
+                      </div>
+                      <div className="examenmedical_section_center">
                         <p> {slides[currentPage - 1].text} </p>
                       </div>
-                      <div className="divider"> </div>
                       <div className="examenmedical_section_right">
                         <p> {slides[currentPage - 1].text2} </p>
                       </div>
@@ -453,35 +588,71 @@ function CentralBox() {
                   </>
                 )}
 
+                {slides[currentPage - 1].type === "storycontinu" && (
+                  <>
+                    <div className="image_with_text_slide">
+                      <div className="image_section">
+                        <img
+                          src={slides[currentPage - 1].imageSrc}
+                          alt={slides[currentPage - 1].title}
+                        />
+                        <p className="image_credit">
+                          {slides[currentPage - 1].creditPicture}
+                        </p>
+                      </div>
+                      <div className="text_section">
+                        <h3>{slides[currentPage - 1].subtitle}</h3>
+                        <p>{slides[currentPage - 1].text}</p>
+                        <h3>{slides[currentPage - 1].subtitle2}</h3>
+                        <p>{slides[currentPage - 1].text2}</p>
+                        <div className="additional_info">
+                          <p>{slides[currentPage - 1].subtext}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
+
                 {slides[currentPage - 1].type === "patientHistory" && (
                   <SlidePatientHistory slideData={slides[currentPage - 1]} />
                 )}
-
                 {slides[currentPage - 1].type === "bilan" && (
-                  <>
-                    <div className="presentation_slide">
-                      <p>
-                        {" "}
-                        <b> {slides[currentPage - 1].text} </b>{" "}
-                      </p>
+                  <div className="all_presentation_slide">
+                    <div className="image_presentation_slide">
+                      <img
+                        className="coeur_image_presention"
+                        src={slides[currentPage - 1].imageSrc}
+                        alt={slides[currentPage - 1].title}
+                      />
+                    </div>
+                    <div className="text_presentation_slide">
+                      <p>{slides[currentPage - 1].text}</p>
 
                       <p className="additional_info">
                         {" "}
                         {slides[currentPage - 1].subtext}{" "}
                       </p>
                     </div>
-                  </>
+                  </div>
                 )}
-
                 {slides[currentPage - 1].type === "cardiopathie carcinoïde" && (
                   <>
                     <div className="cardiopathie_section">
-                      <h3>.{slides[currentPage - 1].subtitle}</h3>
-                      <p>{slides[currentPage - 1].text}</p>
-                      <h3>.{slides[currentPage - 1].subtitle2}</h3>
-                      <p>{slides[currentPage - 1].text2}</p>
-                      <h3>.{slides[currentPage - 1].subtitle3}</h3>
-                      <p>{slides[currentPage - 1].text3}</p>
+                      <div className="cardiopathie_section_text1">
+                        {" "}
+                        <h3>{slides[currentPage - 1].subtitle}</h3>
+                        <p>{slides[currentPage - 1].text}</p>{" "}
+                      </div>
+                      <div className="cardiopathie_section_text2">
+                        <h3>{slides[currentPage - 1].subtitle2}</h3>
+                        <p>{slides[currentPage - 1].text2}</p>
+                      </div>
+                      <div className="cardiopathie_section_text3">
+                        <h3>{slides[currentPage - 1].subtitle3}</h3>
+                        <p>{slides[currentPage - 1].text3}</p>
+                      </div>
+                    </div>
+                    <div className="info_additio">
                       <p className="additional_info">
                         {" "}
                         {slides[currentPage - 1].subtext}{" "}
@@ -492,6 +663,15 @@ function CentralBox() {
                       </p>
                     </div>
                   </>
+                )}
+                {slides[currentPage - 1].type === "conclusions" && (
+                  <div className="all_conclusions">
+                    <div className="conclusion_section">
+                      <p className="conclusion_text">
+                        {slides[currentPage - 1].text}
+                      </p>
+                    </div>
+                  </div>
                 )}
               </div>
             </CSSTransition>
@@ -526,8 +706,6 @@ function CentralBox() {
           src="/servier_logo.png"
           alt="Servier Logo"
         />
-  
-
         <img
           className="springerhealthcare_logo"
           src="/springer.svg"

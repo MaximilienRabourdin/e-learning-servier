@@ -16,7 +16,7 @@ function ChoiceModule() {
         className="secondModule">
           Une étude de cas clinique interactive sur une amylose cardiaque
         </a>
-        <a className="thirdModule">?</a>
+        <a className="thirdModule">Bientôt disponible</a>
         <div className="logo_section">
         <img
           className="servier_logo"
