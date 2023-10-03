@@ -68,13 +68,37 @@ const AmyloseModuleStyled = styled.div`
     }
   }
 
+  
   img {
     width: 80%;
     cursor: pointer;
+    border-radius: 30px;
   }
+
+  .image_echocardiographie {
+    width: 90%;
+    cursor: zoom-in; /* Curseur indiquant que l'image est cliquable pour le zoom */
+
+  }
+
+  .enlargedImage {
+  width: auto; /* Ajustez la hauteur en conséquence pour préserver les proportions */
+}
+
+  .enlargedImage.zoomed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Ajustez la taille tout en préservant les proportions */
+  z-index: 9999; /* Pour que l'image agrandie apparaisse au-dessus de tout le reste */
+  cursor: zoom-out; /* Curseur indiquant que l'image est cliquable pour réduire le zoom */
+}
 
   .ett {
     display: flex;
+    flex-direction:row;
   }
 
   .text_ett {
@@ -86,19 +110,25 @@ const AmyloseModuleStyled = styled.div`
 
   }
 
-  .image_ett {
-    width: 50%;
+  #image_ett {
+    max-width: 100%;
   }
 
   .image_ett_section {
-    display:flex;
+   display:flex;
+   justify-content:center;
+
   }
 
   .ett_text_section {
     display:flex;
     justify-content:space-between;
-    width: 100%:
   }
+
+  .text-button_exit { 
+    text-decoration:none;
+  }
+
 
   .text_ett {
     margin:0  1rem;
@@ -114,15 +144,39 @@ const AmyloseModuleStyled = styled.div`
 
   .objectives_section_title {
     font-size: 24px;
+    text-align: center;
   }
 
-  .list_objectives {
-    background-color : #1976d2;
-    color:white;
-    padding:1rem 2rem;
-    border-radius:20px;
+  .objective_group {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+    margin-top: 3rem;
   }
 
+  .objective {
+    width: 30%;
+    list-style: none;
+    margin: 1rem;
+    padding: 2rem;
+    background-color: #21b0f0;
+    color: white;
+    border-radius: 20px;
+    position: relative; /* Positionnement relatif pour les nombres */
+  }
+
+  .objective_number {
+    background-color: #1172c0;
+    font-weigth: bold;
+    margin: 0; /* Supprimer la marge autour du nombre */
+    padding: 1rem;
+    border-radius: 50%; /* Utiliser 50% pour obtenir un border-radius rond */
+    position: absolute; /* Positionnement absolu pour les nombres */
+    top: 0; /* Aligner le nombre en haut */
+    left: 0; /* Aligner le nombre à gauche */
+    transform: translate(-50%, -50%); /* Centrer le nombre */
+  }
   .right_section {
     width: 100%;
     height: 100%;
@@ -266,10 +320,11 @@ const AmyloseModuleStyled = styled.div`
     justify-content: center;
     align-content:center;
     align-items:center;
+    margin-top:2rem;
   }
 
   .image_patienteX {
-    width: 10%;
+    width: 40%;
     background-repeat: no-repeat;
 
   }
@@ -294,10 +349,49 @@ const AmyloseModuleStyled = styled.div`
     align-content: center;
   }
 
-  .cardiopathie_section {
-    width: 80%;
-    height: 50%;
+  .cardiopathie_carcinoïde_section {
+    width: 100%;
+    display:flex;
+    margin-top:2rem
   }
+
+  .traitement_text {
+    width: 50%;
+    
+  }
+
+  .cardiopathie_section_amylose {
+    width: 100%;
+    margin-top:2rem;
+  }
+
+  .cardiopathie_text_amylose {
+    width: 100%;
+    
+  }
+
+  .cardiopathie_section {
+    width: 100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-top:2rem;
+  }
+
+  .cardiopathie_text {
+    min-width: 50%;
+    margin-right:2rem;
+  }
+
+  .cardiopathie_image_section {
+  width: 50%;
+   display:flex;
+   flex-direction:column;
+   justify-content:center;
+   align-items:center;
+   aling-content:center;
+  }
+
 
   .traitement_subtitle {
     color: #1976d2;
@@ -312,103 +406,88 @@ const AmyloseModuleStyled = styled.div`
   }
 
 /* quizzmultiple section */
-.quizz_slide {
-  text-align: center;
-  height: 60%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #f1f8fe;
-  border-radius: 1rem;
+
+.quizz-container { 
+    background-color:#1172C0;
+  }
+
+  .quizz_slide {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    color:white;
+  }
+
+  .quizz_title {
+    font-size: 22px;
+    color:white;
+    text-position:center;
+  }
+
+  #quizz {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  .answer_button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    color: inherit;
+    color:white;
+    padding: 1rem;
+  }
+
+  .answer_button:hover {
+    border: 1px solid #f1f8fe;
+    color: #005a94;
+    background-color: #f1f8fe;
+    cursor: pointer;
+    padding: 1rem;
+    border-radius: 50px;
+  }
+
+  .answer_button.correct {
+    color: green;
+    border: 1px solid #C4E0B2;
+    border-radius: 50px;
+    background-color: #C4E0B2;
+    margin:0.4rem;
+  }
+
+  .answer_button.incorrect {
+  }
+
+
+
+.information_slide_coupe {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width: 100%;
+  margin-top:2rem;
 }
 
-.quizz_title {
-  font-size: 28px;
-  margin-bottom: 2rem;
-  color: #24226A;
-  font-weight: 700;
+.information_image {
+  width: 50%;
+  margin-left:2rem;
+  
 }
 
-#quizz {
-  list-style-type: none;
-  padding-left: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.information_text {
+  width: 50%;
+  background-color:#1875D1;
+  padding: 1rem;
+  color:white;
+  border-radius:10px;
 }
 
-.choice_answer {
-  display: flex;
-  justify-content: flex-start;
-  background-color: #A7CAED;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.choice_answer:hover {
-  background-color: #005a94;
-}
-
-.choice_answer.correct {
-  background-color: green; /* Couleur verte pour les réponses correctes */
-}
-
-.answer_button, .choice_answer, .correct {
-  border: none;
-  color: white;
-  font-size: 18px;
-  padding: 0.4rem 2rem;
-  margin: 0.5rem;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.answer_button {
-  padding: 1rem 2rem;
-  background-color: #A7CAED;
-}
-
-.answer_button:hover, .choice_answer:hover {
-  background-color: #005a94;
-}
-
-/* checkbox */
-/* Styles pour les cases à cocher */
-input[type="checkbox"] {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  width: 18px;
-  height: 18px;
-  border: 2px solid #1875D1;
-  border-radius: 3px;
-  outline: none;
-  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
-  cursor: pointer;
-  margin-right: 10px;
-}
-
-input[type="checkbox"]:checked {
-  background-color: #1875D1; /* Couleur verte pour les cases cochées */
-  border-color: #1875D1;
-}
-
-input[type="checkbox"]:disabled {
-  background-color: #D8D8D8; /* Couleur pour les cases désactivées */
-  border-color: #D8D8D8;
-  cursor: not-allowed;
-}
-
-/* Styles pour les labels des cases à cocher */
-label {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-label span {
-  margin-left: 5px;
+.additional_info_coupe {
+  color:white;
+  font-size: 16px;
 }
 
 .information_slide{
@@ -428,30 +507,29 @@ label span {
   display:flex;
   align-content:center;
   align-items:center;
+  justify-content:center;
   width: 100%;
-  height: 80%;
+
 }
 
 .information_textX {
   display:flex;
   margin-left:4rem;
   flex-direction:column;
-  width: 100%;
+  width: 50%;
 }
 
 .information_section {
-  width: 100%;
   margin:0.4rem
   background-color: #D8D8D8; 
   padding: 0.4rem;
-  border-radius: 10px;
   
 }
 
 
 .information_section p {
   margin: 0;
-  font-size:14px;
+  font-size:18px;
 }
 
 .information_section h3 {
@@ -473,14 +551,18 @@ label span {
 
 .imageX_section {
   display:flex;
+  width:50%;
   flex-direction:column;
-  justify-content:center;
+  justify-content:flex-start;
   align-items:center;
   align-content:center;
 }
 
 .informationX_image {
   width:100%;
+  text-position:center;
+
+
 }
 
   .echocardiographie_image {
@@ -710,7 +792,6 @@ label span {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-height: 100vh;
     overflow-y: auto;
   }
 
@@ -720,25 +801,22 @@ label span {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    max-height: 60vh;
+    font-size:10px;
+
   }
 
   .mesuredechocardiographie_text {
-    flex: 1;
-    margin-right: 20px;
+    width:60%;
     background-color: #f1f8fe;
-    padding: 1rem;
+    padding: 0.2rem;
     border-radius: 1rem;
   }
 
-  .text_blue {
-    color: ;
-  }
+  
   .imagerie_section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-height: 100vh;
     overflow-y: auto;
   }
 
@@ -747,7 +825,6 @@ label span {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
   }
 
   .echocardiographie_image_container {
@@ -759,8 +836,7 @@ label span {
     transition: background-color 0.3s ease-in-out;
   }
   .echocardiographie_image {
-    max-width: 70%; /* Réduisez la largeur maximale */
-    max-height: 250px; /* Réduisez la hauteur maximale */
+    max-width: 40%; /* Réduisez la largeur maximale */
   }
 
   .mesuredechocardiographie_title {
@@ -778,13 +854,13 @@ label span {
   }
 
   .mesuredechocardiographie_text li {
-    font-size: 18px;
+    font-size: 15px;
     transition: 0.3s ease-in-out;
     background-color: #f1f8fe;
     margin: 0.2rem 0rem;
     border-radius: 10px;
   }
-
+ 
   .subtext_echocardiographie {
     width: 100%;
     font-size: 14px;
@@ -792,12 +868,17 @@ label span {
     text-align: left;
   }
 
-  .conclusion_slide {
-    background-color:#1976d2;
-    padding: 1rem 2rem;
-    border-radius: 10px;
-    color: white;
-  }
+  .conclusions-container {
+ background-color:#FDC002;
+ color:white;
+h1 {
+  color:white;
+}
+.conclusion_text {
+  font-size:24px;
+  color:black;
+}
+}
 `;
 
 export default AmyloseModuleStyled;

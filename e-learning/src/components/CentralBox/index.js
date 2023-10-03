@@ -365,7 +365,7 @@ function CentralBox() {
                           </p>
                         </div>
                       </div>
-
+                  <div className="all_instruction_control">
                       <div className="instruction_control_buttonside">
                         <div className="button_instruction">
                           <img
@@ -382,11 +382,14 @@ function CentralBox() {
                             Cliquez sur ce bouton revenir au choix des modules
                           </p>
                         </div>
+                        
                       </div>
-
                       <div className="instruction_navigation">
                         <p> Utilisez les flèches pour changer de slides </p>
                       </div>
+
+                    
+                    </div>
                     </div>
                   </>
                 )}

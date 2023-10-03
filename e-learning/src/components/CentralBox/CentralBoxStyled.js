@@ -24,7 +24,6 @@ const CentralBoxStyled = styled.div`
     height: 84vh;
     width: 80vw;
     display: flex;
-
     filter: drop-shadow(0px 7px 36px rgba(0, 89, 148, 0.24));
     border-radius: 10px;
     position: relative; /* Ajout de la propriété position relative */
@@ -93,8 +92,7 @@ const CentralBoxStyled = styled.div`
   }
 
   .enlargedImage {
-  height: auto; /* Ajustez la hauteur en conséquence pour préserver les proportions */
-  cursor: zoom-in; /* Curseur indiquant que l'image est cliquable pour le zoom */
+  width: auto; /* Ajustez la hauteur en conséquence pour préserver les proportions */
 }
 
   .enlargedImage.zoomed {
@@ -552,19 +550,28 @@ const CentralBoxStyled = styled.div`
   /* instruction slide start */
   .all_instruction_slide {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
     flex-direction: column;
     margin: 1rem 0rem;
   }
 
+  .all_instruction_control{
+    display:flex;
+    width:100%;
+    flex-direction:row;
+    justify-content:space-between;
+  }
+
   .instruction_control_buttonside {
-    width: 100%;
+    width: 50%;
     display: flex;
     flex-direction: row;
+    justify-content:flex-start;
     align-items: center;
     align-content: center;
+    margin-right:2rem;
 
     .button_instruction {
       height: 70px;
@@ -578,6 +585,13 @@ const CentralBoxStyled = styled.div`
     }
   }
 
+
+  .instruction_navigation {
+    width: 50%;
+    height:100%;
+
+  }
+
   .button_instruction_navigation {
     height: 70px;
     width: 70px;
@@ -589,15 +603,6 @@ const CentralBoxStyled = styled.div`
    
   }
 
-  .instruction_navigation {
-    width: 100%;
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-  }
 
   h5 {
     margin: 0;

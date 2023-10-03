@@ -27,12 +27,14 @@ const amylose_slide = [
     type: "objectives",
     title: "Objectifs d’apprentissage",
     text: "À la fin de cette présentation de cas interactive, les apprenants seront en mesure de:\n\n",
+    objectivesNumber: ["1", "2", "3"],
     objectivesList: [
       "Comprendre l‘intérêt des techniques d'échocardiographie pour le diagnostic et la stratification du pronostic de l‘amylose cardiaque",
       "Identifier l‘hypertrophie ventriculaire symétrique et reconnaitre l‘aspect granité et brillant du myocarde faisant suspecter une amylose cardiaque",
       "Comprendre l‘intérêt de l‘étude de la déformation longitudinale",
     ],
   },
+
   {
     id: 5,
     type: "mesuredechocardiographie",
@@ -71,6 +73,7 @@ const amylose_slide = [
           parametres: ["- Flux"],
         },
       ],
+
       subtext:
         "Mitchell C, Rahko PS, Blauwet LA, et al J Am Soc Echocardiogr. 2019;32(1):1-64. Illustration ® smart.servier.com",
     },
@@ -110,16 +113,19 @@ const amylose_slide = [
     id: 7,
     type: "patientPresentation",
     title: "Patiente X : Présentation",
-    imageSrc: "/patiente_z.png",
+    imageSrc: "/patiente.jpeg",
     imageAlt: "Image de la patiente X",
     patientInfo: {
-      age: "41 ans",
-      gender: "Femme",
-      medicalHistory: "Sans antécédents particuliers",
-      consultationReasons: [
-        "- Douleurs abdominales",
-        "Consultation en hépato-gastrologie pour investigation",
-      ],
+      consultationReasons: (
+        <>
+          <p>41 ans </p>
+          <p>Femme</p>
+          <p>Sans antécédents particuliers</p>
+          <p>Douleurs abdominales,</p>
+          <p>Consultation en hépato-gastrologie pour investigation</p>
+        </>
+      ),
+
       clinicalExamination: [
         "Etat général moyen",
         "Asthénie",
@@ -144,7 +150,8 @@ const amylose_slide = [
     text1: (
       <>
         - FEVG préservée (FEVG = 53 % en Simpson Biplan) <br />
-        - Cinétique segmentaire homogène <br />
+        - Cinétique segmentaire homogène <br />- Aspect granité et brillant du
+        myocarde
       </>
     ),
     text2: (
@@ -233,6 +240,8 @@ const amylose_slide = [
     id: 10,
     type: "information",
     title: "Amylose à chaînes légères (AL)",
+    imageSrc: "/coupe.jpeg",
+    imageAlt: "coupe amylose",
     text: (
       <>
         <p> - Maladie rare</p>
@@ -250,7 +259,7 @@ const amylose_slide = [
 
   {
     id: 11,
-    type: "quizzmultiple",
+    type: "quizz",
     title: "Question 2",
     text: "Quels examens demanderiez-vous pour confirmer ce diagnostic ? Trois réponses possibles",
     answers: [
@@ -279,12 +288,42 @@ const amylose_slide = [
         correct: false,
       },
     ],
-    subtext:
-      "ECG : électrocardiogramme ; IRM : imagerie par résonance magnétique",
   },
+
 
   {
     id: 12,
+    type: "text_cardiopathie",
+    title: "Patiente X : Analyses histologiques",
+    imageSrc: '/microscope.jpeg',
+    imageAlt: 'microscope',
+    imageText: (<> <p>Observation au microscope d’une biopsie</p> 
+     </> ),
+    text: (
+      <>
+        <b>Ponction-biopsie hépatique </b>
+        Présence de dépôts extracellulaires positifs à la coloration au rouge
+        Congo composés d’une substance anhiste éosinophile
+        <br />
+        <br />
+        <b style={{ color: "#0089e3" }}> → amylose hépatique </b> sans
+        prolifération tumorale
+        <br />
+        <br />
+        <b>Ponction-biopsie ostéo-médullaire</b>- Moelle de richesse cellulaire
+        III avec dépôts interstitiels d’une substance éosinophile homogène
+        pouvant rappeler l’<b> amylose </b>
+        - Absence d’infiltration tumorale
+        <br />
+        <br />
+        <b>Ponction-biopsie des glandes salivaires :</b>
+        <br />- Aspect d’une sialadénite chronique sans signe de malignité
+      </>
+    ),
+  },
+
+  {
+    id: 13,
     type: "informationX",
     title: "Patiente X : Biologie",
     text: [
@@ -341,35 +380,9 @@ const amylose_slide = [
       },
     ],
     subtext: "NT-proBNP : N-terminal pro Brain Natriuretic Peptide",
-    image: "photo_attente.png",
+    image: "graphique.png",
   },
 
-  {
-    id: 13,
-    type: "text_cardiopathie",
-    title: "Patiente X : Analyses histologiques",
-    text: (
-      <>
-        <b>Ponction-biopsie hépatique </b>
-        Présence de dépôts extracellulaires positifs à la coloration au rouge
-        Congo composés d’une substance anhiste éosinophile
-        <br />
-        <br />
-        <b style={{ color: "#0089e3" }}> → amylose hépatique </b> sans
-        prolifération tumorale
-        <br />
-        <br />
-        <b>Ponction-biopsie ostéo-médullaire</b>- Moelle de richesse cellulaire
-        III avec dépôts interstitiels d’une substance éosinophile homogène
-        pouvant rappeler l’<b> amylose </b>
-        - Absence d’infiltration tumorale
-        <br />
-        <br />
-        <b>Ponction-biopsie des glandes salivaires :</b>
-        <br />- Aspect d’une sialadénite chronique sans signe de malignité
-      </>
-    ),
-  },
 
   {
     id: 14,
@@ -441,7 +454,7 @@ const amylose_slide = [
 
   {
     id: 16,
-    type: "quizzmultiple",
+    type: "quizz",
     title: "Question 3",
     text: "Quels sont les marqueurs pronostiques de l’amylose AL ? Trois réponses possibles",
     answers: [
@@ -484,24 +497,28 @@ const amylose_slide = [
       "- A l’IRM, rehaussement tardif après injection de gadolinium et T1 mapping > normale",
     text2:
       "Transfert au service de cancérologie (Hôpital Cheikhoul Khadim) pour une prise en charge oncologique",
-    subtext: "5-HIAA : acide 5-hydroxy-indol-acétique",
+      subtitle3:
+      "- Biomarqueurs cardiaques : la troponine T et le NT-proBNP",
+      text3:
+      "Score de la Mayo Clinic (seuils de la troponine T = 0,035 µg/L et du NT-proBNP = 332 pg/mL) :",
+      subtext: "5-HIAA : acide 5-hydroxy-indol-acétique",
   },
+
   {
     id: 20,
-    title: "Patiente X : Traitement",
     type: "cardiopathie carcinoïde",
+    title: "Patiente X : Traitement",
     subtitle:
       "La patiente reçoit depuis plus de 6 mois une chimiothérapie associant 3 classes thérapeutiques (VCD) : ",
-    text2: (
+    imageSrc:'/patiente.jpeg',
+      text2: (
       <>
-        <br />
         - Un inhibiteur du protéasome (bortezomib = V)
         <br />
         - Un agent alkylant (cyclophosphamide = C)
         <br />
         - Des corticoïdes (déxaméthasone = D)
-        <br />
-        - Des anticorps anti-CD38 (daratumumab)
+        <br />- Des anticorps anti-CD38 (daratumumab)
       </>
     ),
 
@@ -518,7 +535,7 @@ const amylose_slide = [
   {
     id: 21,
     title: "Conclusions",
-    type: "conclusion",
+    type: "conclusions",
     text: (
       <>
         - L’amylose est la manifestation de plusieurs maladies systémiques ;

@@ -9,17 +9,121 @@ import { CSSTransition } from "react-transition-group";
 
 function AmyloseModule() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [clickCounts, setClickCounts] = useState(
+    Array(amylose_slide.length).fill(0)
+  );
+  const [selectedAnswerCount, setSelectedAnswerCount] = useState(0);
+  const [userAnswers, setUserAnswers] = useState(
+    Array(amylose_slide.length).fill([])
+  );
+  const [userHasAnswered, setUserHasAnswered] = useState(false);
+  const [showAnswers, setShowAnswers] = useState(false);
+  const [quizQuestions, setQuizQuestions] = useState([
+    {
+      id: 9,
+      type: "quizz",
+      title: "Question 1",
+      text: "Quel diagnostic évoquez-vous ?",
+      answers: [
+        {
+          text: "Insuffisance cardiaque à FEVG préservée",
+          correct: false,
+        },
+        {
+          text: "Cardiomyopathie hypertrophique",
+          correct: false,
+        },
+        {
+          text: "Rétrécissement aortique calcifié",
+          correct: false,
+        },
+        {
+          text: "Amylose à chaînes légères (AL)",
+          correct: true,
+        },
+      ],
+    },
+    {
+      id: 11,
+      type: "quizzmultiple",
+      title: "Question 2",
+      text: "Quels examens demanderiez-vous pour confirmer ce diagnostic ? Trois réponses possibles",
+      answers: [
+        {
+          text: "Examens biologique",
+          correct: true,
+        },
+        {
+          text: "Biopsies et analyses histologiques (infiltration amyloïde)",
+          correct: true,
+        },
+        {
+          text: "Scanner abdominal",
+          correct: false,
+        },
+        {
+          text: "IRM cardiaque",
+          correct: true,
+        },
+        {
+          text: "Coronarographie",
+          correct: false,
+        },
+        {
+          text: "Holter ECG",
+          correct: false,
+        },
+      ],
+    },
+    {
+      id: 16,
+      type: "quizz",
+      title: "Question 3",
+      text: "Quels sont les marqueurs pronostiques de l’amylose AL ? Trois réponses possibles",
+      answers: [
+        {
+          text: "Elévation de la troponine T et du NT-proBNP",
+          correct: true,
+        },
+        {
+          text: "Diminution du débit de filtration glomérulaire",
+          correct: false,
+        },
+        {
+          text: "Altération du strain longitudinal",
+          correct: true,
+        },
+        {
+          text: "Altération de la FEVG",
+          correct: false,
+        },
+        {
+          text: "Réhaussement tardif à l’IRM",
+          correct: true,
+        },
+        {
+          text: "Elargissement des complexes QRS",
+          correct: false,
+        },
+      ],
+    },
+  ]);
+
+  const totalSlides = 20;
+  const stepBarWidth = (currentPage / totalSlides) * 100;
+
   const [showMenuPopup, setShowMenuPopup] = useState(false);
   const [showReferencesPopup, setShowReferencesPopup] = useState(false);
   const [showAidePopup, setShowAidePopup] = useState(false);
+  const [quizAnswers, setQuizAnswers] = useState({});
   const [showAbbreviationPopup, setShowAbbreviationPopup] = useState(false);
   const [enlargedImage, setEnlargedImage] = useState(null);
 
-  const handleAnswerClick = (quizId, answerIndex, correct) => {
-    setQuizAnswers((prevAnswers) => ({
-      ...prevAnswers,
-      [quizId]: correct,
-    }));
+  const handleAnswerClick = (quizId, answerIndex, isCorrect) => {
+    const newUserAnswers = [...userAnswers];
+    newUserAnswers[currentPage - 1] = [answerIndex];
+    setUserAnswers(newUserAnswers);
+    setUserHasAnswered(true);
   };
 
   const handleNextPage = () => {
@@ -35,10 +139,6 @@ function AmyloseModule() {
   };
 
   const progressBarValue = ((currentPage - 1) / amylose_slide.length) * 100;
-
-  const handleMenuButtonClick = () => {
-    setShowMenuPopup(true);
-  };
 
   const handleReferencesButtonClick = () => {
     setShowReferencesPopup(true);
@@ -62,10 +162,6 @@ function AmyloseModule() {
     setShowAbbreviationPopup(true);
   };
 
-  const handleImageClick = (imageSrc) => {
-    setEnlargedImage(imageSrc);
-  };
-
   const handleCloseEnlargedImage = () => {
     setEnlargedImage(null);
   };
@@ -75,48 +171,28 @@ function AmyloseModule() {
     setShowMenuPopup(false);
   };
 
-  // choix multiple pour le quizz
+  // Mettre en place le zoom
+  const [isZoomed, setIsZoomed] = useState(false);
 
-  const [selectedAnswers, setSelectedAnswers] = useState([]);
-  const [showAnswer, setShowAnswer] = useState(false);
-
-  const handleQuizzAnswer = (answerText) => {
-    if (selectedAnswers.includes(answerText)) {
-      setSelectedAnswers(selectedAnswers.filter((text) => text !== answerText));
-    } else if (selectedAnswers.length < 3) {
-      setSelectedAnswers([...selectedAnswers, answerText]);
-    }
-
-    if (selectedAnswers.length === 2) {
-      setShowAnswer(true);
-    }
+  const handleImageClickZoom = () => {
+    // Inversez l'état du zoom lorsque l'utilisateur clique sur l'image
+    setIsZoomed(!isZoomed);
   };
 
-  const [quizAnswers, setQuizAnswers] = useState({});
-
-  const handleQuizzMultipleAnswer = (slideId, index, correct) => {
-    if (!quizAnswers[slideId]) {
-      setQuizAnswers({ ...quizAnswers, [slideId]: [] });
-    }
-
-    if (quizAnswers[slideId].includes(index)) {
-      setQuizAnswers({
-        ...quizAnswers,
-        [slideId]: quizAnswers[slideId].filter((item) => item !== index),
-      });
-    } else {
-      if (quizAnswers[slideId].length < 3) {
-        setQuizAnswers({
-          ...quizAnswers,
-          [slideId]: [...quizAnswers[slideId], index],
-        });
-      }
-    }
-  };
+  // Supposons que "isQuizzSlide" soit un booléen indiquant si la diapositive est de type "quizz".
+  const isQuizzSlide = amylose_slide[currentPage - 1].type === "quizz";
 
   return (
     <AmyloseModuleStyled>
-      <div className="all-box">
+      <div
+        className={`all-box ${
+          amylose_slide[currentPage - 1].type === "quizz"
+            ? "quizz-container"
+            : amylose_slide[currentPage - 1].type === "conclusions"
+            ? "conclusions-container"
+            : ""
+        }`}
+      >
         <nav className="sidebar">
           <ul className="all_button">
             <li
@@ -147,9 +223,12 @@ function AmyloseModule() {
               <img alt="icon" src="./aide_icon.svg" />
               <a className="text-button">Aide</a>
             </li>
-            <li className="button" href='/'>
-              <img alt="icon" src="./exit.svg" />
-              <a className="text-button" href="/">
+            <li className={`button ${currentPage === 4 ? "active" : ""}`}>
+              <img alt="icon" src="./exit_button.svg" />
+              <a
+                className="text-button_exit"
+                href="/accueil_cas_clinique_cardiopathie_carcinoïde"
+              >
                 Quitter
               </a>
             </li>
@@ -217,7 +296,7 @@ function AmyloseModule() {
                   </>
                 )}
 
-{amylose_slide[currentPage - 1].type === "conclusion" && (
+                {amylose_slide[currentPage - 1].type === "conclusion" && (
                   <>
                     <div className="conclusion_slide">
                       <p>
@@ -328,7 +407,7 @@ function AmyloseModule() {
                           <img
                             className="enlargedImage"
                             alt="icon"
-                            src="./exit.svg"
+                            src="./exit_button.svg"
                           />
                           <a className="text_button_instruction">Quitter</a>
                         </div>
@@ -370,11 +449,11 @@ function AmyloseModule() {
                       className="enlargedImage"
                       src={amylose_slide[currentPage - 1].imageSrc}
                       alt={amylose_slide[currentPage - 1].imageAlt}
-                      onClick={() =>
-                        handleImageClick(
-                          amylose_slide[currentPage - 1].imageSrc
-                        )
-                      }
+                      // onClick={() =>
+                      //   handleImageClick(
+                      //     amylose_slide[currentPage - 1].imageSrc
+                      //   )
+                      // }
                     />
                   </div>
                 )}
@@ -386,16 +465,25 @@ function AmyloseModule() {
                     </video>
                   </section>
                 )}
-
                 {amylose_slide[currentPage - 1].type === "objectives" && (
                   <div className="objectives_section">
                     <p className="objectives_section_title">
                       {amylose_slide[currentPage - 1].text}
                     </p>
-                    <ul className="list_objectives">
+                    <ul className="objective_group">
                       {amylose_slide[currentPage - 1].objectivesList.map(
                         (objective, index) => (
-                          <li key={index}>{objective}</li>
+                          <li className="objective" key={index}>
+                            <span className="objective_number">
+                              {
+                                amylose_slide[currentPage - 1].objectivesNumber[
+                                  index
+                                ]
+                              }
+                              .
+                            </span>{" "}
+                            {objective}
+                          </li>
                         )
                       )}
                     </ul>
@@ -444,17 +532,23 @@ function AmyloseModule() {
                   <div className="imagerie_section">
                     <div className="mesuredechocardiographie_content">
                       <div className="mesuredechocardiographie_text">
-                        <p className="blue_text">
+                        <p className="text_blue">
+                          {" "}
                           <b>
                             {" "}
-                            - Suivi de structure ou speckle tracking (analyse de
-                            la déformation du myocarde){" "}
-                          </b>
+                            - Suivi de structure ou <i> speckle </i> tracking
+                            (analyse de la déformation du myocarde){" "}
+                          </b>{" "}
                         </p>
                         <br />
                         <p>
-                          Le <b className="text_blue"> strain </b> est le degré
-                          de déformation du myocarde durant le cycle cardiaque
+                          Le{" "}
+                          <b className="text_blue">
+                            {" "}
+                            <i> strain </i>{" "}
+                          </b>{" "}
+                          est le degré de déformation du myocarde durant le
+                          cycle cardiaque
                         </p>
                         <p>
                           {" "}
@@ -502,104 +596,64 @@ function AmyloseModule() {
                   </div>
                 )}
 
-                {amylose_slide[currentPage - 1].type === "quizz" && (
-                  <div className="quizz_slide">
-                      <p className="quizz_title">
-                      {amylose_slide[currentPage - 1].text}
-                    </p>
-                    <ul id="quizz">
-                      {amylose_slide[currentPage - 1].answers.map(
-                        (answer, index) => (
-                          <li key={index}>
-                            <button
-                              className={`answer_button ${
-                                quizAnswers[
-                                  amylose_slide[currentPage - 1].id
-                                ] !== undefined &&
-                                (quizAnswers[
-                                  amylose_slide[currentPage - 1].id
-                                ] === answer.correct
-                                  ? "correct"
-                                  : "incorrect")
-                              }`}
-                              onClick={() =>
-                                handleAnswerClick(
-                                  amylose_slide[currentPage - 1].id,
-                                  index,
-                                  answer.correct
-                                )
-                              }
-                              disabled={
-                                quizAnswers[
-                                  amylose_slide[currentPage - 1].id
-                                ] !== undefined
-                              }
-                            >
-                              {answer.text}
-                            </button>
-                          </li>
-                        )
-                      )}
-                    </ul>
-                    <p className="subtext">
-                      {amylose_slide[currentPage - 1].subtext}
-                    </p>
-                  </div>
-                )}
-
-                {amylose_slide[currentPage - 1].type === "quizzmultiple" && (
-                  <div className="quizz_slide">
-                    <p className="quizz_title">
-                      {amylose_slide[currentPage - 1].text}
-                    </p>
-                    <ul id="quizz">
-                      {amylose_slide[currentPage - 1].answers.map(
-                        (answer, index) => (
-                          <li
-                            className={`choice_answer ${
-                              answer.correct &&
-                              quizAnswers[amylose_slide[currentPage - 1].id]
-                                ?.length >= 3
+{amylose_slide[currentPage - 1].type === "quizz" && (
+  <div className="quizz_slide">
+    <p className="quizz_title">
+      {amylose_slide[currentPage - 1].text}
+    </p>
+                <ul id="quizz">
+                  {amylose_slide[currentPage - 1]?.answers?.map(
+                    (answer, index) => (
+                      <li key={index}>
+                        <button
+                          className={`answer_button ${
+                            userAnswers[currentPage - 1]?.includes(index)
+                              ? answer.correct
                                 ? "correct"
-                                : ""
-                            }`}
-                            key={index}
-                          >
-                            <label>
-                              <input
-                                type="checkbox"
-                                value={answer.text}
-                                onChange={() =>
-                                  handleQuizzMultipleAnswer(
-                                    amylose_slide[currentPage - 1].id,
-                                    index,
-                                    answer.correct
-                                  )
-                                }
-                                checked={
-                                  quizAnswers[
-                                    amylose_slide[currentPage - 1].id
-                                  ]?.includes(index) || false
-                                }
-                                disabled={
-                                  quizAnswers[amylose_slide[currentPage - 1].id]
-                                    ?.length >= 3 &&
-                                  !quizAnswers[
-                                    amylose_slide[currentPage - 1].id
-                                  ]?.includes(index)
-                                }
-                              />
-                              <span>{answer.text}</span>
-                            </label>
-                          </li>
-                        )
-                      )}
-                    </ul>
-                    <p className="subtext">
-                      {amylose_slide[currentPage - 1].subtext}
-                    </p>
-                  </div>
-                )}
+                                : "incorrect"
+                              : ""
+                          } ${
+                            clickCounts[currentPage - 1] >=
+                              (amylose_slide[currentPage - 1]?.id === 16 ||
+                              amylose_slide[currentPage - 1]?.id === 11
+                                ? 3
+                                : 1) && answer.correct
+                              ? "correct"
+                              : ""
+                          }`}
+                          onClick={() => {
+                            handleAnswerClick(
+                              amylose_slide[currentPage - 1]?.id,
+                              index,
+                              answer.correct
+                            );
+                            if (
+                              clickCounts[currentPage - 1] <
+                              (amylose_slide[currentPage - 1]?.id === 16 ||
+                              amylose_slide[currentPage - 1]?.id === 11
+                                ? 3
+                                : 1)
+                            ) {
+                              const updatedClickCounts = [...clickCounts];
+                              updatedClickCounts[currentPage - 1]++;
+                              setClickCounts(updatedClickCounts);
+                            }
+                          }}
+                          disabled={
+                            userAnswers[currentPage - 1] !== undefined &&
+                            (userAnswers[currentPage - 1].length >= 2 ||
+                              (selectedAnswerCount >= 2 && !answer.correct))
+                          }
+                        >
+                          {answer.text}
+                        </button>
+                      </li>
+                    )
+                  )}
+                </ul>
+                <p className="subtext">{amylose_slide[currentPage - 1].subtext}</p>
+  </div>
+)}
 
                 {amylose_slide[currentPage - 1].type === "imageWithText" && (
                   <>
@@ -615,16 +669,18 @@ function AmyloseModule() {
                     </div>
                     <div className="image_ett_section">
                       <img
-                        className="enlargedImage"
-                        className="image_ett"
+                        id="image_ett"
+                        className={`enlargedImage ${isZoomed ? "zoomed" : ""}`}
                         src={amylose_slide[currentPage - 1].images[0].src}
                         alt={amylose_slide[currentPage - 1].images[0].alt}
+                        onClick={handleImageClickZoom}
                       />
                       <img
-                        className="enlargedImage"
-                        className="image_ett"
+                        id="image_ett"
+                        className={`enlargedImage ${isZoomed ? "zoomed" : ""}`}
                         src={amylose_slide[currentPage - 1].images[1].src}
                         alt={amylose_slide[currentPage - 1].images[1].alt}
+                        onClick={handleImageClickZoom}
                       />
                     </div>
                     <div className="additional_info">
@@ -636,8 +692,17 @@ function AmyloseModule() {
                 {amylose_slide[currentPage - 1].type ===
                   "text_cardiopathie" && (
                   <>
-                    <div className="cardiopathie_section">
-                      <p>{amylose_slide[currentPage - 1].text}</p>
+                    <div className="cardiopathie_section_amylose">
+                      <div className="cardiopathie_text_amylose">
+                        <p>{amylose_slide[currentPage - 1].text}</p>
+                      </div>
+                      {/* <div className="cardiopathie_image">
+                        <img
+                          src={amylose_slide[currentPage - 1].imageSrc}
+                          alt={amylose_slide[currentPage - 1].imageAlt}
+                        />
+                        <p>{amylose_slide[currentPage - 1].imageText}</p>
+                      </div> */}
                       <div className="additional_info">
                         <p className="subtext">
                           {amylose_slide[currentPage - 1].subtext}
@@ -655,21 +720,12 @@ function AmyloseModule() {
                       alt={amylose_slide[currentPage - 1].imageAlt}
                     />
                     <ul>
-                      <li>{amylose_slide[currentPage - 1].patientInfo.age}</li>
-                      <li>
-                        {amylose_slide[currentPage - 1].patientInfo.gender}
-                      </li>
-
-                      <li>
+                      <div>
                         {
                           amylose_slide[currentPage - 1].patientInfo
-                            .medicalHistory
+                            .consultationReasons
                         }
-                      </li>
-                      <li> 
-                      {amylose_slide[currentPage - 1].patientInfo.consultationReasons
-                        }
-                      </li>
+                      </div>
                     </ul>
                   </div>
                 )}
@@ -717,12 +773,20 @@ function AmyloseModule() {
 
                 {amylose_slide[currentPage - 1].type === "information" && (
                   <>
-                    <div className="information_slide">
-                      {amylose_slide[currentPage - 1].text}
+                    <div className="information_slide_coupe">
+                      <div className="information_image">
+                        <img
+                          src={amylose_slide[currentPage - 1].imageSrc}
+                          alt={amylose_slide[currentPage - 1].imageAlt}
+                        />
+                      </div>
 
-                      <p className="additional_info" id="add_info">
-                        {amylose_slide[currentPage - 1].subtext}
-                      </p>
+                      <div className="information_text">
+                        {amylose_slide[currentPage - 1].text}
+                        <p className="additional_info_coupe">
+                          {amylose_slide[currentPage - 1].subtext}
+                        </p>
+                      </div>
                     </div>
                   </>
                 )}
@@ -776,14 +840,38 @@ function AmyloseModule() {
                 {amylose_slide[currentPage - 1].type ===
                   "cardiopathie carcinoïde" && (
                   <>
-                    <div className="cardiopathie_section">
-                      <h3 className="traitement_subtitle">{amylose_slide[currentPage - 1].subtitle}</h3>
-                      <p>{amylose_slide[currentPage - 1].text}</p>
-                      <h3>{amylose_slide[currentPage - 1].subtitle2}</h3>
-                      <p>{amylose_slide[currentPage - 1].text2}</p>
-                      <p className="pierre_angulaire">{amylose_slide[currentPage - 1].text3}</p>
+                    <div className="cardiopathie_carcinoïde_section">
+                      <div className="cardiopathie_image_section">
+                        <img
+                          className="cardiopathie_image"
+                          src={amylose_slide[currentPage - 1].imageSrc}
+                          alt="image en attente"
+                        />
+                      </div>
+
+                      <div className="traitement_text">
+                        <h3 className="traitement_subtitle">
+                          {amylose_slide[currentPage - 1].subtitle}
+                        </h3>
+                        <p>{amylose_slide[currentPage - 1].text}</p>
+                        <h3>{amylose_slide[currentPage - 1].subtitle2}</h3>
+                        <p>{amylose_slide[currentPage - 1].text2}</p>
+                        <p className="pierre_angulaire">
+                          {amylose_slide[currentPage - 1].text3}
+                        </p>
+                      </div>
                     </div>
                   </>
+                )}
+
+                {amylose_slide[currentPage - 1].type === "conclusions" && (
+                  <div className="all_conclusions">
+                    <div className="conclusion_section">
+                      <p className="conclusion_text">
+                        {amylose_slide[currentPage - 1].text}
+                      </p>
+                    </div>
+                  </div>
                 )}
               </div>
             </CSSTransition>
@@ -835,7 +923,8 @@ function AmyloseModule() {
           <div className="popup-content">
             <h4 style={{ color: "#0089e3" }}>Abréviations</h4>
             <p>
-              ECG : électrocardiogramme FEVG : fraction d’éjection du ventricule
+              ECG : électrocardiogramme <br />
+              FEVG : fraction d’éjection du ventricule <br />
               gauche <br />
               HTAP : hypertension artérielle pulmonaire <br />
               HVG :hypertrophie ventriculaire gauche <br />
