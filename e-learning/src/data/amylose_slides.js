@@ -496,12 +496,13 @@ const amylose_slide = [
     subtitle2:
       "- A l’IRM, rehaussement tardif après injection de gadolinium et T1 mapping > normale",
     text2:
-      "Transfert au service de cancérologie (Hôpital Cheikhoul Khadim) pour une prise en charge oncologique",
-      subtitle3:
-      "- Biomarqueurs cardiaques : la troponine T et le NT-proBNP",
-      text3:
-      "Score de la Mayo Clinic (seuils de la troponine T = 0,035 µg/L et du NT-proBNP = 332 pg/mL) :",
-      subtext: "5-HIAA : acide 5-hydroxy-indol-acétique",
+      "Biomarqueurs cardiaques : la troponine T et le NT-proBNP",
+      text3:(<>  <b> Score de la Mayo Clinic (seuils de la troponine T = 0,035 µg/L et du NT-proBNP = 332 pg/mL) : </b>
+      <li>- Les deux paramètres sont sous leur seuil = stade 1 </li>
+      <li>- Un seul paramètre est au-dessus de son seuil = stade 2 </li>
+      <li> Les deux paramètres sont au-dessus de leur seuil = stade 3</li>
+      </>),
+    subtext: "5-HIAA : acide 5-hydroxy-indol-acétique",
   },
 
   {

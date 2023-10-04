@@ -269,32 +269,25 @@ function AmyloseModule() {
                 </h1>
 
                 {amylose_slide[currentPage - 1].type === "default" && (
-                  <>
-                    <div className="presentation_slide">
-                      <p>
-                        <b> {amylose_slide[currentPage - 1].subtitle}</b>
-                      </p>
-                      <p> {amylose_slide[currentPage - 1].author} </p>
-                      <p> {amylose_slide[currentPage - 1].text} </p>
-                      <b>
-                        {" "}
-                        <p className="subtitle2">
-                          {" "}
-                          {amylose_slide[currentPage - 1].subtitle2}{" "}
-                        </p>{" "}
-                      </b>
-                      <p className="text2">
-                        {" "}
-                        {amylose_slide[currentPage - 1].text2}{" "}
-                      </p>
+  <>
+    <div className="presentation_slide">
+      <p>
+        <b>{amylose_slide[currentPage - 1].subtitle}</b>
+      </p>
+      <p>{amylose_slide[currentPage - 1].text}</p>
+      <p>
+        <b>{amylose_slide[currentPage - 1].subtitle2}</b>
+      </p>
+      <p className="text2">{amylose_slide[currentPage - 1].text2}</p>
+      <p className="subtitle3">
+        <b>{amylose_slide[currentPage - 1].subtitle3}</b>
+      </p>
+      <p className="text3"> {amylose_slide[currentPage - 1].text3} </p>
+      <p className="subtext">{amylose_slide[currentPage - 1].subtext}</p>
+    </div>
+  </>
+)}
 
-                      <p className="subtext">
-                        {" "}
-                        {amylose_slide[currentPage - 1].subtext}{" "}
-                      </p>
-                    </div>
-                  </>
-                )}
 
                 {amylose_slide[currentPage - 1].type === "conclusion" && (
                   <>
