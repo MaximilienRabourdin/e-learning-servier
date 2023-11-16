@@ -220,11 +220,23 @@ function CentralBox() {
               <img alt="icon" src="./aide_icon.svg" />
               <a className="text-button">Aide</a>
             </li>
-            <li
-              className={`button ${currentPage === 4 ? "active" : ""}`}
-            >
-              <img alt="icon" src="./exit_button.svg" />
-              <a className="text-button_exit" href='/accueil_cas_clinique_cardiopathie_carcinoïde'>Quitter</a>
+            <li className={`button ${currentPage === 4 ? "active" : ""}`}>
+              <a
+                className="link-button_exit"
+                href="/accueil_cas_clinique_cardiopathie_carcinoïde"
+              >
+                <img
+                  alt="icon"
+                  src="./exit_button.svg"
+                  href="/accueil_cas_clinique_cardiopathie_carcinoïde"
+                />
+                <p
+                  className="text-button_exit"
+                  href="/accueil_cas_clinique_cardiopathie_carcinoïde"
+                >
+                  Quitter
+                </p>
+              </a>
             </li>
           </ul>
         </nav>
@@ -365,31 +377,28 @@ function CentralBox() {
                           </p>
                         </div>
                       </div>
-                  <div className="all_instruction_control">
-                      <div className="instruction_control_buttonside">
-                        <div className="button_instruction">
-                          <img
-                            className="enlargedImage"
-                            alt="icon"
-                            src="./exit_button.svg"
-                          />
-                          <a className="text_button_instruction">Quitter</a>
+                      <div className="all_instruction_control">
+                        <div className="instruction_control_buttonside">
+                          <div className="button_instruction">
+                            <img
+                              className="enlargedImage"
+                              alt="icon"
+                              src="./exit_button.svg"
+                            />
+                            <a className="text_button_instruction">Quitter</a>
+                          </div>
+                          <div className="description_button">
+                            <h5> Quitter </h5>
+                            <p className="description_button_text">
+                              {" "}
+                              Cliquez sur ce bouton revenir au choix des modules
+                            </p>
+                          </div>
                         </div>
-                        <div className="description_button">
-                          <h5> Quitter </h5>
-                          <p className="description_button_text">
-                            {" "}
-                            Cliquez sur ce bouton revenir au choix des modules
-                          </p>
+                        <div className="instruction_navigation">
+                          <p> Utilisez les flèches pour changer de slides </p>
                         </div>
-                        
                       </div>
-                      <div className="instruction_navigation">
-                        <p> Utilisez les flèches pour changer de slides </p>
-                      </div>
-
-                    
-                    </div>
                     </div>
                   </>
                 )}
@@ -449,57 +458,59 @@ function CentralBox() {
                     </ul>
                   </div>
                 )}
-           {slides[currentPage - 1].type === "quizz" && (
-  <div className="quizz_slide">
-    <p className="quizz_title">
-      {slides[currentPage - 1].text}
-    </p>
-    <ul id="quizz">
-      {slides[currentPage - 1].answers.map((answer, index) => (
-        <li key={index}>
-          <button
-            className={`answer_button ${
-              userAnswers[currentPage - 1]?.includes(index)
-                ? answer.correct
-                  ? "correct"
-                  : "incorrect"
-                : ""
-            } ${
-              clickCounts[currentPage - 1] >= (slides[currentPage - 1].id === 16 ? 2 : 1) && answer.correct
-                ? "correct"
-                : ""
-            }`}
-            onClick={() => {
-              handleAnswerClick(
-                slides[currentPage - 1].id,
-                index,
-                answer.correct
-              );
-              if (clickCounts[currentPage - 1] < (slides[currentPage - 1].id === 16 ? 2 : 1)) {
-                const updatedClickCounts = [...clickCounts];
-                updatedClickCounts[currentPage - 1]++;
-                setClickCounts(updatedClickCounts);
-              }
-            }}
-            disabled={
-              userAnswers[currentPage - 1] !== undefined &&
-              (userAnswers[currentPage - 1].length >= 2 ||
-                (selectedAnswerCount >= 2 && !answer.correct))
-            }
-          >
-            {answer.text}
-          </button>
-        </li>
-      ))}
-    </ul>
-    <p className="subtext">{slides[currentPage - 1].subtext}</p>
-  </div>
-)}
-
-
+                {slides[currentPage - 1].type === "quizz" && (
+                  <div className="quizz_slide">
+                    <p className="quizz_title">
+                      {slides[currentPage - 1].text}
+                    </p>
+                    <ul id="quizz">
+                      {slides[currentPage - 1].answers.map((answer, index) => (
+                        <li key={index}>
+                          <button
+                            className={`answer_button ${
+                              userAnswers[currentPage - 1]?.includes(index)
+                                ? answer.correct
+                                  ? "correct"
+                                  : "incorrect"
+                                : ""
+                            } ${
+                              clickCounts[currentPage - 1] >=
+                                (slides[currentPage - 1].id === 16 ? 2 : 1) &&
+                              answer.correct
+                                ? "correct"
+                                : ""
+                            }`}
+                            onClick={() => {
+                              handleAnswerClick(
+                                slides[currentPage - 1].id,
+                                index,
+                                answer.correct
+                              );
+                              if (
+                                clickCounts[currentPage - 1] <
+                                (slides[currentPage - 1].id === 16 ? 2 : 1)
+                              ) {
+                                const updatedClickCounts = [...clickCounts];
+                                updatedClickCounts[currentPage - 1]++;
+                                setClickCounts(updatedClickCounts);
+                              }
+                            }}
+                            disabled={
+                              userAnswers[currentPage - 1] !== undefined &&
+                              (userAnswers[currentPage - 1].length >= 2 ||
+                                (selectedAnswerCount >= 2 && !answer.correct))
+                            }
+                          >
+                            {answer.text}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="subtext">{slides[currentPage - 1].subtext}</p>
+                  </div>
+                )}
 
                 {/* Afficher les bonnes réponses lorsque l'utilisateur clique sur le bouton */}
-                
 
                 {slides[currentPage - 1].type === "imageWithText" && (
                   <>
@@ -703,11 +714,13 @@ function CentralBox() {
         </div>
       </div>
       <div className="logo_section">
+       <a href="/">
         <img
           className="servier_logo"
           src="/servier_logo.png"
           alt="Servier Logo"
         />
+        </a>
         <img
           className="springerhealthcare_logo"
           src="/springer.svg"

@@ -29,6 +29,11 @@ function Home() {
           <IoIosArrowForward className="arrow_forward" />
         </Link>{" "}
         <img className="servier_logo" src="/servier_logo.png" />
+        <img
+          className="springerhealthcare_logo"
+          src="/springer.svg"
+          alt="Springer logo"
+        />{" "}
       </div>
     </HomeStyled>
   );

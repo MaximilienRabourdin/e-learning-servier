@@ -58,6 +58,18 @@ const AmyloseStyled = styled.div`
       4px 0px 4px 0px rgba(0, 0, 0, 0.06) inset;
   }
 
+  .springerhealthcare_logo {
+    position: fixed;
+    width: 10rem;
+    left: 12rem;
+    bottom: 1.2rem;
+    width: 18%;
+    border-radius: 16px;
+    background: #f6fcff;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.06) inset,
+      4px 0px 4px 0px rgba(0, 0, 0, 0.06) inset;
+  }
+
 
 `;
 

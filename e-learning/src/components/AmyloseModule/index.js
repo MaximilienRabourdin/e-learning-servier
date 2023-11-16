@@ -224,12 +224,21 @@ function AmyloseModule() {
               <a className="text-button">Aide</a>
             </li>
             <li className={`button ${currentPage === 4 ? "active" : ""}`}>
-              <img alt="icon" src="./exit_button.svg" />
               <a
-                className="text-button_exit"
+                className="link-button_exit"
                 href="/accueil_cas_clinique_cardiopathie_carcinoïde"
               >
-                Quitter
+                <img
+                  alt="icon"
+                  src="./exit_button.svg"
+                  href="/accueil_cas_clinique_cardiopathie_carcinoïde"
+                />
+                <p
+                  className="text-button_exit"
+                  href="/accueil_cas_clinique_cardiopathie_carcinoïde"
+                >
+                  Quitter
+                </p>
               </a>
             </li>
           </ul>
@@ -676,10 +685,12 @@ function AmyloseModule() {
                         onClick={handleImageClickZoom}
                       />
                     </div>
-                    <div className="additional_info">
-                      <p>{amylose_slide[currentPage - 1].subtext}</p>
-                    </div>
-                  </>
+                   
+              
+                   <div className="additional_info">
+                   <p>{amylose_slide[currentPage - 1].subtext}</p>
+                 </div>
+                 </>
                 )}
 
                 {amylose_slide[currentPage - 1].type ===
@@ -712,15 +723,30 @@ function AmyloseModule() {
                       src={amylose_slide[currentPage - 1].imageSrc}
                       alt={amylose_slide[currentPage - 1].imageAlt}
                     />
-                    <ul>
-                      <div>
+                    <ul className="reasons_consultations_patient">
+                      <div className="consultationReasons">
                         {
                           amylose_slide[currentPage - 1].patientInfo
                             .consultationReasons
                         }
                       </div>
+                      <div>
+                        {
+                          amylose_slide[currentPage - 1].patientInfo
+                            .consultationReasons2
+                        }
+                      </div>
                     </ul>
+
+                  <div className="consultationReasons_subtext">
+                  <p className="subtext">
+                      {amylose_slide[currentPage - 1].subtext}
+                    </p> 
                   </div>
+                   
+
+                  </div>
+                 
                 )}
 
                 {amylose_slide[currentPage - 1].type === "examen_medical" && (
@@ -766,6 +792,7 @@ function AmyloseModule() {
 
                 {amylose_slide[currentPage - 1].type === "information" && (
                   <>
+                  <div>
                     <div className="information_slide_coupe">
                       <div className="information_image">
                         <img
@@ -776,11 +803,12 @@ function AmyloseModule() {
 
                       <div className="information_text">
                         {amylose_slide[currentPage - 1].text}
-                        <p className="additional_info_coupe">
-                          {amylose_slide[currentPage - 1].subtext}
-                        </p>
+                       
                       </div>
                     </div>
+                    <p className="subtext"> {amylose_slide[currentPage - 1].subtext} </p>
+
+</div>
                   </>
                 )}
 
@@ -894,11 +922,19 @@ function AmyloseModule() {
         </div>
       </div>
       <div className="logo_section">
+        <a href="/"
+> 
         <img
           className="servier_logo"
           src="/servier_logo.png"
           alt="Servier Logo"
         />
+        </a>
+        <img
+          className="springerhealthcare_logo"
+          src="/springer.svg"
+          alt="Springer logo"
+        />{" "}
       </div>
       {showMenuPopup && (
         <div className="popup-overlay" onClick={handleClosePopup}>

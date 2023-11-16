@@ -76,7 +76,7 @@ const AmyloseModuleStyled = styled.div`
   }
 
   .image_echocardiographie {
-    width: 90%;
+    width: 80%;
     cursor: zoom-in; /* Curseur indiquant que l'image est cliquable pour le zoom */
 
   }
@@ -111,7 +111,7 @@ const AmyloseModuleStyled = styled.div`
   }
 
   #image_ett {
-    max-width: 100%;
+    max-width: 50%;
   }
 
   .image_ett_section {
@@ -125,13 +125,18 @@ const AmyloseModuleStyled = styled.div`
     justify-content:space-between;
   }
 
-  .text-button_exit { 
-    text-decoration:none;
+  .link-button_exit { 
+  text-decoration:none;
+  width:100%}
+
+  .text-button_exit {
+    font-size: 16px;
+    margin:0;
   }
 
 
   .text_ett {
-    margin:0  1rem;
+    margin:0  0.4rem;
   }
 
   p {
@@ -317,27 +322,36 @@ const AmyloseModuleStyled = styled.div`
 
   .patient_presentation_section {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-content:center;
     align-items:center;
     margin-top:2rem;
   }
 
   .image_patienteX {
-    width: 40%;
+    width: 36%;
     background-repeat: no-repeat;
 
   }
 
-  .text_patienteX {
+  .reasons_consultations_patient {
     width: 100%;
     display: flex;
-    flex-direction: column;
-    margin-left:2rem;
-    justify-content: flex-start;
-    align-items: flex-start;
-    align-content: flex-start;
+    margin-left:1rem;
+    justify-content: space-between;
+    
   }
+
+  .consultationReasons {
+    margin-right: 2rem;
+  }
+
+  .consultationReasons_subtext{
+    display:flex
+    flex-direction:column;
+  }
+
+  
 
   .patientHistory {
     width: 100%;
@@ -486,8 +500,10 @@ const AmyloseModuleStyled = styled.div`
 }
 
 .additional_info_coupe {
-  color:white;
-  font-size: 16px;
+  width: 100%;
+  font-size: 14px;
+    color: #7f7f7f;
+    flex-direction:column;
 }
 
 .information_slide{
@@ -664,6 +680,15 @@ const AmyloseModuleStyled = styled.div`
   .servier_logo {
     width: 10%;
     border-radius: 16px;
+    background: #f6fcff;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.06) inset,
+      4px 0px 4px 0px rgba(0, 0, 0, 0.06) inset;
+  }
+
+  .springerhealthcare_logo {
+    width: 20%;
+    border-radius: 16px;
+    margin-left: 2rem;
     background: #f6fcff;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.06) inset,
       4px 0px 4px 0px rgba(0, 0, 0, 0.06) inset;
@@ -878,6 +903,10 @@ h1 {
   font-size:24px;
   color:black;
 }
+}
+
+.quizz-container {
+  h1 { color : white;}
 }
 `;
 

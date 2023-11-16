@@ -50,7 +50,14 @@ const CentralBoxStyled = styled.div`
     align-content: center;
   }
 
-  .text-button_exit { text-decoration:none;}
+  .link-button_exit { 
+  text-decoration:none;
+  width:100%}
+
+  .text-button_exit {
+    font-size: 16px;
+    margin:0;
+  }
 
   .button {
     display: flex;

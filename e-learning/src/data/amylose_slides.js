@@ -118,27 +118,25 @@ const amylose_slide = [
     patientInfo: {
       consultationReasons: (
         <>
-          <p>41 ans </p>
-          <p>Femme</p>
-          <p>Sans antécédents particuliers</p>
-          <p>Douleurs abdominales,</p>
+          <p> Femme, 41 ans </p>
+          <p> Sans antécédents particuliers</p>
+          <p> Motif de consultation : Douleurs abdominales</p>
           <p>Consultation en hépato-gastrologie pour investigation</p>
+          
         </>
       ),
-
-      clinicalExamination: [
-        "Etat général moyen",
-        "Asthénie",
-        "Douleurs abdominales",
-        "Distension abdominale avec hépatosplénomégalie",
-        "Macroglossie",
-      ],
-      ecgFindings: [
-        "Rythme régulier sinusal à 90 bpm",
-        "Intervalle P-R : 0,18 s",
-        "HVG électrique",
-      ],
-      additionalInfo:
+      consultationReasons2: (
+        <>
+          <p>Examen clinique: <br/></p> 
+          <li> Etat général moyen</li>
+          <li> Asthénie</li>
+          <li> Douleurs abdominales </li>
+          <li> Distension abdominale avec hépatosplénomégalie</li>
+          <li> Macroglossie</li> 
+          <p> ECG : Rythme régulier sinusal ; Intervalle P-R : 0,18 s ; HVG électrique </p>
+        </>
+      ),
+      subtext:
         "ECG : électrocardiogramme ; HVG : hypertrophie ventriculaire gauche",
     },
   },
@@ -149,7 +147,7 @@ const amylose_slide = [
     title: "Patiente X : ETT",
     text1: (
       <>
-        - FEVG préservée (FEVG = 53 % en Simpson Biplan) <br />
+        - FEVG préservée (FEVG = 53 % en Simpson Biplan), HVG symétrique = 12 mm <br />
         - Cinétique segmentaire homogène <br />- Aspect granité et brillant du
         myocarde
       </>
@@ -301,8 +299,8 @@ const amylose_slide = [
      </> ),
     text: (
       <>
-        <b>Ponction-biopsie hépatique </b>
-        Présence de dépôts extracellulaires positifs à la coloration au rouge
+        <b>Ponction-biopsie hépatique </b><br/><br/>
+        - Présence de dépôts extracellulaires positifs à la coloration au rouge
         Congo composés d’une substance anhiste éosinophile
         <br />
         <br />
@@ -310,13 +308,13 @@ const amylose_slide = [
         prolifération tumorale
         <br />
         <br />
-        <b>Ponction-biopsie ostéo-médullaire</b>- Moelle de richesse cellulaire
+        <b>Ponction-biopsie ostéo-médullaire</b><br/><br/>- Moelle de richesse cellulaire
         III avec dépôts interstitiels d’une substance éosinophile homogène
         pouvant rappeler l’<b> amylose </b>
         - Absence d’infiltration tumorale
         <br />
         <br />
-        <b>Ponction-biopsie des glandes salivaires :</b>
+        <b>Ponction-biopsie des glandes salivaires :</b><br/>
         <br />- Aspect d’une sialadénite chronique sans signe de malignité
       </>
     ),
@@ -397,8 +395,7 @@ const amylose_slide = [
         <br />- Des dépôts amyloïdes sont identifiés dans une biopsie
         extracardiaque.
         <br />- <b>Et </b>des éléments caractéristiques sont retrouvés à
-        l’échocardiographie ou à l’IRM cardiaque Des métastases intracardiaques
-        (rare).
+        l’échocardiographie ou à l’IRM cardiaque.
         <br />
         <br /> <b> Les signes cliniques de l’amylose AL </b>
         <br />- Extracardiaques : macroglossie, hématomes cutanés, protéinurie,
@@ -492,14 +489,14 @@ const amylose_slide = [
     title: "Marqueurs pronostiques et stratification",
     type: "default",
     subtitle: "- A l’ETT, altération du strain longitudinal",
-    text: "Normale : -18 % Forme sévère : < -15 % Forme très sévère : < -10 %",
+    text: "Normale : -18 % ; Forme sévère : < -15 % ; Forme très sévère : < -10 %",
     subtitle2:
       "- A l’IRM, rehaussement tardif après injection de gadolinium et T1 mapping > normale",
     text2:
       "Biomarqueurs cardiaques : la troponine T et le NT-proBNP",
       text3:(<>  <b> Score de la Mayo Clinic (seuils de la troponine T = 0,035 µg/L et du NT-proBNP = 332 pg/mL) : </b>
-      <li>- Les deux paramètres sont sous leur seuil = stade 1 </li>
-      <li>- Un seul paramètre est au-dessus de son seuil = stade 2 </li>
+      <li> Les deux paramètres sont sous leur seuil = stade 1 </li>
+      <li> Un seul paramètre est au-dessus de son seuil = stade 2 </li>
       <li> Les deux paramètres sont au-dessus de leur seuil = stade 3</li>
       </>),
     subtext: "5-HIAA : acide 5-hydroxy-indol-acétique",
@@ -525,7 +522,7 @@ const amylose_slide = [
 
     text3: (
       <>
-        - La pierre angulaire du traitement des amyloses AL repose sur la
+        La pierre angulaire du traitement des amyloses AL repose sur la
         neutralisation du précurseur protéique qu’est la chaine légère
         d’immunoglobuline, sécrétée en excès par un clone plasmocytaire dans le
         cadre d’une gammapathie.

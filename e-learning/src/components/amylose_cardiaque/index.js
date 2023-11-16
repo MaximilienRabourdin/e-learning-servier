@@ -10,16 +10,14 @@ function Amylose() {
       <div className="all_page">
         <div className="text_section">
           <h1>
-          Une étude de cas clinique interactive sur une amylose cardiaque
+            Une étude de cas clinique interactive sur une amylose cardiaque
           </h1>
 
           <h2>
             {" "}
-            Préparé en collaboration avec 
-le Pr Nadia Laredj et le Pr Jean-Baptiste Anzouan
-
+            Préparé en collaboration avec le Pr Nadia Laredj et le Pr
+            Jean-Baptiste Anzouan
             <br />
-           
           </h2>
         </div>
       </div>
@@ -29,6 +27,11 @@ le Pr Nadia Laredj et le Pr Jean-Baptiste Anzouan
           <IoIosArrowForward className="arrow_forward" />
         </Link>{" "}
         <img className="servier_logo" src="/servier_logo.png" />
+        <img
+          className="springerhealthcare_logo"
+          src="/springer.svg"
+          alt="Springer logo"
+        />{" "}
       </div>
     </AmyloseStyled>
   );
